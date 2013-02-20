@@ -5,6 +5,6 @@
     [BirthDate]     DATETIME       NOT NULL,
     [Level_LevelId] INT            NULL,
     PRIMARY KEY CLUSTERED ([StudentId] ASC),
-    CONSTRAINT [Student_Level] FOREIGN KEY ([Level_LevelId]) REFERENCES [dbo].[Level] ([LevelId])
+    CONSTRAINT [Student_Level] FOREIGN KEY ([Level_LevelId]) REFERENCES [dbo].[Level] ([LevelId]) 
 );
 

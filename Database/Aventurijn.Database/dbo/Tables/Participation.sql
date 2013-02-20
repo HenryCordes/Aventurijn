@@ -7,6 +7,6 @@
     [Student_StudentId]     INT            NULL,
     PRIMARY KEY CLUSTERED ([ParticipationId] ASC),
     CONSTRAINT [Participation_Activity] FOREIGN KEY ([Activity_ActivityId]) REFERENCES [dbo].[Activity] ([ActivityId]),
-    CONSTRAINT [Participation_Student] FOREIGN KEY ([Student_StudentId]) REFERENCES [dbo].[Student] ([StudentId])
+    CONSTRAINT [Participation_Student] FOREIGN KEY ([Student_StudentId]) REFERENCES [dbo].[Student] ([StudentId]) 
 );
 

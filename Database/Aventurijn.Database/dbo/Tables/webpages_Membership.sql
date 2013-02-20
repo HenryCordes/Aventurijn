@@ -11,5 +11,5 @@
     [PasswordVerificationToken]               NVARCHAR (128) NULL,
     [PasswordVerificationTokenExpirationDate] DATETIME       NULL,
     PRIMARY KEY CLUSTERED ([UserId] ASC)
-);
+); 
 

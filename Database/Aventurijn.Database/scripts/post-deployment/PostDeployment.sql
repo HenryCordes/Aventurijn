@@ -25,7 +25,7 @@ END
 
 IF NOT EXISTS (SELECT * FROM [Level] WHERE Name = 'Bovenbouw')
 BEGIN
-  INSERT INTO [Level] ([Name]) VALUES ('Bovenbouw') 
+  INSERT INTO [Level] ([Name]) VALUES ('Bovenbouw')  
 END
 
 
