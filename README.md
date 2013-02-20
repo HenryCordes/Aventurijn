@@ -9,4 +9,3 @@ Because the way the school facilitates learning, 'just in time learning', there 
 This is the starting point for this application.
 
 Aventurijn.Activities.Web will be written in C#, leveraging ASP.NET MVC 4 with a SQL Server backend.
-
