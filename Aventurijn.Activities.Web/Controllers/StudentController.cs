@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Aventurijn.Activities.Web.Models.Domain;
 using Aventurijn.Activities.Web.Models.Context;
+using Aventurijn.Activities.Web.Models.ViewModel;
 
 namespace Aventurijn.Activities.Web.Controllers
 {
@@ -32,6 +33,7 @@ namespace Aventurijn.Activities.Web.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(student);
         }
 
@@ -40,7 +42,8 @@ namespace Aventurijn.Activities.Web.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            var viewModel = new StudentViewModel(db.Levels);
+            return View(viewModel);
         }
 
         //
