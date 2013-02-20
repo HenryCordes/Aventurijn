@@ -107,7 +107,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Aventurijn.Activities.Web\Aventurijn.Activities.Web.csproj">
       <Project>{AB700954-EF96-4040-A36B-724BE73FEE80}</Project>
-      <Name>Avonturijn.Activities.Web</Name>
+      <Name>Aventurijn.Activities.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
