@@ -1,0 +1,53 @@
+﻿@model Aventurijn.Activities.Web.Models.Domain.Participation
+
+@{
+    ViewBag.Title = "Aventurijn - Deelname Aanpassen";
+}
+
+<h2>Deelname aanpassen</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Deelname</legend>
+
+        @Html.HiddenFor(model => model.ParticipationId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ExtraInfo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ExtraInfo)
+            @Html.ValidationMessageFor(model => model.ExtraInfo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Participating)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Participating)
+            @Html.ValidationMessageFor(model => model.Participating)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ParticipationDateTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ParticipationDateTime)
+            @Html.ValidationMessageFor(model => model.ParticipationDateTime)
+        </div>
+
+        <p>
+            <input type="submit" value="Opslaan" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Terug naar lijst", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

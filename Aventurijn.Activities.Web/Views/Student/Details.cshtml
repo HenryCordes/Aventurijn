@@ -1,0 +1,36 @@
+﻿@model Aventurijn.Activities.Web.Models.Domain.Student
+
+@{
+    ViewBag.Title = "Aventurijn - Leerling Details";
+}
+
+<h2>Leerling Details</h2>
+
+<fieldset>
+    <legend>Leerling</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LastName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LastName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BirthDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BirthDate)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Aanpassen", "Edit", new { id=Model.StudentId }) |
+    @Html.ActionLink("Terug naar lijst", "Index")
+</p>

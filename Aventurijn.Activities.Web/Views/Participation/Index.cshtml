@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Aventurijn.Activities.Web.Models.Domain.Participation>
+
+@{
+    ViewBag.Title = "Aventurijn - Puntjes";
+}
+
+<h2>Puntjes</h2>
+
+<p>
+    @Html.ActionLink("Nieuw", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ExtraInfo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Participating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ParticipationDateTime)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExtraInfo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Participating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParticipationDateTime)
+        </td>
+        <td>
+            @Html.ActionLink("Aanpassen", "Edit", new { id=item.ParticipationId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ParticipationId }) |
+            @Html.ActionLink("Verwijderen", "Delete", new { id=item.ParticipationId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,29 @@
+﻿@model Aventurijn.Activities.Web.Models.Domain.Activity
+
+@{
+    ViewBag.Title = "Aventurijn - Activiteit Details";
+}
+
+<h2>Activiteit Details</h2>
+
+<fieldset>
+    <legend>Activiteit</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreationDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreationDate)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Aanpassen", "Edit", new { id=Model.ActivityId }) |
+    @Html.ActionLink("Terug naar lijst", "Index")
+</p>

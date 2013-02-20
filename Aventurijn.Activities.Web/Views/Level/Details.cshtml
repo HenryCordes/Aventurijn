@@ -1,0 +1,22 @@
+﻿@model Aventurijn.Activities.Web.Models.Domain.Level
+
+@{
+    ViewBag.Title = "Avonturijn - Nivo Details";
+}
+
+<h2>Nivo details</h2>
+
+<fieldset>
+    <legend>Nivo</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Aanpassen", "Edit", new { id=Model.LevelId }) |
+    @Html.ActionLink("Terug naar lijst", "Index")
+</p>

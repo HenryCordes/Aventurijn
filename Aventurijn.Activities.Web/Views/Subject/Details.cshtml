@@ -1,0 +1,29 @@
+﻿@model Aventurijn.Activities.Web.Models.Domain.Subject
+
+@{
+    ViewBag.Title = "Aventurijn - Onderwerp Deatils";
+}
+
+<h2>Onderwerp details</h2>
+
+<fieldset>
+    <legend>Onderwerp</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Code)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Code)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Aanpassen", "Edit", new { id=Model.SubjectId }) |
+    @Html.ActionLink("Terug naar lijst", "Index")
+</p>

@@ -1,0 +1,36 @@
+﻿@model Aventurijn.Activities.Web.Models.Domain.Participation
+
+@{
+    ViewBag.Title = "Aventurijn - Deelname Details";
+}
+
+<h2>Deelname details</h2>
+
+<fieldset>
+    <legend>Deelname</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ExtraInfo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ExtraInfo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Participating)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Participating)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ParticipationDateTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ParticipationDateTime)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Aanpassen", "Edit", new { id=Model.ParticipationId }) |
+    @Html.ActionLink("Terug naar lijst", "Index")
+</p>
