@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Aventurijn - puntjes";
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title</h1><br />
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <p>
+                Meld je aan en werk de puntjes van de kinderen bij...
+            </p>
+        </div>
+    </section>
+}
+<h3>Wij suggereren het volgende:</h3>
+<ol class="round">
+    <li class="one">
+        <h5>Registreren</h5>
+        <p>Heb je nog geen gebruikersnaam en wachtwoord? Registreer je om toegang te krijgen. <br />
+          Na het registreren kun je de activiteiten van de kinderen bij werken.</p>
+        <a href="/Account/Register" id="registerLink">Registeren</a>
+    </li>
+
+    <li class="two">
+        <h5>Aanmelden</h5>
+        <br>Heb je al account gegevens? Meldt je dan aan.<br />
+Na het aanmelden kun je de activiteiten van de kinderen bij werken.</p>
+        <a href="/Account/Login" id="loginLink">Aanmelden</a>
+    </li>
+
+    <li class="three">
+        <h5>De website van de school</h5>
+        Zoek je informatie betreffende de Aventurijn?<br />
+        <a href="http://www.aventurijn.org">Naar de website…</a>
+    </li>
+</ol>
