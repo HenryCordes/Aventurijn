@@ -28,6 +28,9 @@ namespace Aventurijn.Activities.Web.Models.Domain
 
         [DisplayName("Nivo")]
         public Level Level { get; set; }
+
+        public int LevelId { get; set; }
+    
     
     }
 }

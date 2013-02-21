@@ -18,5 +18,7 @@ namespace Aventurijn.Activities.Web.Models.Domain
         [StringLength(100)]
         [DisplayName("Naam")]
         public string Name { get; set; }
+
+        //public List<Student> Students { get; set; } 
     }
 }

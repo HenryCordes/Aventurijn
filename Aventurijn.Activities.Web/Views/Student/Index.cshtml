@@ -20,6 +20,9 @@
         <th>
             @Html.DisplayNameFor(model => model.BirthDate)
         </th>
+         <th>
+            @Html.DisplayNameFor(model => model.Level)
+        </th>
         <th></th>
     </tr>
 
@@ -34,6 +37,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.BirthDate)
         </td>
+         <td>
+            @Html.DisplayTextFor(modelItem => item.Level.Name)
+        </td>
         <td>
             @Html.ActionLink("Aanpassen", "Edit", new { id=item.StudentId }) |
             @Html.ActionLink("Details", "Details", new { id=item.StudentId }) |
@@ -43,3 +49,9 @@
 }
 
 </table>
+
+@*@section Scripts {
+    <script type="text/javascript">
+        $("tr:nth-child(odd)").addClass("odd");
+    </script>
+}*@

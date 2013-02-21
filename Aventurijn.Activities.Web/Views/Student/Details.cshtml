@@ -6,29 +6,45 @@
 
 <h2>Leerling Details</h2>
 
-<fieldset>
+<fieldset class="tabular">
     <legend>Leerling</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.LastName)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.LastName)
+    
+    <div class="row">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Name)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Name)
+        </div>
     </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.BirthDate)
+    <div class="row">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.LastName)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.LastName)
+        </div>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.BirthDate)
+
+    <div class="row">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.BirthDate)
+        </div>
     </div>
+
+    <div class="row">
+         <div class="display-label">
+             @Html.DisplayNameFor(model => model.Level)
+        </div>
+        <div class="display-field">
+            @Html.DisplayTextFor(model => model.Level.Name)
+        </div>
+    </div>
+  
 </fieldset>
 <p>
     @Html.ActionLink("Aanpassen", "Edit", new { id=Model.StudentId }) |

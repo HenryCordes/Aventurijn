@@ -3,7 +3,14 @@
     [Name]              NVARCHAR (100) NULL,
     [CreationDate]      DATETIME       NOT NULL,
     [Subject_SubjectId] INT            NULL,
-    PRIMARY KEY CLUSTERED ([ActivityId] ASC),
-    CONSTRAINT [Activity_Subject] FOREIGN KEY ([Subject_SubjectId]) REFERENCES [dbo].[Subject] ([SubjectId]) 
+    CONSTRAINT [PK_dbo.Activity] PRIMARY KEY CLUSTERED ([ActivityId] ASC),
+    CONSTRAINT [FK_dbo.Activity_dbo.Subject_Subject_SubjectId] FOREIGN KEY ([Subject_SubjectId]) REFERENCES [dbo].[Subject] ([SubjectId])
 );
+
+
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_Subject_SubjectId]
+    ON [dbo].[Activity]([Subject_SubjectId] ASC);
 

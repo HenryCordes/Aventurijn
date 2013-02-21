@@ -1,4 +1,4 @@
-﻿@model Aventurijn.Activities.Web.Models.Domain.Student
+﻿@model Aventurijn.Activities.Web.Models.ViewModel.StudentViewModel
 
 @{
     ViewBag.Title = "Aventurijn - Leerling Aanpassen";
@@ -9,35 +9,44 @@
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
-    <fieldset>
+    <fieldset class="editor">
         <legend>Leerling</legend>
 
-        @Html.HiddenFor(model => model.StudentId)
+        @Html.HiddenFor(model => model.Student.StudentId)
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
+            @Html.LabelFor(model => model.Student.Name)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.LastName)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.LastName)
-            @Html.ValidationMessageFor(model => model.LastName)
+            @Html.EditorFor(model => model.Student.Name)
+            @Html.ValidationMessageFor(model => model.Student.Name)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.BirthDate)
+            @Html.LabelFor(model => model.Student.LastName)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.BirthDate)
-            @Html.ValidationMessageFor(model => model.BirthDate)
+            @Html.EditorFor(model => model.Student.LastName)
+            @Html.ValidationMessageFor(model => model.Student.LastName)
         </div>
 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Student.BirthDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Student.BirthDate)
+            @Html.ValidationMessageFor(model => model.Student.BirthDate)
+        </div>
+        
+         <div class="editor-label">
+            @Html.LabelFor(model => model.Student.Level)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.Student.LevelId, new SelectList(Model.Levels, 
+               "LevelId", "Name", 
+                Model.Levels.First().LevelId))
+            @Html.ValidationMessageFor(model => model.Student.Level)
+        </div>
         <p>
             <input type="submit" value="Opslaan" />
         </p>

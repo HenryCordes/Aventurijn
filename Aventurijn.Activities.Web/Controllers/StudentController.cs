@@ -20,7 +20,13 @@ namespace Aventurijn.Activities.Web.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Students.ToList());
+            var students = db.Students.ToList();
+            foreach (var student in students)
+            {
+                student.Level = db.Levels.Find(student.LevelId);
+            }
+
+            return View(students);
         }
 
         //
@@ -33,6 +39,7 @@ namespace Aventurijn.Activities.Web.Controllers
             {
                 return HttpNotFound();
             }
+            student.Level = db.Levels.Find(student.LevelId);
 
             return View(student);
         }
@@ -67,12 +74,16 @@ namespace Aventurijn.Activities.Web.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Student student = db.Students.Find(id);
+            var student = db.Students.Find(id);
             if (student == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            var viewModel = new StudentViewModel(db.Levels)
+                {
+                    Student = student
+                };
+            return View(viewModel);
         }
 
         //
@@ -87,7 +98,11 @@ namespace Aventurijn.Activities.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(student);
+            var viewModel = new StudentViewModel(db.Levels)
+            {
+                Student = student
+            };
+            return View(viewModel);
         }
 
         //

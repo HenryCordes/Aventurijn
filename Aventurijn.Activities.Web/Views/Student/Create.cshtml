@@ -9,7 +9,7 @@
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
-    <fieldset>
+    <fieldset  class="editor">
         <legend>Leerling</legend>
 
         <div class="editor-label">
@@ -40,7 +40,7 @@
             @Html.LabelFor(model => model.Student.Level)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.Levels, new SelectList(Model.Levels, 
+            @Html.DropDownListFor(model => model.Student.LevelId, new SelectList(Model.Levels, 
                "LevelId", "Name", 
                 Model.Levels.First().LevelId))
             @Html.ValidationMessageFor(model => model.Student.Level)

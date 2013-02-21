@@ -9,7 +9,7 @@
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
-    <fieldset>
+    <fieldset class="editor">
         <legend>Activiteit</legend>
 
         @Html.HiddenFor(model => model.ActivityId)

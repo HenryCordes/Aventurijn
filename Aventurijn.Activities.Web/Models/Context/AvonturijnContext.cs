@@ -32,6 +32,11 @@ namespace Aventurijn.Activities.Web.Models.Context
                                 m.MapLeftKey("UserId");
                                 m.MapRightKey("RoleId");
                             });
+
+            //modelBuilder.Entity<Student>()
+            //            .HasRequired<Level>(l => l.Level)
+            //            .WithMany(l => l.Students)
+            //            .HasForeignKey();
         }
 
     }
