@@ -20,19 +20,25 @@ namespace Aventurijn.Activities.Web.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Activities.ToList());
+            var activities = db.Activities.ToList();
+            foreach (var activity in activities)
+            {
+                activity.Subject = db.Subjects.Find(activity.SubjectId);
+            }
+            return View(activities);
         }
 
         //
         // GET: /Activity/Details/5
 
-        public ActionResult Details(string id = null)
+        public ActionResult Details(long id = 0)
         {
             Activity activity = db.Activities.Find(id);
             if (activity == null)
             {
                 return HttpNotFound();
             }
+            activity.Subject = db.Subjects.Find(activity.SubjectId);
             return View(activity);
         }
 
@@ -68,7 +74,7 @@ namespace Aventurijn.Activities.Web.Controllers
         //
         // GET: /Activity/Edit/5
 
-        public ActionResult Edit(string id = null)
+        public ActionResult Edit(long id = 0)
         {
             Activity activity = db.Activities.Find(id);
             if (activity == null)
@@ -105,7 +111,7 @@ namespace Aventurijn.Activities.Web.Controllers
         //
         // GET: /Activity/Delete/5
 
-        public ActionResult Delete(string id = null)
+        public ActionResult Delete(long id = 0)
         {
             Activity activity = db.Activities.Find(id);
             if (activity == null)
@@ -119,7 +125,7 @@ namespace Aventurijn.Activities.Web.Controllers
         // POST: /Activity/Delete/5
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(long id)
         {
             Activity activity = db.Activities.Find(id);
             db.Activities.Remove(activity);

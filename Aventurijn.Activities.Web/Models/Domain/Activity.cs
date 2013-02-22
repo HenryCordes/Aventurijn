@@ -22,9 +22,9 @@ namespace Aventurijn.Activities.Web.Models.Domain
         [DisplayName("Gemaakt op")]
         public DateTime CreationDate { get; set; }
 
-         [DisplayName("Onderwerp")]
+        [DisplayName("Onderwerp")]
         public Subject Subject { get; set; }
 
-         public int SubjectId { get; set; }
+        public int SubjectId { get; set; }
     }
 }

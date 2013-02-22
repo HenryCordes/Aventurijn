@@ -6,21 +6,26 @@
 
 <h2>Activiteit Details</h2>
 
-<fieldset>
+<fieldset class="tabular">
     <legend>Activiteit</legend>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
-    </div>
+    <div class="row">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Name)
+        </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.CreationDate)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.CreationDate)
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Name)
+        </div>
+     </div>
+
+    <div class="row">
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.CreationDate)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.CreationDate)
+        </div>
     </div>
 </fieldset>
 <p>
