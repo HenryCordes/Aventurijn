@@ -1,4 +1,4 @@
-﻿@model Aventurijn.Activities.Web.Models.Domain.Activity
+﻿@model Aventurijn.Activities.Web.Models.ViewModel.ActivityViewModel
 
 @{
     ViewBag.Title = "Aventurijn - Activiteit Aanpassen";
@@ -12,29 +12,37 @@
     <fieldset class="editor">
         <legend>Activiteit</legend>
 
-        @Html.HiddenFor(model => model.ActivityId)
+        @Html.HiddenFor(model => model.Activity.ActivityId)
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
+            @Html.LabelFor(model => model.Activity.Name)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
+            @Html.EditorFor(model => model.Activity.Name)
+            @Html.ValidationMessageFor(model => model.Activity.Name)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.CreationDate)
+            @Html.LabelFor(model => model.Activity.CreationDate)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.CreationDate)
-            @Html.ValidationMessageFor(model => model.CreationDate)
+            @Html.EditorFor(model => model.Activity.CreationDate)
+            @Html.ValidationMessageFor(model => model.Activity.CreationDate)
         </div>
-
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Activity.Subject.Name)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.Activity.Subject.SubjectId, new SelectList(Model.Subjects, 
+               "SubjectId", "Name", 
+                Model.Subjects.First().SubjectId))
+            @Html.ValidationMessageFor(model => model.Activity.Subject)
+        </div>
         <p>
             <input type="submit" value="Opslaan" />
         </p>
     </fieldset>
-}
+
 
 <div>
     @Html.ActionLink("Terug naar lijst", "Index")

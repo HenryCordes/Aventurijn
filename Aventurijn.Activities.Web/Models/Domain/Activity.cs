@@ -13,7 +13,7 @@ namespace Aventurijn.Activities.Web.Models.Domain
     public class Activity
     {
         [Key]
-        public string ActivityId { get; set; }
+        public long ActivityId { get; set; }
 
         [StringLength(100)]
         [DisplayName("Naam")]

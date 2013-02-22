@@ -12,24 +12,40 @@
 <table>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ExtraInfo)
+            @Html.DisplayNameFor(model => model.Student)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Activity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Activity.Subject)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Participating)
         </th>
+         <th>
+            @Html.DisplayNameFor(model => model.ExtraInfo)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.ParticipationDateTime)
         </th>
+        
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ExtraInfo)
+            @Html.DisplayTextFor(modelItem => item.Student.Name)
+        </td>
+         <td>
+            @Html.DisplayTextFor(modelItem => item.Activity.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Participating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExtraInfo)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ParticipationDateTime)

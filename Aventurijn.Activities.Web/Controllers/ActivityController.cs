@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Aventurijn.Activities.Web.Models.Domain;
 using Aventurijn.Activities.Web.Models.Context;
+using Aventurijn.Activities.Web.Models.ViewModel;
 
 namespace Aventurijn.Activities.Web.Controllers
 {
@@ -40,7 +41,8 @@ namespace Aventurijn.Activities.Web.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            var viewModel = new ActivityViewModel(db.Subjects);
+            return View(viewModel);
         }
 
         //
@@ -56,7 +58,11 @@ namespace Aventurijn.Activities.Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(activity);
+            var viewModel = new ActivityViewModel(db.Subjects)
+                {
+                    Activity = activity
+                };
+            return View(viewModel);
         }
 
         //
@@ -69,7 +75,12 @@ namespace Aventurijn.Activities.Web.Controllers
             {
                 return HttpNotFound();
             }
-            return View(activity);
+            var viewModel = new ActivityViewModel(db.Subjects)
+            {
+                Activity = activity
+            };
+            return View(viewModel);
+          
         }
 
         //
@@ -84,7 +95,11 @@ namespace Aventurijn.Activities.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(activity);
+            var viewModel = new ActivityViewModel(db.Subjects)
+            {
+                Activity = activity
+            };
+            return View(viewModel);
         }
 
         //

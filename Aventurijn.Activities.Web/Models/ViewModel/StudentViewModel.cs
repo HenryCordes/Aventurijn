@@ -11,8 +11,7 @@ using Aventurijn.Activities.Web.Models.Domain;
 
 namespace Aventurijn.Activities.Web.Models.ViewModel
 {
-    [Table("Student")]
-    [DisplayName("Leerling")]
+ 
     public class StudentViewModel
     {
         public StudentViewModel(IEnumerable<Level> levels)
