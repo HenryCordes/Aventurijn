@@ -13,20 +13,19 @@
         <header>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p class="site-title">Aventurijn</p>
+                   <a class="logo" href="/"><p class="site-title">Aventurijn</p></a>
                 </div>
                 <div class="float-right">
                     <section id="login">
                         @Html.Partial("_LoginPartial")
                     </section>
                     <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Leerlingen", "Index", "Student")</li>
-                            <li>@Html.ActionLink("Activiteiten", "Index", "Activity")</li>
-                            <li>@Html.ActionLink("Onderwerpen", "Index", "Subject")</li>
+                        <ul id="menu">   
                             <li>@Html.ActionLink("Puntjes", "Index", "Participation")</li>
-
+                            <li>@Html.ActionLink("Activiteiten", "Index", "Activity")</li>   
+                            <li>@Html.ActionLink("Leerlingen", "Index", "Student")</li>
+                            <li>@Html.ActionLink("Onderwerpen", "Index", "Subject")</li>
+                            <li>@Html.ActionLink("Nivo", "Index", "Level")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                         </ul>
                     </nav>

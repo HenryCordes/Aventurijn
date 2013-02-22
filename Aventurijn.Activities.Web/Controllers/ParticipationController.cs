@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Aventurijn.Activities.Web.Models.Domain;
 using Aventurijn.Activities.Web.Models.Context;
+using Aventurijn.Activities.Web.Models.ViewModel;
 
 namespace Aventurijn.Activities.Web.Controllers
 {
@@ -19,7 +20,15 @@ namespace Aventurijn.Activities.Web.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Participations.ToList());
+            var participations = db.Participations.ToList();
+            foreach (var participation in participations)
+            {
+                participation.Activity = db.Activities.Find(participation.ActivityId);
+                participation.Activity.Subject = db.Subjects.Find(participation.Activity.SubjectId);
+                participation.Student = db.Students.Find(participation.StudentId);
+            }
+
+            return View(participations);
         }
 
         //
@@ -32,6 +41,9 @@ namespace Aventurijn.Activities.Web.Controllers
             {
                 return HttpNotFound();
             }
+            participation.Activity = db.Activities.Find(participation.ActivityId);
+            participation.Activity.Subject = db.Subjects.Find(participation.Activity.SubjectId);
+            participation.Student = db.Students.Find(participation.StudentId);
             return View(participation);
         }
 
@@ -40,7 +52,8 @@ namespace Aventurijn.Activities.Web.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            var viewModel = new ParticipationViewModel(db.Activities, db.Students);
+            return View(viewModel);
         }
 
         //
@@ -51,12 +64,17 @@ namespace Aventurijn.Activities.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+               // participation.Activity = db.Activities.Find(participation.ActivityId);
+              //  participation.Student = db.Students.Find(participation.StudentId);
                 db.Participations.Add(participation);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            return View(participation);
+            var viewModel = new ParticipationViewModel(db.Activities, db.Students)
+            {
+                Participation = participation
+            };
+            return View(viewModel);
         }
 
         //
@@ -69,7 +87,11 @@ namespace Aventurijn.Activities.Web.Controllers
             {
                 return HttpNotFound();
             }
-            return View(participation);
+            var viewModel = new ParticipationViewModel(db.Activities, db.Students)
+            {
+                Participation = participation
+            };
+            return View(viewModel);
         }
 
         //
@@ -80,11 +102,18 @@ namespace Aventurijn.Activities.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                participation.Activity = db.Activities.Find(participation.ActivityId);
+                participation.Activity.Subject = db.Subjects.Find(participation.Activity.SubjectId);
+                participation.Student = db.Students.Find(participation.StudentId);
                 db.Entry(participation).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(participation);
+            var viewModel = new ParticipationViewModel(db.Activities, db.Students)
+            {
+                Participation = participation
+            };
+            return View(viewModel);
         }
 
         //

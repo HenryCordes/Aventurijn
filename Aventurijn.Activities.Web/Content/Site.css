@@ -22,6 +22,7 @@ a {
     text-decoration: underline;
 }
 
+
     a:link, a:visited,
     a:active, a:hover {
         color: #333;
@@ -30,6 +31,13 @@ a {
     a:hover {
         background-color: #c7d1d6;
     }
+
+a.logo {
+    padding-left: 0;
+    padding-right: 0;
+    text-decoration: none;
+    top:-20px
+}
 
 header, footer, hgroup,
 nav, section {

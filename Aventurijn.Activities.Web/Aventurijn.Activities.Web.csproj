@@ -185,6 +185,7 @@
     <Compile Include="Models\Domain\Student.cs" />
     <Compile Include="Models\Domain\Subject.cs" />
     <Compile Include="Models\ViewModel\ActivityViewModel.cs" />
+    <Compile Include="Models\ViewModel\ParticipationViewModel.cs" />
     <Compile Include="Models\ViewModel\StudentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

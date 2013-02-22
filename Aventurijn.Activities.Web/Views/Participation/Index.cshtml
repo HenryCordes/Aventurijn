@@ -38,8 +38,11 @@
         <td>
             @Html.DisplayTextFor(modelItem => item.Student.Name)
         </td>
-         <td>
+        <td>
             @Html.DisplayTextFor(modelItem => item.Activity.Name)
+        </td>
+         <td>
+            @Html.DisplayTextFor(modelItem => item.Activity.Subject.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Participating)

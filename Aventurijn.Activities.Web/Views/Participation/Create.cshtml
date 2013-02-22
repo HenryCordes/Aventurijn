@@ -1,4 +1,4 @@
-﻿@model Aventurijn.Activities.Web.Models.Domain.Participation
+﻿@model Aventurijn.Activities.Web.Models.ViewModel.ParticipationViewModel
 
 @{
     ViewBag.Title = "Avonturijn - Nieuwe Deelname";
@@ -12,28 +12,49 @@
     <fieldset  class="editor">
         <legend>Deelname</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ExtraInfo)
+         <div class="editor-label">
+            @Html.LabelFor(model => model.Participation.Student.Name)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ExtraInfo)
-            @Html.ValidationMessageFor(model => model.ExtraInfo)
+            @Html.DropDownListFor(model => model.Participation.StudentId, new SelectList(Model.Students, 
+                                                                                                 "StudentId", "Name", 
+                                                                                                 Model.Students.First().StudentId))
+            @Html.ValidationMessageFor(model => model.Participation.Student)
+        </div>
+        
+         <div class="editor-label">
+            @Html.LabelFor(model => model.Participation.Activity.Name)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.Participation.ActivityId, new SelectList(Model.Activities, 
+                                                                                               "ActivityId", "Name", 
+                                                                                                Model.Activities.First().ActivityId))
+            @Html.ValidationMessageFor(model => model.Participation.Activity)
+        </div>
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Participation.ExtraInfo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Participation.ExtraInfo)
+            @Html.ValidationMessageFor(model => model.Participation.ExtraInfo)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Participating)
+            @Html.LabelFor(model => model.Participation.Participating)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Participating)
-            @Html.ValidationMessageFor(model => model.Participating)
+            @Html.EditorFor(model => model.Participation.Participating)
+            @Html.ValidationMessageFor(model => model.Participation.Participating)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ParticipationDateTime)
+            @Html.LabelFor(model => model.Participation.ParticipationDateTime)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ParticipationDateTime)
-            @Html.ValidationMessageFor(model => model.ParticipationDateTime)
+            @Html.EditorFor(model => model.Participation.ParticipationDateTime)
+            @Html.ValidationMessageFor(model => model.Participation.ParticipationDateTime)
         </div>
 
         <p>
