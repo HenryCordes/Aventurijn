@@ -24,6 +24,8 @@ namespace Aventurijn.Activities.Web.Models.Domain
         public string LastName { get; set; }
 
         [DisplayName("Geboortedatum")]
+        [DisplayFormat(DataFormatString = "{0:dd-mm-yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.DateTime)]
         public DateTime BirthDate { get; set; }
 
         [DisplayName("Nivo")]

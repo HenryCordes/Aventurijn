@@ -33,7 +33,7 @@
             @Html.LabelFor(model => model.Activity.Subject.Name)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.Activity.Subject.SubjectId, new SelectList(Model.Subjects, 
+            @Html.DropDownListFor(model => model.Activity.SubjectId, new SelectList(Model.Subjects, 
                "SubjectId", "Name", 
                 Model.Subjects.First().SubjectId))
             @Html.ValidationMessageFor(model => model.Activity.Subject)

@@ -19,12 +19,14 @@ namespace Aventurijn.Activities.Web.Models.Domain
         [DisplayName("Naam")]
         public string Name { get; set; }
 
-        [DisplayName("Gemaakt op")]
-        public DateTime CreationDate { get; set; }
-
         [DisplayName("Onderwerp")]
         public Subject Subject { get; set; }
 
-        public int SubjectId { get; set; }
+        public int SubjectId { get; set; } 
+        
+        [DisplayName("Gemaakt op")]
+
+        [DataType(DataType.DateTime)]
+        public DateTime CreationDate { get; set; }
     }
 }

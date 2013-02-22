@@ -15,21 +15,21 @@ body {
 }
 
 a {
-    color: #333;
+    color: #4997B3;
     outline: none;
     padding-left: 3px;
     padding-right: 3px;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 
     a:link, a:visited,
     a:active, a:hover {
-        color: #333;
+       
     }
 
     a:hover {
-        background-color: #c7d1d6;
+        text-decoration: underline;
     }
 
 a.logo {
@@ -141,13 +141,18 @@ footer {
     font-family: Rockwell, Consolas, "Courier New", Courier, monospace;
     font-size: 2.9em;
     margin: 0;
-    background: transparent url('/Content/img/avonturijnlogo.jpg') no-repeat 0 -14px;
-    padding-top: 12px;
-    padding-left: 62px;
-    height: 65px;
-
-    
+   
 }
+
+.site-title .logo {
+    background: transparent url('/Content/img/avonturijnlogo.jpg') no-repeat 0 -18px;
+    margin-top: 0px;
+    padding-top: 8px;
+    padding-left: 62px;
+    display: inline-block;
+    padding-bottom: 23px;
+}
+
 
 .site-title a, .site-title a:hover, .site-title a:active {
     background: none;
@@ -162,12 +167,12 @@ footer {
 #login {
     display: block;
     font-size: .85em;
-    margin: 0 0 10px;
+    margin: 0 0 6px;
     text-align: right;
 }
 
     #login a {
-        background-color: #d3dce0;
+        /*background-color: #d3dce0;*/
         margin-left: 10px;
         margin-right: 3px;
         padding: 2px 3px;
@@ -597,6 +602,11 @@ th {
 td {
     padding: 0.25em 2em 0.25em 0em;
     border: 0 none;
+
+    word-wrap: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 tr.pager td {
@@ -779,7 +789,7 @@ fieldset.editor { margin-top: 10px;}
 .display-label{  display: table-cell; padding-right: 8px;font-weight: bold;}
 .display-field{  display: table-cell;}
 
-th, td { padding: .5em; }
+th, td { padding: .2em .4em .2em .4em; word-wrap: break-word;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
 th {background: -webkit-linear-gradient(#aaa,#999);
 background: -moz-linear-gradient(#aaa,#999);
 background: -o-linear-gradient(#aaa,#999);

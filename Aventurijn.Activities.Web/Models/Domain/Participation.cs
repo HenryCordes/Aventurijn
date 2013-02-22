@@ -18,7 +18,7 @@ namespace Aventurijn.Activities.Web.Models.Domain
         [DisplayName("Extra")]
         public string ExtraInfo { get; set; }
 
-        [DisplayName("Neemt deel")]
+        [DisplayName("Deelname")]
         public bool Participating { get; set; }
 
         [DisplayName("Activiteit")]
@@ -29,7 +29,9 @@ namespace Aventurijn.Activities.Web.Models.Domain
         public Student Student { get; set; }
         public int StudentId { get; set; }
 
-        [DisplayName("Tijdstip")]
+        [DisplayName("Datum")]
+        [DisplayFormat(DataFormatString = "{0:dd-mm-yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.DateTime)]
         public DateTime ParticipationDateTime { get; set; }
     }
 }

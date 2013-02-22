@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Aventurijn.Activities.Web.Modelbinders;
 
 namespace Aventurijn.Activities.Web
 {
@@ -23,6 +24,8 @@ namespace Aventurijn.Activities.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+
+        //    ModelBinders.Binders.Add(typeof(DateTime?), new DatetimeFormatModelBinder());
         }
     }
 }

@@ -7,13 +7,14 @@
         <meta name="viewport" content="width=device-width" />
         <meta name="robots" content="noindex, nofollow">
         @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/themes/base/css")
         @Scripts.Render("~/bundles/modernizr")
     </head>
     <body>
         <header>
             <div class="content-wrapper">
                 <div class="float-left">
-                   <a class="logo" href="/"><p class="site-title">Aventurijn</p></a>
+                    <a class="logo" href="/"><p class="site-title"><span class="logo">Aventurijn</span></p></a>
                 </div>
                 <div class="float-right">
                     <section id="login">
@@ -49,6 +50,8 @@
         </footer>
 
         @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+        @Scripts.Render("~/bundles/aventurijn")
         @RenderSection("scripts", required: false)
     </body>
 </html>
