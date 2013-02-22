@@ -10,6 +10,9 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 
+
+/*	----	Level vulling (Nivo)	----	*/
+
 IF NOT EXISTS (SELECT * FROM [Level] WHERE Name = 'Onderbouw')
 BEGIN
   INSERT INTO [Level] ([Name]) VALUES ('Onderbouw') 
@@ -27,6 +30,80 @@ IF NOT EXISTS (SELECT * FROM [Level] WHERE Name = 'Bovenbouw')
 BEGIN
   INSERT INTO [Level] ([Name]) VALUES ('Bovenbouw')  
 END
+
+
+
+
+/*	----	Subject vulling (onderwerpen)	----	*/
+
+IF NOT EXISTS (SELECT * FROM [Subject] WHERE [Code] = 'nwt')
+BEGIN
+  INSERT INTO [Subject] ([Code], [Name]) VALUES ('nwt','Natuur, wetenschap en techniek' )  
+END
+
+
+IF NOT EXISTS (SELECT * FROM [Subject] WHERE [Code] = 'nl')
+BEGIN
+  INSERT INTO [Subject] ([Code], [Name]) VALUES ('nl','Nederlands, taal' )  
+END
+
+
+IF NOT EXISTS (SELECT * FROM [Subject] WHERE [Code] = 'rw')
+BEGIN
+  INSERT INTO [Subject] ([Code], [Name]) VALUES ('rw','Rekenen, wiskunde' )  
+END
+
+IF NOT EXISTS (SELECT * FROM [Subject] WHERE [Code] = 'ao')
+BEGIN
+  INSERT INTO [Subject] ([Code], [Name]) VALUES ('ao','Algemene ontwikkeling' )  
+END
+
+IF NOT EXISTS (SELECT * FROM [Subject] WHERE [Code] = 'b')
+BEGIN
+  INSERT INTO [Subject] ([Code], [Name]) VALUES ('b','Biologie, natuur' )  
+END
+
+IF NOT EXISTS (SELECT * FROM [Subject] WHERE [Code] = 'cr')
+BEGIN
+  INSERT INTO [Subject] ([Code], [Name]) VALUES ('cr','Creativiteit, muziek' )  
+END
+
+IF NOT EXISTS (SELECT * FROM [Subject] WHERE [Code] = 'bw')
+BEGIN
+  INSERT INTO [Subject] ([Code], [Name]) VALUES ('bw','Bewustzijn' )  
+END
+
+IF NOT EXISTS (SELECT * FROM [Subject] WHERE [Code] = 'a')
+BEGIN
+  INSERT INTO [Subject] ([Code], [Name]) VALUES ('a','Aardrijkskunde' )  
+END
+
+IF NOT EXISTS (SELECT * FROM [Subject] WHERE [Code] = 'g')
+BEGIN
+  INSERT INTO [Subject] ([Code], [Name]) VALUES ('g','Geschiedenis' )  
+END
+
+IF NOT EXISTS (SELECT * FROM [Subject] WHERE [Code] = 'en')
+BEGIN
+  INSERT INTO [Subject] ([Code], [Name]) VALUES ('en','Engels' )  
+END
+
+IF NOT EXISTS (SELECT * FROM [Subject] WHERE [Code] = 'fr')
+BEGIN
+  INSERT INTO [Subject] ([Code], [Name]) VALUES ('fr','Frans' )  
+END
+
+IF NOT EXISTS (SELECT * FROM [Subject] WHERE [Code] = 'd')
+BEGIN
+  INSERT INTO [Subject] ([Code], [Name]) VALUES ('d','Duits' )  
+END
+
+IF NOT EXISTS (SELECT * FROM [Subject] WHERE [Code] = 'gm')
+BEGIN
+  INSERT INTO [Subject] ([Code], [Name]) VALUES ('gm','Gym, beweging' )  
+END
+
+
 
 
 GO
