@@ -23,9 +23,11 @@ namespace Aventurijn.Activities.Web.Models.Domain
 
         [DisplayName("Activiteit")]
         public Activity Activity { get; set; }
+        public long ActivityId { get; set; }
 
         [DisplayName("Leerling")]
         public Student Student { get; set; }
+        public int StudentId { get; set; }
 
         [DisplayName("Tijdstip")]
         public DateTime ParticipationDateTime { get; set; }

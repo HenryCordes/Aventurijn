@@ -1,16 +1,18 @@
-﻿CREATE TABLE [dbo].[Activity] (
-    [ActivityId]        NVARCHAR (128) NOT NULL,
-    [Name]              NVARCHAR (100) NULL,
-    [CreationDate]      DATETIME       NOT NULL,
-    [Subject_SubjectId] INT            NULL,
+CREATE TABLE [dbo].[Activity] (
+    [ActivityId]   NVARCHAR (128) NOT NULL,
+    [Name]         NVARCHAR (100) NULL,
+    [CreationDate] DATETIME       NOT NULL,
+    [SubjectId]    INT            NOT NULL,
     CONSTRAINT [PK_dbo.Activity] PRIMARY KEY CLUSTERED ([ActivityId] ASC),
-    CONSTRAINT [FK_dbo.Activity_dbo.Subject_Subject_SubjectId] FOREIGN KEY ([Subject_SubjectId]) REFERENCES [dbo].[Subject] ([SubjectId])
+    CONSTRAINT [FK_dbo.Activity_dbo.Subject_SubjectId] FOREIGN KEY ([SubjectId]) REFERENCES [dbo].[Subject] ([SubjectId]) ON DELETE CASCADE
 );
 
 
 
 
+
+
 GO
-CREATE NONCLUSTERED INDEX [IX_Subject_SubjectId]
-    ON [dbo].[Activity]([Subject_SubjectId] ASC);
+CREATE NONCLUSTERED INDEX [IX_SubjectId]
+    ON [dbo].[Activity]([SubjectId] ASC);
 

@@ -24,5 +24,7 @@ namespace Aventurijn.Activities.Web.Models.Domain
 
          [DisplayName("Onderwerp")]
         public Subject Subject { get; set; }
+
+         public int SubjectId { get; set; }
     }
 }
