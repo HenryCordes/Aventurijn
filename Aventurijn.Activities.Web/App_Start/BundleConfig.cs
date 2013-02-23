@@ -19,7 +19,10 @@ namespace Aventurijn.Activities.Web
                         "~/Scripts/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/bundles/aventurijn").Include(
-                        "~/Scripts/aventurijn.js"));
+                                         "~/Scripts/knockout-{version}.js",
+                                         "~/Scripts/knockout.mapping-latest.js",
+                                         "~/Scripts/aventurijn.js",
+                                         "~/Scripts/aventurijn.activities.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.

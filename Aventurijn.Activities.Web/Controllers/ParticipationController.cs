@@ -141,6 +141,21 @@ namespace Aventurijn.Activities.Web.Controllers
             return RedirectToAction("Index");
         }
 
+
+        public JsonResult All()
+        {
+            var participations = db.Participations.ToList();
+            foreach (var participation in participations)
+            {
+                participation.Activity = db.Activities.Find(participation.ActivityId);
+                participation.Activity.Subject = db.Subjects.Find(participation.Activity.SubjectId);
+                participation.Student = db.Students.Find(participation.StudentId);
+            }
+
+            return Json(participations, JsonRequestBehavior.AllowGet);
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

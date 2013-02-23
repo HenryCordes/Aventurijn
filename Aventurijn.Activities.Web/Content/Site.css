@@ -436,7 +436,6 @@ fieldset {
 label {
     display: block;
     font-size: 1.2em;
-    font-weight: 600;
 }
 
 label.checkbox {
@@ -801,3 +800,19 @@ th:last-child { border-radius: 0 9px 0 0; }
 tr:last-child td:first-child { border-radius: 0 0 0 9px; }
 tr:last-child td:last-child { border-radius: 0 0 9px 0; }
 tr:nth-child(odd) { background: #e2e2e2; }
+
+.loading-container { width: 100%; text-align: center; }
+.loader{
+    background-image: url(/Content/img/ajax-loader.gif);
+    background-repeat: no-repeat;
+    width: 64px;
+    height: 32px;
+    padding-left: 42px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+    position: relative;
+    padding-top: 9px;
+    color: #D0CACD;
+    text-align: left;
+}
