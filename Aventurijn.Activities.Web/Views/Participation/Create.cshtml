@@ -13,7 +13,7 @@
         <legend>Deelname</legend>
 
          <div class="editor-label">
-            @Html.LabelFor(model => model.Participation.Student.Name)
+            @Html.LabelFor(model => model.Participation.Student)
         </div>
         <div class="editor-field">
             @Html.DropDownListFor(model => model.Participation.StudentId, new SelectList(Model.Students, 
@@ -23,7 +23,7 @@
         </div>
         
          <div class="editor-label">
-            @Html.LabelFor(model => model.Participation.Activity.Name)
+            @Html.LabelFor(model => model.Participation.Activity)
         </div>
         <div class="editor-field">
             @Html.DropDownListFor(model => model.Participation.ActivityId, new SelectList(Model.Activities, 
