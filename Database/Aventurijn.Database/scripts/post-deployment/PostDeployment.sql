@@ -199,4 +199,258 @@ BEGIN
 END
 
 
+/*	--		Students	--	*/
+SET @LoopNotReady = 1
+SET @LoopCounter = 0
+
+DECLARE @LevelId int
+DECLARE @LevelName varchar(100)
+DECLARE @Name varchar(100)
+DECLARE @Insertion varchar(10) 
+DECLARE @LastName varchar(100)
+DECLARE @BirthDate datetime
+
+WHILE @LoopNotReady = 1
+BEGIN
+	SET @LoopCounter = @LoopCounter + 1
+	PRINT @LoopCounter
+
+	IF @LoopCounter = 1 
+	BEGIN
+		SET @LevelName = 'Bovenbouw'
+		SET @Name  = 'Sylvie'
+		SET @Insertion  = '' 
+		SET @LastName  = 'Dikkers'
+		SET @BirthDate  = convert(datetime,'28-09-2001',105)
+	END
+	IF @LoopCounter = 2 
+	BEGIN 
+		SET @LevelName = 'Bovenbouw'
+		SET @Name  = 'Jarno'
+		SET @Insertion  = '' 
+		SET @LastName  = 'Dikkers'
+		SET @BirthDate  = convert(datetime,'26-09-1997',105)
+	END
+	IF @LoopCounter = 3
+	BEGIN 
+		SET @LevelName = 'Bovenbouw'
+		SET @Name  = 'Thomas'
+		SET @Insertion  = '' 
+		SET @LastName  = 'Esser'
+		SET @BirthDate  = convert(datetime,'14-02-1997',105)
+	END
+	IF @LoopCounter = 4
+	BEGIN 
+		SET @LevelName = 'Bovenbouw'
+		SET @Name  = 'Stern'
+		SET @Insertion  = 'van der' 
+		SET @LastName  = 'Heide'
+		SET @BirthDate  = convert(datetime,'04-07-1999',105)
+	END
+	IF @LoopCounter = 5
+	BEGIN 
+		SET @LevelName = 'Onderbouw'
+		SET @Name  = 'Igor'
+		SET @Insertion  = ''
+		SET @LastName  = 'Perik'
+		SET @BirthDate  = convert(datetime,'28-01-2006',105)
+	END
+	IF @LoopCounter = 6
+	BEGIN 
+		SET @LevelName = 'Bovenbouw'
+		SET @Name  = 'Tomas'
+		SET @Insertion  = ''
+		SET @LastName  = 'Ritsma van Eck'
+		SET @BirthDate  = convert(datetime,'07-06-1996',105)
+	END
+	IF @LoopCounter = 7
+	BEGIN 
+		SET @LevelName = 'Middenbouw'
+		SET @Name  = 'Sofie'
+		SET @Insertion  = ''
+		SET @LastName  = 'Perik'
+		SET @BirthDate  = convert(datetime,'29-12-2004',105)
+	END
+	IF @LoopCounter = 8
+	BEGIN 
+		SET @LevelName = 'Bovenbouw'
+		SET @Name  = 'Storm '
+		SET @Insertion  =  ''
+		SET @LastName  = 'Ritsma van Eck'
+		SET @BirthDate  = convert(datetime,'12-04-1998',105)
+		
+	END
+	IF @LoopCounter = 9
+	BEGIN 
+		SET @LevelName = 'Middenbouw'
+		SET @Name  = 'Duco'
+		SET @Insertion  = ''
+		SET @LastName  = 'Ritsma van Eck'
+		SET @BirthDate  = convert(datetime,'31-08-2002',105)
+	END
+	IF @LoopCounter = 10
+	BEGIN 
+		SET @LevelName = 'Middenbouw'
+		SET @Name  = 'Taco'
+		SET @Insertion  = ''
+		SET @LastName  = 'Ritsma van Eck'
+		SET @BirthDate  = convert(datetime,'31-08-2002',105)
+		
+	END
+	IF @LoopCounter = 11
+	BEGIN 
+		SET @LevelName = 'Onderbouw'
+		SET @Name  = 'Aëla'
+		SET @Insertion  = ''
+		SET @LastName  = 'Smeehuyzen'
+		SET @BirthDate  = convert(datetime,'30-10-2006',105)
+	END
+	IF @LoopCounter = 12
+	BEGIN 
+		SET @LevelName = 'Onderbouw'
+		SET @Name  = 'Marie-louise'
+		SET @Insertion  = ''
+		SET @LastName  = 'Strijker'
+		SET @BirthDate  = convert(datetime,'12-11-2005',105)	
+	END
+	IF @LoopCounter = 13
+	BEGIN 
+		SET @LevelName = 'Middenbouw'
+		SET @Name  = 'Dylan'
+		SET @Insertion  = ''
+		SET @LastName  = 'Strijker'
+		SET @BirthDate  = convert(datetime,'19-08-2001',105)	
+	END
+	IF @LoopCounter = 14
+	BEGIN 
+		SET @LevelName = 'Middenbouw'
+		SET @Name  = 'Lester'
+		SET @Insertion  = ''
+		SET @LastName  = 'Strijker'
+		SET @BirthDate  = convert(datetime,'15-04-2004',105)
+	END
+	IF @LoopCounter = 15
+	BEGIN 
+		SET @LevelName = 'Bovenbouw'
+		SET @Name  = 'Aimy'
+		SET @Insertion  = ''
+		SET @LastName  = 'Tomeï'
+		SET @BirthDate  = convert(datetime,'14-05-1996',105)
+	END
+	IF @LoopCounter = 16
+	BEGIN 
+		SET @LevelName = 'Middenbouw'
+		SET @Name  = 'Floor'
+		SET @Insertion  = 'de'
+		SET @LastName  = 'Voogt'
+		SET @BirthDate  = convert(datetime,'08-11-2003',105)
+	END
+	IF @LoopCounter = 17
+	BEGIN 
+		SET @LevelName = 'Onderbouw'
+		SET @Name  = 'Thessa'
+		SET @Insertion  = 'de'
+		SET @LastName  = 'Voogt'
+		SET @BirthDate  = convert(datetime,'26-04-2006',105)
+	END
+	IF @LoopCounter = 18
+	BEGIN 
+		SET @LevelName = 'Bovenbouw'
+		SET @Name  = 'Aldo'
+		SET @Insertion  = 'de'
+		SET @LastName  = 'Vos'
+		SET @BirthDate  = convert(datetime,'14-10-1996',105)
+		
+	END
+	IF @LoopCounter = 19
+	BEGIN 
+		SET @LevelName = 'Bovenbouw'
+		SET @Name  = 'Yannick'
+		SET @Insertion  = 'de'
+		SET @LastName  = 'Vroed'
+		SET @BirthDate  = convert(datetime,'02-01-1998',105)
+	END
+	IF @LoopCounter = 20
+	BEGIN 
+		SET @LevelName = 'Bovenbouw'
+		SET @Name  = 'Zoë'
+		SET @Insertion  = 'de'
+		SET @LastName  = 'Vroed'
+		SET @BirthDate  = convert(datetime,'05-06-1996',105)
+	END
+	IF @LoopCounter = 21
+	BEGIN 
+		SET @LevelName = 'Middenbouw'
+		SET @Name  = 'Fleur'
+		SET @Insertion  = 'van'
+		SET @LastName  = 'Willige'
+		SET @BirthDate  = convert(datetime,'13-05-2003',105)
+	END
+	IF @LoopCounter = 22
+	BEGIN 
+		SET @LevelName = 'Bovenbouw'
+		SET @Name  = 'Jolie'
+		SET @Insertion  = 'van'
+		SET @LastName  = 'Willige'
+		SET @BirthDate  = convert(datetime,'23-03-2005',105)
+	END
+	IF @LoopCounter = 23
+	BEGIN 
+		SET @LevelName = 'Bovenbouw'
+		SET @Name  = 'Sofie'
+		SET @Insertion  = ''
+		SET @LastName  = 'Veerbeek'
+		SET @BirthDate  = convert(datetime,'13-07-1998',105)
+	END
+	IF @LoopCounter = 24
+	BEGIN 
+		SET @LevelName = 'Middenbouw'
+		SET @Name  = 'Tom'
+		SET @Insertion  = ''
+		SET @LastName  = 'Veerbeek'
+		SET @BirthDate  = convert(datetime,'05-02-2003',105)
+	END
+	IF @LoopCounter = 25
+	BEGIN 
+		SET @LevelName = 'Onderbouw'
+		SET @Name  = 'Maya'
+		SET @Insertion  = ''
+		SET @LastName  = 'Veerbeek'
+		SET @BirthDate  = convert(datetime,'16-01-2008',105)	
+	END
+	IF @LoopCounter = 26
+	BEGIN 
+		SET @LevelName = 'Middenbouw'
+		SET @Name  = 'Nemo'
+		SET @Insertion  = ''
+		SET @LastName  = 'Boertjens'
+		SET @BirthDate  = convert(datetime,'04-04-2002',105)
+	END
+	IF @LoopCounter = 27
+	BEGIN 
+		SET @LevelName = 'Onderbouw'
+		SET @Name  = 'Puk'
+		SET @Insertion  = ''
+		SET @LastName  = 'Cordes'
+		SET @BirthDate  = convert(datetime,'23-07-2005'	,105)
+		SET @LoopNotReady = 0
+	END
+	IF @LoopCounter > 27
+	BEGIN 
+		SET @LoopNotReady = 0
+	END
+
+
+	IF NOT EXISTS (SELECT * FROM [Student] WHERE [Name] = @Name AND [LastName] = @LastName)
+	BEGIN
+	PRINT 'IN IF: ' + @Name
+	  SET @LevelId = 0
+	  SELECT @LevelId = [LevelId] FROM [Level] WHERE [Name] = @LevelName
+	  IF @LevelId > 0
+	  BEGIN
+	  	INSERT INTO [Student] ([Name], [Insertion], [LastName], [BirthDate], [LevelId]) VALUES (@Name, @Insertion, @LastName, @BirthDate, @LevelId) 
+	  END 
+	END
+END
+
 GO

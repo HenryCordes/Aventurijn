@@ -115,6 +115,7 @@ namespace Aventurijn.Activities.Web.Controllers
             {
                 return HttpNotFound();
             }
+            student.Level = db.Levels.Find(student.LevelId);
             return View(student);
         }
 

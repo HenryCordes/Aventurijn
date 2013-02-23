@@ -6,15 +6,17 @@
 
 <h2>Nivo details</h2>
 
-<fieldset>
+<fieldset class="tabular">
     <legend>Nivo</legend>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
-    </div>
+     <div class="row">
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.Name)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Name)
+        </div>    
+     </div>
 </fieldset>
 <p>
     @Html.ActionLink("Aanpassen", "Edit", new { id=Model.LevelId }) |
