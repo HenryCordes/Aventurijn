@@ -77,16 +77,22 @@ namespace Aventurijn.Activities.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Attempt to register the user
-                try
+                if (!model.UserName.EndsWith("aventurijn.org") && model.UserName != "h.cordes@gmail.com")
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    ModelState.AddModelError("UserName", "Ongeldig emailadres");
                 }
-                catch (MembershipCreateUserException e)
+                else
                 {
-                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                    try
+                    {
+                        WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                        WebSecurity.Login(model.UserName, model.Password);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    catch (MembershipCreateUserException e)
+                    {
+                        ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                    }
                 }
             }
 

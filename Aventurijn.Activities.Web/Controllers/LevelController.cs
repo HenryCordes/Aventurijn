@@ -10,6 +10,7 @@ using Aventurijn.Activities.Web.Models.Context;
 
 namespace Aventurijn.Activities.Web.Controllers
 {
+     [Authorize]
     public class LevelController : Controller
     {
         private AvonturijnContext db = new AvonturijnContext();

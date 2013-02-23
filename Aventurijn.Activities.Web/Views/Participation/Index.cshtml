@@ -9,7 +9,7 @@
 <p>
     @Html.ActionLink("Nieuw", "Create")
 </p>
-
+<form id="studentForm" method="post" action="">
     <table class="data" id="participations_table">
         <thead>
             <tr>
@@ -35,7 +35,7 @@
             </tr>
       </tfoot>
     </table>
-   
+  </form>
 <!--        TEMPLATES       -->
 <script type="text/html" id="participations-template">
     <tr>
@@ -45,7 +45,7 @@
         <td class=""><input type="checkbox" data-bind="checked: Participating" /></td>
         <td data-bind="text: ExtraInfo" class=""></td>        
         <td data-bind="text: ParticipationDateTimeAsString" class=""></td>
-        <td> <a href="#" class="edit" data-bind="attr: { 'data-current': ParticipationId }" >Edit</a></td>
+        <td> <a href="#" class="edit" data-bind="attr: { 'data-current': ParticipationId }" >Edit</a> | <a href="#" class="org-edit" data-bind="attr: { 'data-current': ParticipationId }" >Aanpassen</a> </td>
     </tr>
 </script>
 
@@ -66,6 +66,12 @@ string data = new System.Web.Script.Serialization.JavaScriptSerializer().Seriali
             link.parents('tr').find('#student_' + id).hide();
             link.parents('tr').find('#student_editor_' + id).show();
         });
-
+        
+         $('.org-edit').click(function() {
+             var link = $(this);
+             var id = link.attr('data-current');
+             window.location.href = '/participation/edit/'+id;
+    
+        });
     </script>
 }

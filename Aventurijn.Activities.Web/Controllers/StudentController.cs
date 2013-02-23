@@ -11,6 +11,7 @@ using Aventurijn.Activities.Web.Models.ViewModel;
 
 namespace Aventurijn.Activities.Web.Controllers
 {
+     [Authorize]
     public class StudentController : Controller
     {
         private AvonturijnContext db = new AvonturijnContext();
