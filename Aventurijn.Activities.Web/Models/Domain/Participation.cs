@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -33,5 +34,23 @@ namespace Aventurijn.Activities.Web.Models.Domain
         [DisplayFormat(DataFormatString = "{0:dd-mm-yyyy}", ApplyFormatInEditMode = true)]
         [DataType(DataType.DateTime)]
         public DateTime ParticipationDateTime { get; set; }
+
+        [DisplayName("Datum")]
+        [DataType(DataType.DateTime)]
+        public string ParticipationDateTimeAsString {
+            get
+            {
+                return ParticipationDateTime.ToString("dd-MM-yyyy", CultureInfo.InvariantCulture);
+            }
+            set
+            {
+                var date = new DateTime();
+                if (DateTime.TryParse(value, out date))
+                {
+                    ParticipationDateTime = date;
+                }
+               
+            }
+        }
     }
 }

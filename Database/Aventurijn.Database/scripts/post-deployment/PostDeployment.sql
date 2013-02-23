@@ -32,7 +32,7 @@ BEGIN
 END
 
 
-GO
+
 
 /*	----	Subject vulling (onderwerpen)	----	*/
 
@@ -104,6 +104,99 @@ BEGIN
 END
 
 
+
+
+/*	--		TESTDATA	--	*/
+
+DECLARE @SubjectId int
+DECLARE @currDate DATETIME
+DECLARE @Subject varchar(100)
+DECLARE @Code varchar(10)
+DECLARE @LoopNotReady bit
+DECLARE @LoopCounter int
+
+SET @currDate = getutcdate()
+
+/*	--		Activiteiten	--	*/
+SET @LoopNotReady = 1
+SET @LoopCounter = 0
+PRINT @currDate
+PRINT @LoopCounter
+
+WHILE @LoopNotReady = 1
+BEGIN
+	SET @LoopCounter = @LoopCounter + 1
+	PRINT @LoopCounter
+
+	IF @LoopCounter = 1 
+	BEGIN
+		SET @Subject = 'Proefjes zuur/base'
+		SET @Code = 'nwt'
+	END
+	IF @LoopCounter = 2 
+	BEGIN 
+		SET @Subject = 'Economie spel'
+		SET @Code = 'nwt'
+	END
+	IF @LoopCounter = 3
+	BEGIN 
+		SET @Subject = 'Technisch lego'
+		SET @Code = 'nwt'
+	END
+	IF @LoopCounter = 4
+	BEGIN 
+		SET @Subject = 'Lezen, schrijven'
+		SET @Code = 'nl'
+	END
+	IF @LoopCounter = 5
+	BEGIN 
+		SET @Subject = 'Rekenen'
+		SET @Code = 'rw'
+	END
+	IF @LoopCounter = 6
+	BEGIN 
+		SET @Subject = 'Rode kool koken'
+		SET @Code = 'nwt'
+	END
+	IF @LoopCounter = 7
+	BEGIN 
+		SET @Subject = 'Staartdeling'
+		SET @Code = 'rw'
+	END
+	IF @LoopCounter = 8
+	BEGIN 
+		SET @Subject = 'Marry workshop: hout, rozenbottels'
+		SET @Code = 'b'
+	END
+	IF @LoopCounter = 9
+	BEGIN 
+		SET @Subject = 'Pantoun, tibetaans gedicht maken'
+		SET @Code = 'nl'
+	END
+	IF @LoopCounter = 10
+	BEGIN 
+		SET @Subject = 'Vikingen'
+		SET @Code = 'g'
+		SET @LoopNotReady = 0
+	END
+	IF @LoopCounter > 10
+	BEGIN 
+		SET @LoopNotReady = 0
+	END
+
+
+	IF NOT EXISTS (SELECT * FROM [Activity] WHERE [Name] = @Subject)
+	BEGIN
+	PRINT 'IN IF: ' + @Subject
+	SET @SubjectId = 0
+	  SELECT @SubjectId = [SubjectId] FROM [Subject] WHERE [Code] = @Code
+	  IF @SubjectId > 0
+	  BEGIN
+	  	INSERT INTO [Activity] ([SubjectId], [Name], [CreationDate]) VALUES (@SubjectId, @Subject, @currDate) 
+	  END 
+	END
+
+END
 
 
 GO

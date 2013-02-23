@@ -1,8 +1,8 @@
-﻿var participations = function () {
+﻿var participations = function (initialdata) {
     var self = this;
     
     self.loading = ko.observableArray();
-    self.participations = ko.observable();
+    self.participations = ko.observable(initialdata);
 
     self.load = function() {
         _getData();
@@ -40,11 +40,9 @@
                     alert(xmlHttpRequest.responseText);
                 }
             });
-     };  
+     };
     
     function _updateModel (data){
-       // var viewModel = ko.mapping.fromJS(data);
-
         self.participations(data);
         self.loading.pop();
     };

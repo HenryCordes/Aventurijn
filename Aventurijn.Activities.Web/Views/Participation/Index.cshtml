@@ -10,8 +10,7 @@
     @Html.ActionLink("Nieuw", "Create")
 </p>
 
-<div id="participations_table">
-    <table >
+    <table class="data" id="participations_table">
         <thead>
             <tr>
                 <th class="">Leerling</th>
@@ -24,88 +23,41 @@
             </tr>
         </thead>
         <tbody data-bind="template: { name: 'participations-template', foreach: participations, as: 'participation'}"></tbody>
+        <tfoot>
+            <tr>
+                <td colspan="7">
+                    <div class="loading-container" data-bind="if: loading().length">
+                        <div class="loader">
+                            Loading... 
+                        </div>
+                    </div>
+                </td>
+            </tr>
+      </tfoot>
     </table>
-    <div class="loading-container" data-bind="if: loading().length">
-        <div class="loader">
-            Loading... 
-        </div>
-    </div>
-</div>
-
+   
+<!--        TEMPLATES       -->
 <script type="text/html" id="participations-template">
     <tr>
         <td data-bind="text: Student.Name" class=""></td> 
         <td data-bind="text: Activity.Name" class=""></td>
         <td data-bind="text: Activity.Subject.Name" class=""></td>
-        <td class=""><checkbox data-bind="checked: Participating" /></td>
+        <td class=""><input type="checkbox" data-bind="checked: Participating" /></td>
         <td data-bind="text: ExtraInfo" class=""></td>        
-        <td data-bind="text: ParticipationDateTime" class=""></td>
+        <td data-bind="text: ParticipationDateTimeAsString" class=""></td>
         <td> <a href="#" class="edit" data-bind="attr: { 'data-current': ParticipationId }" >Edit</a></td>
-
     </tr>
 </script>
 
 
-@*<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Student)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Activity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Activity.Subject)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Participating)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ExtraInfo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ParticipationDateTime)
-        </th>
-        
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                <span id="student_@item.ParticipationId">@item.Student.Name</span>
-                <input type="text" id="student_editor_@item.ParticipationId" value="@item.Student.Name" style="display:none;" />
-            </td>
-            <td>
-                @Html.LabelFor(modelItem => item.Activity.Name, new { id="activity_"+item.ParticipationId }) 
-            </td>
-            <td>
-                @Html.DisplayTextFor(modelItem => item.Activity.Subject.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Participating)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExtraInfo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ParticipationDateTime)
-            </td>
-            <td>
-                @Html.ActionLink("Aanpassen", "Edit", new { id=item.ParticipationId }) |
-                @Html.ActionLink("Details", "Details", new { id=item.ParticipationId }) |
-                @Html.ActionLink("Verwijderen", "Delete", new { id=item.ParticipationId })| 
-                <a href="#" class="edit" data-current="@item.ParticipationId" >Edit</a>
-            </td>
-        </tr>
-    }
-
-</table>*@
-
 @section Scripts {
+@{
+string data = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Model);
+}
     <script type="text/javascript"> 
-         var allParticipations = new participations();
-        allParticipations.load();
+        var initialData = @Html.Raw(data);
+
+        var allParticipations = new participations(initialData);
         ko.applyBindings(allParticipations, document.getElementById('participations_table'));
         
         $('.edit').click(function() {

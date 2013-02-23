@@ -788,6 +788,7 @@ fieldset.editor { margin-top: 10px;}
 .display-label{  display: table-cell; padding-right: 8px;font-weight: bold;}
 .display-field{  display: table-cell;}
 
+table.data { min-width: 600px;}
 th, td { padding: .2em .4em .2em .4em; word-wrap: break-word;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
 th {background: -webkit-linear-gradient(#aaa,#999);
 background: -moz-linear-gradient(#aaa,#999);
@@ -801,7 +802,7 @@ tr:last-child td:first-child { border-radius: 0 0 0 9px; }
 tr:last-child td:last-child { border-radius: 0 0 9px 0; }
 tr:nth-child(odd) { background: #e2e2e2; }
 
-.loading-container { width: 100%; text-align: center; }
+.loading-container { width: 100%; text-align: center; top: -30px; position: relative;}
 .loader{
     background-image: url(/Content/img/ajax-loader.gif);
     background-repeat: no-repeat;
