@@ -9,8 +9,9 @@
 <p>
     @Html.ActionLink("Nieuw", "Create")
 </p>
-<form id="studentForm" method="post" action="">
-    <table class="data" id="participations_table">
+<div id="participations_table">
+<form id="studentForm" method="post" action="/participation/save" data-bind="submit: save">
+    <table class="data"  data-bind="visible: participations().length > 0">
         <thead>
             <tr>
                 <th class="">Leerling</th>
@@ -33,19 +34,28 @@
                     </div>
                 </td>
             </tr>
-      </tfoot>
+        </tfoot>
     </table>
-  </form>
+    <button id="new_participation" type="button"data-bind='click: addParticipation' >Nieuw</button> 
+    <button id="save_participations" data-bind="enable: participations().length > 0" type="submit" >Opslaan</button>
+</form>
+</div>
 <!--        TEMPLATES       -->
 <script type="text/html" id="participations-template">
     <tr>
+        <input type="hidden" data-bind="value: ParticipationId"/>
+        <input type="hidden" data-bind="value: StudentId"/>
+        <input type="hidden" data-bind="value: ActivityId"/>
+        <input type="hidden" data-bind="value: Activity.SubjectId"/>
         <td data-bind="text: Student.Name" class=""></td> 
         <td data-bind="text: Activity.Name" class=""></td>
         <td data-bind="text: Activity.Subject.Name" class=""></td>
         <td class=""><input type="checkbox" data-bind="checked: Participating" /></td>
         <td data-bind="text: ExtraInfo" class=""></td>        
         <td data-bind="text: ParticipationDateTimeAsString" class=""></td>
-        <td> @*<a href="#" class="edit" data-bind="attr: { 'data-current': ParticipationId }" >Edit</a> |*@ <a href="#" class="org-edit" data-bind="attr: { 'data-current': ParticipationId }" >Aanpassen</a> </td>
+        <td> <a href="#" class="org-edit" data-bind="attr: { 'data-current': ParticipationId }" >Aanpassen</a> | 
+            <a href="#" class="delete" data-bind="attr: { 'data-current': ParticipationId }" >Verwijderen</a>
+        </td>
     </tr>
 </script>
 
@@ -59,8 +69,11 @@ string data = new System.Web.Script.Serialization.JavaScriptSerializer().Seriali
 
         var allParticipations = new participations(initialData);
         ko.applyBindings(allParticipations, document.getElementById('participations_table'));
+        $('#save_participations').click(function() {
+            allParticipations.save();
+        });
         
-        $('.edit').click(function() {
+        $('.delete').click(function() {
             var link = $(this);
             var id = link.attr('data-current');
             link.parents('tr').find('#student_' + id).hide();
@@ -73,5 +86,8 @@ string data = new System.Web.Script.Serialization.JavaScriptSerializer().Seriali
              window.location.href = '/participation/edit/'+id;
     
         });
+
+        //link.parents('tr').find('#student_' + id).hide();
+        //link.parents('tr').find('#student_editor_' + id).show();
     </script>
 }

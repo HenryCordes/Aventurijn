@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Aventurijn.Activities.Web.Attributes;
 using Aventurijn.Activities.Web.Models.Domain;
 using Aventurijn.Activities.Web.Models.Context;
 using Aventurijn.Activities.Web.Models.ViewModel;
@@ -142,6 +143,47 @@ namespace Aventurijn.Activities.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult Index([FromJson] IEnumerable<Participation> participations)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach (var participation in participations)
+                {
+                    participation.Activity = db.Activities.Find(participation.ActivityId);
+                    participation.Activity.Subject = db.Subjects.Find(participation.Activity.SubjectId);
+                    participation.Student = db.Students.Find(participation.StudentId);
+                    db.Entry(participation).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+            }
+            return View( participations);
+        }
+
+        [HttpPost]
+        [HandleError]
+        public JsonResult Save(List<Participation> participations)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach (var participation in participations)
+                {
+                    participation.Activity = db.Activities.Find(participation.ActivityId);
+                    participation.Activity.Subject = db.Subjects.Find(participation.Activity.SubjectId);
+                    participation.Student = db.Students.Find(participation.StudentId);
+                    db.Entry(participation).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+              
+                return Json(true);
+            }
+            else
+            {
+                return Json(false);
+            }
+
+            
+        }
 
         public JsonResult All()
         {

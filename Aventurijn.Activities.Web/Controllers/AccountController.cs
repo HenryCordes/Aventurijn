@@ -38,6 +38,10 @@ namespace Aventurijn.Activities.Web.Controllers
         {
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
+                if (returnUrl == null || returnUrl == "/")
+                {
+                    returnUrl = "/participation";
+                }
                 return RedirectToLocal(returnUrl);
             }
 
@@ -87,7 +91,7 @@ namespace Aventurijn.Activities.Web.Controllers
                     {
                         WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                         WebSecurity.Login(model.UserName, model.Password);
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Participation");
                     }
                     catch (MembershipCreateUserException e)
                     {
