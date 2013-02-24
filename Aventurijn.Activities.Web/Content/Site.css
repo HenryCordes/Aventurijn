@@ -454,6 +454,8 @@ input, textarea, select {
 
 select{ width: 310px;}
 
+table td > select { padding: 4px; font-size: 1em;margin: 0;}
+
 textarea {
     font-family: inherit;
     width: 500px;

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Aventurijn.Activities.Web.Models.Domain.Participation>
+﻿@model Aventurijn.Activities.Web.Models.ViewModel.ParticipationsViewModel
 
 @{
     ViewBag.Title = "Aventurijn - Puntjes";
@@ -47,14 +47,16 @@
         <input type="hidden" data-bind="value: StudentId"/>
         <input type="hidden" data-bind="value: ActivityId"/>
         <input type="hidden" data-bind="value: Activity.SubjectId"/>
-        <td data-bind="text: Student.Name" class=""></td> 
+        <td class="">
+            <select data-bind="options: $root.students, optionsText: 'Name', optionsValue: 'StudentId', value: participation.StudentId, optionCaption: 'Selecteren...' "></select>
+        </td> 
         <td data-bind="text: Activity.Name" class=""></td>
         <td data-bind="text: Activity.Subject.Name" class=""></td>
         <td class=""><input type="checkbox" data-bind="checked: Participating" /></td>
         <td data-bind="text: ExtraInfo" class=""></td>        
         <td data-bind="text: ParticipationDateTimeAsString" class=""></td>
         <td> <a href="#" class="org-edit" data-bind="attr: { 'data-current': ParticipationId }" >Aanpassen</a> | 
-            <a href="#" class="delete" data-bind="attr: { 'data-current': ParticipationId }" >Verwijderen</a>
+             <a href="#" class="delete" data-bind='click: $root.removeParticipation' >Verwijderen</a>
         </td>
     </tr>
 </script>
@@ -69,22 +71,15 @@ string data = new System.Web.Script.Serialization.JavaScriptSerializer().Seriali
 
         var allParticipations = new participations(initialData);
         ko.applyBindings(allParticipations, document.getElementById('participations_table'));
+        
         $('#save_participations').click(function() {
             allParticipations.save();
-        });
-        
-        $('.delete').click(function() {
-            var link = $(this);
-            var id = link.attr('data-current');
-            link.parents('tr').find('#student_' + id).hide();
-            link.parents('tr').find('#student_editor_' + id).show();
         });
         
          $('.org-edit').click(function() {
              var link = $(this);
              var id = link.attr('data-current');
              window.location.href = '/participation/edit/'+id;
-    
         });
 
         //link.parents('tr').find('#student_' + id).hide();

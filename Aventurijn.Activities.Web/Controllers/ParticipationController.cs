@@ -22,15 +22,17 @@ namespace Aventurijn.Activities.Web.Controllers
 
         public ActionResult Index()
         {
-            var participations = db.Participations.ToList();
+            var participations = db.Participations.OrderBy(p => p.ParticipationDateTime).ToList();
             foreach (var participation in participations)
             {
                 participation.Activity = db.Activities.Find(participation.ActivityId);
                 participation.Activity.Subject = db.Subjects.Find(participation.Activity.SubjectId);
                 participation.Student = db.Students.Find(participation.StudentId);
             }
+            var viewModel = new ParticipationsViewModel(db.Activities.OrderBy(a => a.Name), db.Students.OrderBy(s => s.Name));
+            viewModel.Participations = participations;
 
-            return View(participations);
+            return View(viewModel);
         }
 
         //
@@ -54,7 +56,7 @@ namespace Aventurijn.Activities.Web.Controllers
 
         public ActionResult Create()
         {
-            var viewModel = new ParticipationViewModel(db.Activities, db.Students);
+            var viewModel = new ParticipationViewModel(db.Activities.OrderBy(a => a.Name), db.Students.OrderBy(s => s.Name));
             return View(viewModel);
         }
 
@@ -66,13 +68,11 @@ namespace Aventurijn.Activities.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-               // participation.Activity = db.Activities.Find(participation.ActivityId);
-              //  participation.Student = db.Students.Find(participation.StudentId);
                 db.Participations.Add(participation);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            var viewModel = new ParticipationViewModel(db.Activities, db.Students)
+            var viewModel = new ParticipationViewModel(db.Activities.OrderBy(a => a.Name), db.Students.OrderBy(s => s.Name))
             {
                 Participation = participation
             };
@@ -89,7 +89,7 @@ namespace Aventurijn.Activities.Web.Controllers
             {
                 return HttpNotFound();
             }
-            var viewModel = new ParticipationViewModel(db.Activities, db.Students)
+            var viewModel = new ParticipationViewModel(db.Activities.OrderBy(a => a.Name), db.Students.OrderBy(s => s.Name))
             {
                 Participation = participation
             };
@@ -111,7 +111,7 @@ namespace Aventurijn.Activities.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            var viewModel = new ParticipationViewModel(db.Activities, db.Students)
+            var viewModel = new ParticipationViewModel(db.Activities.OrderBy(a => a.Name), db.Students.OrderBy(s => s.Name))
             {
                 Participation = participation
             };
@@ -157,7 +157,10 @@ namespace Aventurijn.Activities.Web.Controllers
                     db.SaveChanges();
                 }
             }
-            return View( participations);
+            var viewModel = new ParticipationsViewModel(db.Activities.OrderBy(a => a.Name), db.Students.OrderBy(s => s.Name));
+            viewModel.Participations = participations;
+
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -187,7 +190,7 @@ namespace Aventurijn.Activities.Web.Controllers
 
         public JsonResult All()
         {
-            var participations = db.Participations.ToList();
+            var participations = db.Participations;
             foreach (var participation in participations)
             {
                 participation.Activity = db.Activities.Find(participation.ActivityId);

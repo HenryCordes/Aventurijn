@@ -1,8 +1,11 @@
-﻿var participations = function (initialdata) {
+﻿
+var participations = function (initialdata) {
     var self = this;
     
     self.loading = ko.observableArray();
-    self.participations = ko.observableArray(initialdata);
+    self.participations = ko.observableArray(initialdata.Participations);
+    self.students = ko.observableArray(initialdata.Students);//ko.mapping.fromJS(initialdata.Students);
+    self.activities = ko.observableArray(initialdata.Activities);
    // $("studentForm").validate({ submitHandler: self.save });
 
     self.load = function() {
@@ -10,7 +13,6 @@
     };
 
     self.save = function() {
-        alert("Could now transmit to server: " + ko.utils.stringifyJson(self.participations));
         ko.utils.postJson(location.href, { participations: self.participations });
     };
     
@@ -19,7 +21,8 @@
         self.participations.push({
             Name: "",
             ParticipationDateTimeAsString: now.toString('dd-mm-yyyy'),
-            ParticipationDateTime: now
+            ParticipationDateTime: now,
+            Student: initialdata.Students()[0]
         });
     };
  
