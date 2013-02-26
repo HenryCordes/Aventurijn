@@ -10,7 +10,31 @@ var participations = function (initialdata) {
    // $("studentForm").validate({ submitHandler: self.save });
 
     self.save = function() {
-        ko.utils.postJson(location.href, { participations: ko.mapping.toJS(self.participations) });
+     //   var result = ko.utils.postJson(location.href, { participations: ko.mapping.toJS(self.participations) });
+        
+        self.loading.push(true);
+        var dataAsString = ko.mapping.toJSON(self.participations);
+         jQuery.ajax({
+                type: 'POST',
+                url: 'participation/save',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: dataAsString,
+                traditional: true,
+                success: function(result){
+                    self.loading.pop();
+                    if (result === true) {
+                      $('.success-container').fadeIn('slow', function() {
+                          $('.success-container').fadeOut();
+                      });  
+                    }
+                },
+                error: function(xmlHttpRequest)
+                {
+                     self.loading.pop();
+                    alert(xmlHttpRequest.responseText);
+                }
+            });
     };
     
     self.addParticipation = function() {

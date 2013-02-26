@@ -44,6 +44,23 @@ namespace Aventurijn.Activities.Web.Controllers
             return View(viewModel);
         }
 
+        [HttpPost]
+        public ActionResult Index([FromJson] IEnumerable<Participation> participations)
+        {
+            if (ModelState.IsValid)
+            {
+                SaveParticipations(participations);
+            }
+            var viewModel = new ParticipationsViewModel(db.Activities.OrderBy(a => a.Name),
+                                                        db.Students.OrderBy(s => s.Name),
+                                                        db.Subjects.OrderBy(su => su.Name));
+            viewModel.FromDate = DateTime.UtcNow.Date.AddMonths(-1);
+            viewModel.ToDate = DateTime.UtcNow.Date;
+            viewModel.Participations = participations;
+
+            return View(viewModel);
+        }
+
         //
         // GET: /Participation/Details/5
 
@@ -153,33 +170,18 @@ namespace Aventurijn.Activities.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index([FromJson] IEnumerable<Participation> participations)
-        {
-            if (ModelState.IsValid)
-            {
-                SaveParticipations(participations);
-            }
-            var viewModel = new ParticipationsViewModel(db.Activities.OrderBy(a => a.Name),
-                                                        db.Students.OrderBy(s => s.Name),
-                                                        db.Subjects.OrderBy(su => su.Name)); 
-            viewModel.Participations = participations;
-
-            return View(viewModel);
-        }
-
-        [HttpPost]
         [HandleError]
-        public JsonResult Save(List<Participation> participations)
+        public JsonResult Save(IEnumerable<Participation> participations)
         {
-            if (ModelState.IsValid)
-            {
+      //    if (ModelState.IsValid)
+     //       {
                 SaveParticipations(participations);
                 return Json(true);
-            }
-            else
-            {
-                return Json(false);
-            }
+      //      }
+     //       else
+     //       {
+        //        return Json(false);
+      //      }
         }
 
         [HttpPost]

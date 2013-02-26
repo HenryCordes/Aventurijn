@@ -40,7 +40,12 @@
                     <td colspan="7">
                         <div class="loading-container" data-bind="if: loading().length">
                             <div class="loader">
-                                Loading... 
+                                Laden... 
+                            </div>
+                        </div>
+                         <div class="success-container" style="display:none;">
+                            <div class="success">
+                                Succesvol opgeslagen
                             </div>
                         </div>
                     </td>
@@ -93,12 +98,7 @@ string data = new System.Web.Script.Serialization.JavaScriptSerializer().Seriali
 
         var allParticipations = new participations(initialData);
         ko.applyBindings(allParticipations, document.getElementById('participations_table'));
-        
-        $('#save_participations').click(function() {
-            allParticipations.save();
-        });
-        
-        
+
          $('.org-edit').click(function() {
              var link = $(this);
              var id = link.attr('data-current');
