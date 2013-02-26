@@ -103,7 +103,7 @@ h5, h6 {
 ----------------------------------------------------------*/
 .content-wrapper {
     margin: 0 auto;
-    max-width: 960px;
+    max-width: 1100px;
 }
 
 #body {
@@ -115,7 +115,7 @@ h5, h6 {
     .main-content {
         background: url("../Images/accent.png") no-repeat;
         padding-left: 10px;
-        padding-top: 30px;
+        padding-top: 10px;
     }
 
     .featured + .main-content {
@@ -451,10 +451,11 @@ input, textarea, select {
     padding: 5px;
     width: 300px;
 }
+input[type="button"],input[type="submit"]{ width: inherit;}
 
 select{ width: 310px;}
 
-table td > input, table td > select { padding: 4px; font-size: 1em;margin: 0;width: inherit;}
+table td > input, table td > select, select.small { padding: 4px; font-size: 1em;margin: 0;width: inherit;}
 table td > input.datefield { width: 80px;}
 input.datefield.small { font-size: 1em;  width: 80px;}
 
@@ -495,7 +496,6 @@ textarea {
         -webkit-border-radius: 4px;
         cursor: pointer;
         margin-right: 4px;
-        margin-top: 20px;
     }
 
     input[type="submit"]:hover,
@@ -516,6 +516,11 @@ textarea {
         border-color: #B5B5B5;
         cursor: default;
     }
+
+ul { list-style-type: none; }
+ul.horizontal {margin-left: -3em;}
+ul.horizontal li {display: inline; padding-right: 5px;}
+ul li button { margin-top: 5px;}
   
 /* info and errors */
 .message-info {
@@ -638,6 +643,8 @@ td {
 tr.pager td {
     padding: 0 0.25em 0 0;
 }
+
+td.centered { text-align: center;}
 
 
 /********************
@@ -844,3 +851,15 @@ tr:nth-child(odd) { background: #e2e2e2; }
     color: #D0CACD;
     text-align: left;
 }
+
+.no-data{
+    width: 610px;
+    clear: both;
+    height: 60px;
+    padding-top: 42px;
+    text-align: center;
+    font-size: 17px;
+}
+
+div.buttonrow { width: 100%;height: 20px; margin-top: 20px;}
+.right { float: right;clear: left;}

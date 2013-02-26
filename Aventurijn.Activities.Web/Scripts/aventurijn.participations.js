@@ -32,14 +32,14 @@ var participations = function (initialdata) {
         self.participations.remove(participation);
     };
 
-    self.getParticipations = function(from, to) {
-        _getData(from, to);
+    self.getParticipations = function(from, to, studentId) {
+        _getData(from, to, studentId);
     };
 
-    function _getData (from, to){
+    function _getData (from, to, studentId){
          self.loading.push(true);
         
-         var data = { 'from': from, 'to': to };
+         var data = { 'from': from, 'to': to, 'studentId': studentId };
         
          jQuery.ajax({
                 type: 'POST',

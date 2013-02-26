@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Aventurijn.Activities.Web.Models.Domain.Participation>
+
+@{
+    ViewBag.Title = "Aventurijn - Puntjes print";
+}
+
+<h2>Puntjes</h2>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Student)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Activity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Activity.Subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Participating)
+        </th>
+         <th>
+            @Html.DisplayNameFor(model => model.ExtraInfo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ParticipationDateTime)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayTextFor(modelItem => item.Student.Name)
+        </td>
+        <td>
+            @Html.DisplayTextFor(modelItem => item.Activity.Name)
+        </td>
+         <td>
+            @Html.DisplayTextFor(modelItem => item.Activity.Subject.Name)
+        </td>
+        <td class="centered">
+            @Html.DisplayFor(modelItem => item.Participating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExtraInfo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParticipationDateTime)
+        </td>
+    </tr>
+}
+
+</table>
+
+
+<p><a href="#" onclick="window.history.back();return false;">Terug naar lijst</a></p>

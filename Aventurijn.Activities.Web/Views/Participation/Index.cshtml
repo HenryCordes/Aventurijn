@@ -6,45 +6,54 @@
 
 <h2>Puntjes</h2>
 
-@*<p>
-    @Html.ActionLink("Nieuw", "Create")
-</p>*@
-<ul>
+<ul class="horizontal">
     <li>Van: <input type="text" id="fromDate" class="datefield small" value="@Model.FromDateAsString" /></li>
     <li>Tot: <input type="text" id="toDate" class="datefield small" value="@Model.ToDateAsString" /></li>
-    <li><button id="getParticipations" type="button" >Selecteer</button></li>
+    <li>Leerling: <select id="studentsSelect" class="small">
+                      <option value="0" selected>Alle...</option>
+                       @foreach (var student in Model.Students)
+                       {
+                           <option value="@student.StudentId">@student.Name</option>
+                       }
+                  </select></li>
+    <li><button id="getParticipations" type="button" >Filter</button></li>
 </ul>
 
 <div id="participations_table">
-<form id="studentForm" method="post" action="/participation/save" data-bind="submit: save">
-    <table class="data"  data-bind="visible: participations().length > 0">
-        <thead>
-            <tr>
-                <th class="">Leerling</th>
-                <th class="">Activiteit</th>
-                <th class="">Onderwerp</th>
-                <th class="">Deelname</th>
-                <th class="">Extra</th>
-                <th class="">Datum</th>  
-                <th></th>  
-            </tr>
-        </thead>
-        <tbody data-bind="template: { name: 'participations-template', foreach: participations, as: 'participation'}"></tbody>
-        <tfoot>
-            <tr>
-                <td colspan="7">
-                    <div class="loading-container" data-bind="if: loading().length">
-                        <div class="loader">
-                            Loading... 
+    <form id="participationsForm" method="post" action="/participation/save" data-bind="submit: save">
+        <div data-bind="visible: participations().length == 0" class="no-data">Geen puntjes gevonden...</div>
+        <table class="data" data-bind="visible: participations().length > 0">
+            <thead>
+                <tr>
+                    <th class="">Leerling</th>
+                    <th class="">Activiteit</th>
+                    <th class="">Onderwerp</th>
+                    <th class="">Deelname</th>
+                    <th class="">Extra</th>
+                    <th class="">Datum</th>  
+                    <th></th>  
+                </tr>
+            </thead>
+            <tbody data-bind="template: { name: 'participations-template', foreach: participations, as: 'participation'}"></tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="7">
+                        <div class="loading-container" data-bind="if: loading().length">
+                            <div class="loader">
+                                Loading... 
+                            </div>
                         </div>
-                    </div>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
-    <button id="new_participation" type="button"data-bind='click: addParticipation' >Nieuw</button> 
-    <button id="save_participations" data-bind="enable: participations().length > 0" type="submit" >Opslaan</button>
-</form>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="buttonrow">
+            <button id="new_participation" type="button" data-bind='click: addParticipation' >Nieuw</button> 
+            <button id="save_participations" data-bind="enable: participations().length > 0" type="submit" >Opslaan</button>
+            
+             <button id="show_participations" data-bind="enable: participations().length > 0" class="right" type="button">Print</button>
+        </div>
+    </form>
 </div>
 <!--        TEMPLATES       -->
 <script type="text/html" id="participations-template">
@@ -62,14 +71,15 @@
         <td data-bind="with: participation.ActivityId">
             <select data-bind="options: $root.subjects, optionsText: 'Name', optionsValue: 'SubjectId', value: participation.Activity.SubjectId " class="subject" disabled="true"></select>
         </td> 
-        <td><input type="checkbox" data-bind="checked: Participating" /></td>
+        <td class="centered"><input type="checkbox" data-bind="checked: Participating" /></td>
         <td>
             <input type="text" class="" data-bind="value: ExtraInfo"/>
         </td>        
         <td>
             <input type="text" class="datefield" data-bind="value: ParticipationDateTimeAsString"/>
         </td>
-        <td> | <a href="#" class="delete" data-bind='click: $root.removeParticipation' >Verwijderen</a>@* | <a href="#" class="org-edit" data-bind="attr: { 'data-current': ParticipationId }" >Aanpassen</a> *@</td>
+        <td> | <a href="#" class="delete" data-bind='click: $root.removeParticipation' >Verwijderen</a>
+            @* | <a href="#" class="org-edit" data-bind="attr: { 'data-current': ParticipationId }" >Aanpassen</a> *@</td>
     </tr>
 </script>
 
@@ -87,6 +97,7 @@ string data = new System.Web.Script.Serialization.JavaScriptSerializer().Seriali
         $('#save_participations').click(function() {
             allParticipations.save();
         });
+        
         
          $('.org-edit').click(function() {
              var link = $(this);
@@ -109,10 +120,17 @@ string data = new System.Web.Script.Serialization.JavaScriptSerializer().Seriali
         $('#getParticipations').click(function() {
             var from = $('#fromDate').val();
             var to = $('#toDate').val();
-            allParticipations.getParticipations(from, to);
+            var studentId = $('#studentsSelect').val();
+            allParticipations.getParticipations(from, to, studentId);
         });
+        
+        $('#show_participations').click(function() {
+            var from = $('#fromDate').val();
+            var to = $('#toDate').val();
+            var studentId = $('#studentsSelect').val();
 
-        //link.parents('tr').find('#student_' + id).hide();
-        //link.parents('tr').find('#student_editor_' + id).show();
+            window.location.href = 'participation/readonly?from=' + from + '&to=' + to + '&studentId=' + studentId;
+            
+        });
     </script>
 }

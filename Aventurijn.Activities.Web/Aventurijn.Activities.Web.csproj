@@ -338,6 +338,7 @@
     <Content Include="Views\Participation\Delete.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
+    <Content Include="Views\Participation\ReadOnly.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

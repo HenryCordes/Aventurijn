@@ -183,20 +183,21 @@ namespace Aventurijn.Activities.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult WithinDateRange(DateTime from, DateTime to)
+        public JsonResult WithinDateRange(DateTime from, DateTime to, int studentId = 0)
         {
-            var participations = db.Participations.Where(p => p.ParticipationDateTime > from &&
-                                                              p.ParticipationDateTime < to)
-                                                  .OrderBy(p => p.ParticipationDateTime).ToList();
-            ;
-            foreach (var participation in participations)
-            {
-                participation.Activity = db.Activities.Find(participation.ActivityId);
-                participation.Activity.Subject = db.Subjects.Find(participation.Activity.SubjectId);
-                participation.Student = db.Students.Find(participation.StudentId);
-            }
+            var participations = GetParticipations(from, to, studentId);
 
             return Json(participations);
+        }
+
+        public ActionResult ReadOnly()
+        {
+            DateTime from = DateTime.Parse(Request.QueryString["from"]);
+            DateTime to = DateTime.Parse(Request.QueryString["to"]);
+            int studentId = int.Parse(Request.QueryString["studentId"]);
+ 
+            var participations = GetParticipations(from, to, studentId);
+            return View("readonly", participations);
         }
 
         private void SaveParticipations(IEnumerable<Participation> participations)
@@ -217,6 +218,26 @@ namespace Aventurijn.Activities.Web.Controllers
                 db.SaveChanges();
             }
         }
+
+        private List<Participation> GetParticipations(DateTime from, DateTime to, int studentId)
+        {
+             var queryableParticipations = db.Participations.Where(p => p.ParticipationDateTime > from &&
+                                                                        p.ParticipationDateTime < to);
+             if (studentId > 0)
+             {
+                 queryableParticipations = queryableParticipations.Where(p => p.StudentId == studentId);
+             }
+             var participations = queryableParticipations.OrderBy(p => p.ParticipationDateTime).ToList();
+
+             foreach (var participation in participations)
+             {
+                 participation.Activity = db.Activities.Find(participation.ActivityId);
+                 participation.Activity.Subject = db.Subjects.Find(participation.Activity.SubjectId);
+                 participation.Student = db.Students.Find(participation.StudentId);
+             }
+             return participations;
+        }
+
 
         protected override void Dispose(bool disposing)
         {
