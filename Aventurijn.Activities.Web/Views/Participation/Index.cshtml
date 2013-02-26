@@ -6,9 +6,15 @@
 
 <h2>Puntjes</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Nieuw", "Create")
-</p>
+</p>*@
+<ul>
+    <li>Van: <input type="text" id="fromDate" class="datefield small" value="@Model.FromDateAsString" /></li>
+    <li>Tot: <input type="text" id="toDate" class="datefield small" value="@Model.ToDateAsString" /></li>
+    <li><button id="getParticipations" type="button" >Selecteer</button></li>
+</ul>
+
 <div id="participations_table">
 <form id="studentForm" method="post" action="/participation/save" data-bind="submit: save">
     <table class="data"  data-bind="visible: participations().length > 0">
@@ -47,17 +53,23 @@
         <input type="hidden" data-bind="value: StudentId"/>
         <input type="hidden" data-bind="value: ActivityId"/>
         <input type="hidden" data-bind="value: Activity.SubjectId"/>
-        <td class="">
+        <td>
             <select data-bind="options: $root.students, optionsText: 'Name', optionsValue: 'StudentId', value: participation.StudentId, optionCaption: 'Selecteren...' "></select>
         </td> 
-        <td data-bind="text: Activity.Name" class=""></td>
-        <td data-bind="text: Activity.Subject.Name" class=""></td>
-        <td class=""><input type="checkbox" data-bind="checked: Participating" /></td>
-        <td data-bind="text: ExtraInfo" class=""></td>        
-        <td data-bind="text: ParticipationDateTimeAsString" class=""></td>
-        <td> <a href="#" class="org-edit" data-bind="attr: { 'data-current': ParticipationId }" >Aanpassen</a> | 
-             <a href="#" class="delete" data-bind='click: $root.removeParticipation' >Verwijderen</a>
+        <td>
+            <select data-bind="options: $root.activities, optionsText: 'Name', optionsValue: 'ActivityId', value: participation.ActivityId, optionCaption: 'Selecteren...' " class="activity"></select>
+        </td> 
+        <td data-bind="with: participation.ActivityId">
+            <select data-bind="options: $root.subjects, optionsText: 'Name', optionsValue: 'SubjectId', value: participation.Activity.SubjectId " class="subject" disabled="true"></select>
+        </td> 
+        <td><input type="checkbox" data-bind="checked: Participating" /></td>
+        <td>
+            <input type="text" class="" data-bind="value: ExtraInfo"/>
+        </td>        
+        <td>
+            <input type="text" class="datefield" data-bind="value: ParticipationDateTimeAsString"/>
         </td>
+        <td> | <a href="#" class="delete" data-bind='click: $root.removeParticipation' >Verwijderen</a>@* | <a href="#" class="org-edit" data-bind="attr: { 'data-current': ParticipationId }" >Aanpassen</a> *@</td>
     </tr>
 </script>
 
@@ -80,6 +92,24 @@ string data = new System.Web.Script.Serialization.JavaScriptSerializer().Seriali
              var link = $(this);
              var id = link.attr('data-current');
              window.location.href = '/participation/edit/'+id;
+        });
+         
+        $('.activity').live('change', function() {
+             var select = $(this);
+            var newActivityId = select.val();
+            
+            for (var i = 0; i < initialData.Activities.length; i++) {
+                if (initialData.Activities[i].ActivityId == newActivityId) {
+                    $(select.parents('tr').find('.subject')[0]).val(initialData.Activities[i].SubjectId);
+                    return;
+                }
+            }
+        });
+
+        $('#getParticipations').click(function() {
+            var from = $('#fromDate').val();
+            var to = $('#toDate').val();
+            allParticipations.getParticipations(from, to);
         });
 
         //link.parents('tr').find('#student_' + id).hide();

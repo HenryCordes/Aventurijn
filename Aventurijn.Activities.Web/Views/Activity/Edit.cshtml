@@ -15,28 +15,28 @@
         @Html.HiddenFor(model => model.Activity.ActivityId)
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Activity.Name)
+            @Html.LabelFor(model => model.Activity)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Activity.Name)
             @Html.ValidationMessageFor(model => model.Activity.Name)
-        </div>
-
+        </div>  
         <div class="editor-label">
+            @Html.LabelFor(model => model.Activity.Subject)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.Activity.SubjectId, new SelectList(Model.Subjects, 
+                                                                                    "SubjectId", "Name", 
+                                                                                    Model.Subjects.First().SubjectId))
+            @Html.ValidationMessageFor(model => model.Activity.Subject)
+        </div>
+        
+         <div class="editor-label">
             @Html.LabelFor(model => model.Activity.CreationDate)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Activity.CreationDate)
             @Html.ValidationMessageFor(model => model.Activity.CreationDate)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Activity.Subject.Name)
-        </div>
-        <div class="editor-field">
-            @Html.DropDownListFor(model => model.Activity.SubjectId, new SelectList(Model.Subjects, 
-               "SubjectId", "Name", 
-                Model.Subjects.First().SubjectId))
-            @Html.ValidationMessageFor(model => model.Activity.Subject)
         </div>
         <p>
             <input type="submit" value="Opslaan" />

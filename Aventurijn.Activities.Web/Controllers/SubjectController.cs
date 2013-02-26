@@ -20,7 +20,7 @@ namespace Aventurijn.Activities.Web.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Subjects.ToList());
+            return View(db.Subjects.OrderBy(s => s.Name).ToList());
         }
 
         //

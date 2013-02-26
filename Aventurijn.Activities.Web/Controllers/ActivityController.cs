@@ -48,7 +48,7 @@ namespace Aventurijn.Activities.Web.Controllers
 
         public ActionResult Create()
         {
-            var viewModel = new ActivityViewModel(db.Subjects);
+            var viewModel = new ActivityViewModel(db.Subjects.OrderBy(s => s.Name));
             return View(viewModel);
         }
 
@@ -65,7 +65,7 @@ namespace Aventurijn.Activities.Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            var viewModel = new ActivityViewModel(db.Subjects)
+            var viewModel = new ActivityViewModel(db.Subjects.OrderBy(s => s.Name))
                 {
                     Activity = activity
                 };
@@ -82,7 +82,7 @@ namespace Aventurijn.Activities.Web.Controllers
             {
                 return HttpNotFound();
             }
-            var viewModel = new ActivityViewModel(db.Subjects)
+            var viewModel = new ActivityViewModel(db.Subjects.OrderBy(s => s.Name))
             {
                 Activity = activity
             };
@@ -102,7 +102,7 @@ namespace Aventurijn.Activities.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            var viewModel = new ActivityViewModel(db.Subjects)
+            var viewModel = new ActivityViewModel(db.Subjects.OrderBy(s => s.Name))
             {
                 Activity = activity
             };

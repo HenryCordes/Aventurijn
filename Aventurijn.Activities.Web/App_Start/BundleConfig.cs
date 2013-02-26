@@ -21,7 +21,7 @@ namespace Aventurijn.Activities.Web
             bundles.Add(new ScriptBundle("~/bundles/aventurijn").Include(
                                          "~/Scripts/knockout-{version}.js",
                                          "~/Scripts/knockout.mapping-latest.js",
-                                         "~/Scripts/moment.js",
+                                         "~/Scripts/jquery.dateFormat-1.0.js",
                                          "~/Scripts/aventurijn.js",
                                          "~/Scripts/aventurijn.participations.js"));
 

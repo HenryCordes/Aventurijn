@@ -21,7 +21,7 @@ namespace Aventurijn.Activities.Web.Controllers
 
         public ActionResult Index()
         {
-            var students = db.Students.ToList();
+            var students = db.Students.OrderBy(s => s.Name).ToList();
             foreach (var student in students)
             {
                 student.Level = db.Levels.Find(student.LevelId);
