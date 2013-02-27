@@ -630,15 +630,6 @@ th {
         content: '▼';
     }
 
-td {
-    padding: 0.25em 2em 0.25em 0em;
-    border: 0 none;
-
-    word-wrap: break-word;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
 
 tr.pager td {
     padding: 0 0.25em 0 0;
@@ -646,6 +637,22 @@ tr.pager td {
 
 td.centered { text-align: center;}
 
+table.data { min-width: 600px;}
+th, td { padding: .2em .4em .2em .4em; word-wrap: break-word;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+th {background: -webkit-linear-gradient(#aaa,#999);
+background: -moz-linear-gradient(#aaa,#999);
+background: -o-linear-gradient(#aaa,#999);
+background: -ms-linear-gradient(#aaa,#999);
+background: -webkit-linear-gradient(#aaa,#999);
+color: #fff;}
+th:first-child { border-radius: 9px 0 0 0; }
+th:last-child { border-radius: 0 9px 0 0; }
+tr:last-child td:first-child { border-radius: 0 0 0 9px; }
+tr:last-child td:last-child { border-radius: 0 0 9px 0; }
+tr:nth-child(odd) { background: #e2e2e2; }
+td.break-word { white-space: normal;}
+
+table.full-width { width: 100%;}
 
 /********************
 *   Mobile Styles   *
@@ -822,24 +829,6 @@ fieldset.editor { margin-top: 10px;}
 .display-label{  display: table-cell; padding-right: 8px;font-weight: bold;}
 .display-field{  display: table-cell;}
 
-table.data { min-width: 600px;}
-th, td { padding: .2em .4em .2em .4em; word-wrap: break-word;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
-th {background: -webkit-linear-gradient(#aaa,#999);
-background: -moz-linear-gradient(#aaa,#999);
-background: -o-linear-gradient(#aaa,#999);
-background: -ms-linear-gradient(#aaa,#999);
-background: -webkit-linear-gradient(#aaa,#999);
-color: #fff;}
-th:first-child { border-radius: 9px 0 0 0; }
-th:last-child { border-radius: 0 9px 0 0; }
-tr:last-child td:first-child { border-radius: 0 0 0 9px; }
-tr:last-child td:last-child { border-radius: 0 0 9px 0; }
-tr:nth-child(odd) { background: #e2e2e2; }
-
-
-table.full-width { width: 100%;}
-.success-container, .positioning-container { position: relative; width: 0;height: 0;}
-
 .loader{
     background-image: url(/Content/img/ajax-loader.gif);
     background-repeat: no-repeat;
@@ -865,19 +854,5 @@ table.full-width { width: 100%;}
     border-radius: 5px 5px 5px 5px;
 }
 .message > div { margin-top:27px;}
-
-.no-data{
-    width: 200px;
-    height: 50px;
-    margin-top: 60px;
-    position: absolute;
-    text-align: center;
-    background-color: #fff;
-    border: 2px solid #333333;
-    padding-top: 25px;
-    border-radius: 5px 5px 5px 5px;
-    top: -86px;
-    left: 410px;
-}
 div.buttonrow { width: 100%;height: 20px; margin-top: 20px;}
 .right { float: right;clear: left;}
