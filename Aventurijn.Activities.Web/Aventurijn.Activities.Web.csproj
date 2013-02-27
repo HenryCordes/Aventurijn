@@ -253,8 +253,9 @@
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="robots.txt" />
-    <Content Include="Scripts\aventurijn.participations.js" />
-    <Content Include="Scripts\aventurijn.js" />
+    <Content Include="Scripts\aventurijn\aventurijn.participations.js" />
+    <Content Include="Scripts\aventurijn\aventurijn.js" />
+    <Content Include="Scripts\aventurijn\puntjes.message.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -272,6 +273,7 @@
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\aventurijn\puntjes.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

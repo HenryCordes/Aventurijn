@@ -2,7 +2,7 @@
 var participations = function (initialdata) {
     var self = this;
     
-    self.loading = ko.observableArray();
+    self.isLoading = ko.observable(false);
     self.participations = ko.mapping.fromJS(initialdata.Participations);
     self.students = ko.observableArray(initialdata.Students);
     self.activities = ko.observableArray(initialdata.Activities);
@@ -10,9 +10,7 @@ var participations = function (initialdata) {
    // $("studentForm").validate({ submitHandler: self.save });
 
     self.save = function() {
-     //   var result = ko.utils.postJson(location.href, { participations: ko.mapping.toJS(self.participations) });
-        
-        self.loading.push(true);
+        self.isLoading(true);
         var dataAsString = ko.mapping.toJSON(self.participations);
          jQuery.ajax({
                 type: 'POST',
@@ -22,17 +20,18 @@ var participations = function (initialdata) {
                 data: dataAsString,
                 traditional: true,
                 success: function(result){
-                    self.loading.pop();
+                    self.isLoading(false);
                     if (result === true) {
-                      $('.success-container').fadeIn('slow', function() {
-                          $('.success-container').fadeOut();
-                      });  
+                        puntjes.message.show("Succesvol opgeslagen");
+                    }
+                    else {
+                         puntjes.message.show("Opslaan mislukt");
                     }
                 },
                 error: function(xmlHttpRequest)
                 {
-                     self.loading.pop();
-                    alert(xmlHttpRequest.responseText);
+                    self.isLoading(false);
+                    puntjes.message.show(xmlHttpRequest.responseText);
                 }
             });
     };
@@ -61,7 +60,7 @@ var participations = function (initialdata) {
     };
 
     function _getData (from, to, studentId){
-         self.loading.push(true);
+         self.isLoading(true);
         
          var data = { 'from': from, 'to': to, 'studentId': studentId };
         
@@ -75,15 +74,16 @@ var participations = function (initialdata) {
                 },
                 error: function(xmlHttpRequest)
                 {
-                     self.loading.pop();
+                     self.isLoading(true);
                     alert(xmlHttpRequest.responseText);
                 }
             });
      };
     
     function _updateModel (data) {
+        self.isLoading(false);
         ko.mapping.fromJS(data, self.participations);
      //   self.participations(data);
-        self.loading.pop();
+ 
     };
 }

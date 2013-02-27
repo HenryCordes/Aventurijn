@@ -28,18 +28,7 @@ namespace Aventurijn.Activities.Web.Controllers
             viewModel.FromDate = DateTime.UtcNow.Date.AddMonths(-1);
             viewModel.ToDate = DateTime.UtcNow.Date;
 
-            var participations = db.Participations.Where(p => p.ParticipationDateTime > viewModel.FromDate &&
-                                                              p.ParticipationDateTime < viewModel.ToDate)
-                                                  .OrderBy(p => p.ParticipationDateTime).ToList();
-
-            foreach (var participation in participations)
-            {
-                participation.Activity = db.Activities.Find(participation.ActivityId);
-                participation.Activity.Subject = db.Subjects.Find(participation.Activity.SubjectId);
-                participation.Student = db.Students.Find(participation.StudentId);
-            }
-            
-            viewModel.Participations = participations.OrderBy(p => p.ParticipationDateTime);
+            viewModel.Participations = GetParticipations(viewModel.FromDate, viewModel.ToDate, 0);
 
             return View(viewModel);
         }
@@ -224,7 +213,7 @@ namespace Aventurijn.Activities.Web.Controllers
         private List<Participation> GetParticipations(DateTime from, DateTime to, int studentId)
         {
              var queryableParticipations = db.Participations.Where(p => p.ParticipationDateTime > from &&
-                                                                        p.ParticipationDateTime < to);
+                                                                        p.ParticipationDateTime <= to);
              if (studentId > 0)
              {
                  queryableParticipations = queryableParticipations.Where(p => p.StudentId == studentId);

@@ -21,8 +21,7 @@
 
 <div id="participations_table">
     <form id="participationsForm" method="post" action="/participation/save" data-bind="submit: save">
-        <div data-bind="visible: participations().length == 0" class="no-data">Geen puntjes gevonden...</div>
-        <table class="data" data-bind="visible: participations().length > 0">
+        <table class="data full-width" data-bind="loadingWhen: isLoading">
             <thead>
                 <tr>
                     <th class="">Leerling</th>
@@ -35,19 +34,10 @@
                 </tr>
             </thead>
             <tbody data-bind="template: { name: 'participations-template', foreach: participations, as: 'participation'}"></tbody>
-            <tfoot>
+            <tfoot data-bind="visible: participations().length == 0">
                 <tr>
                     <td colspan="7">
-                        <div class="loading-container" data-bind="if: loading().length">
-                            <div class="loader">
-                                Laden... 
-                            </div>
-                        </div>
-                         <div class="success-container" style="display:none;">
-                            <div class="success">
-                                Succesvol opgeslagen
-                            </div>
-                        </div>
+                        Geen puntjes gevonden...
                     </td>
                 </tr>
             </tfoot>
@@ -56,7 +46,7 @@
             <button id="new_participation" type="button" data-bind='click: addParticipation' >Nieuw</button> 
             <button id="save_participations" data-bind="enable: participations().length > 0" type="submit" >Opslaan</button>
             
-             <button id="show_participations" data-bind="enable: participations().length > 0" class="right" type="button">Print</button>
+            <button id="show_participations" data-bind="enable: participations().length > 0" class="right" type="button">Print</button>
         </div>
     </form>
 </div>
@@ -83,8 +73,7 @@
         <td>
             <input type="text" class="datefield" data-bind="value: ParticipationDateTimeAsString"/>
         </td>
-        <td> | <a href="#" class="delete" data-bind='click: $root.removeParticipation' >Verwijderen</a>
-            @* | <a href="#" class="org-edit" data-bind="attr: { 'data-current': ParticipationId }" >Aanpassen</a> *@</td>
+        <td> | <a href="#" class="delete" data-bind='click: $root.removeParticipation' >Verwijderen</a></td>
     </tr>
 </script>
 
@@ -96,6 +85,8 @@ string data = new System.Web.Script.Serialization.JavaScriptSerializer().Seriali
     <script type="text/javascript"> 
         var initialData = @Html.Raw(data);
 
+        puntjes.message.init(document.getElementById('participations_table'));
+        
         var allParticipations = new participations(initialData);
         ko.applyBindings(allParticipations, document.getElementById('participations_table'));
 
@@ -129,8 +120,7 @@ string data = new System.Web.Script.Serialization.JavaScriptSerializer().Seriali
             var to = $('#toDate').val();
             var studentId = $('#studentsSelect').val();
 
-            window.location.href = 'participation/readonly?from=' + from + '&to=' + to + '&studentId=' + studentId;
-            
+            window.location.href = 'participation/readonly?from=' + from + '&to=' + to + '&studentId=' + studentId; 
         });
     </script>
 }

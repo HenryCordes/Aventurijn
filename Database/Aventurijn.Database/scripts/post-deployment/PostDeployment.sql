@@ -248,7 +248,7 @@ BEGIN
 	IF @LoopCounter = 7
 	BEGIN 
 		SET @LevelName = 'Middenbouw'
-		SET @Name  = 'Sofie'
+		SET @Name  = 'Sofie P'
 	END
 	IF @LoopCounter = 8
 	BEGIN 
@@ -284,6 +284,7 @@ BEGIN
 	BEGIN 
 		SET @LevelName = 'Middenbouw'
 		SET @Name  = 'Lester'
+	END
 	IF @LoopCounter = 15
 	BEGIN 
 		SET @LevelName = 'Bovenbouw'
@@ -357,16 +358,17 @@ BEGIN
 	END
 
 
-	IF NOT EXISTS (SELECT * FROM [Student] WHERE [Name] = @Name AND [LastName] = @LastName)
+	IF NOT EXISTS (SELECT * FROM [Student] WHERE [Name] = @Name)
 	BEGIN
 	PRINT 'IN IF: ' + @Name
 	  SET @LevelId = 0
 	  SELECT @LevelId = [LevelId] FROM [Level] WHERE [Name] = @LevelName
 	  IF @LevelId > 0
 	  BEGIN
-	  	INSERT INTO [Student] ([Name], [Insertion], [LastName], [BirthDate], [LevelId]) VALUES (@Name, @Insertion, @LastName, @BirthDate, @LevelId) 
+	  	INSERT INTO [Student] ([Name], [LevelId]) VALUES (@Name, @LevelId) 
 	  END 
 	END
 END
+
 
 GO
