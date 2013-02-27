@@ -1,10 +1,16 @@
 ﻿@model System.Web.Mvc.HandleErrorInfo
 
 @{
-    ViewBag.Title = "Error";
+    ViewBag.Title = "Aventurijn - Oops";
 }
 
-<hgroup class="title">
-    <h1 class="error">Error.</h1>
-    <h2 class="error">An error occurred while processing your request.</h2>
-</hgroup>
+<h2>Probleem </h2>
+
+<h4>Oops er is iets verkeerd gegaan!</h4>
+<p>
+    Sorry voor het ongemak, wanneer dit probleem zich voor blijft doen, neem dan contact op met de site beheerder.
+</p>
+
+<input type="hidden" id="exMessage" value="@Model.Exception.Message"/>
+<input type="hidden" id="exInner" value="@Model.Exception.InnerException"/>
+<input type="hidden" id="exStack" value="@Model.Exception.StackTrace"/>

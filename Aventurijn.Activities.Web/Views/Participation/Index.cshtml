@@ -68,7 +68,7 @@
         </td> 
         <td class="centered"><input type="checkbox" data-bind="checked: Participating" /></td>
         <td>
-            <input type="text" class="" data-bind="value: ExtraInfo"/>
+            <input type="text"  data-bind="value: ExtraInfo, attr: { title: ExtraInfo }" />
         </td>        
         <td>
             <input type="text" class="datefield" data-bind="value: ParticipationDateTimeAsString"/>
@@ -122,5 +122,9 @@ string data = new System.Web.Script.Serialization.JavaScriptSerializer().Seriali
 
             window.location.href = 'participation/readonly?from=' + from + '&to=' + to + '&studentId=' + studentId; 
         });
+
+        //$('.extra-info').keyup(function() {
+        //    $(this).attr('title', $(this).val());
+        //});
     </script>
 }
