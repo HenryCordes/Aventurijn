@@ -152,30 +152,39 @@ namespace Aventurijn.Activities.Web.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Participation participation = db.Participations.Find(id);
-            db.Participations.Remove(participation);
-            db.SaveChanges();
+            DeleteParticipation(id);
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public JsonResult Remove(int id)
+        {
+            DeleteParticipation(id);
+            return Json(id);
+        }
+
 
         [HttpPost]
         [HandleError]
         public JsonResult Save(IEnumerable<Participation> participations)
         {
-      //    if (ModelState.IsValid)
-     //       {
+            try
+            {
                 SaveParticipations(participations);
                 return Json(true);
-      //      }
-     //       else
-     //       {
-        //        return Json(false);
-      //      }
+            }
+            catch
+            {
+                return Json(false);
+            }
+
         }
 
         [HttpPost]
+        [HandleError]
         public JsonResult WithinDateRange(DateTime from, DateTime to, int studentId = 0)
         {
+
             var participations = GetParticipations(from, to, studentId);
 
             return Json(participations);
@@ -189,6 +198,13 @@ namespace Aventurijn.Activities.Web.Controllers
  
             var participations = GetParticipations(from, to, studentId);
             return View("readonly", participations);
+        }
+
+        private void DeleteParticipation(int id)
+        {
+            Participation participation = db.Participations.Find(id);
+            db.Participations.Remove(participation);
+            db.SaveChanges();
         }
 
         private void SaveParticipations(IEnumerable<Participation> participations)

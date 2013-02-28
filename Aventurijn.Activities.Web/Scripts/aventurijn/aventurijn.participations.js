@@ -7,7 +7,7 @@ var participations = function (initialdata) {
     self.students = ko.observableArray(initialdata.Students);
     self.activities = ko.observableArray(initialdata.Activities);
     self.subjects = ko.observableArray(initialdata.Subjects);
-   // $("studentForm").validate({ submitHandler: self.save });
+    $("studentForm").validate({ submitHandler: self.save });
 
     self.save = function() {
         self.isLoading(true);
@@ -52,7 +52,36 @@ var participations = function (initialdata) {
     };
  
     self.removeParticipation = function(participation) {
-        self.participations.remove(participation);
+        var id = participation.ParticipationId();
+        if (id == 0) {
+            self.participations.remove(participation);
+            puntjes.message.show("Succesvol verwijderd");
+        }
+        else {
+
+            jQuery.ajax({
+                type: 'POST',
+                url: 'participation/remove/'+ id,
+                traditional: true,
+                success: function(result) {
+                    if (result == id) {
+                        self.participations.remove(participation);
+                        puntjes.message.show("Succesvol verwijderd");
+                    }
+                    else {
+                        puntjes.message.show("Verwijderen mislukt");
+                    }
+                },
+                error: function(xmlHttpRequest) {
+                    puntjes.message.show("Verwijderen mislukt - fout");
+                    $('#exText').val(xmlHttpRequest.responseText);
+                }
+            });
+        }
+    };
+    
+    self.removeParticipationWithId = function(id) {                               
+         self.participations.remove(function(participation) { return participation.ParticipationId == id });   
     };
 
     self.getParticipations = function(from, to, studentId) {
@@ -61,6 +90,7 @@ var participations = function (initialdata) {
     
     self.addActivity =  function(activity) {
         self.activities.push(activity);
+        self.activities.sort(function(left, right) { return left.Name == right.Name ? 0 : (left.Name < right.Name ? -1 : 1) });
     };
 
     function _getData (from, to, studentId){

@@ -107,7 +107,7 @@
         <td>
             <input type="text" class="datefield" data-bind="value: ParticipationDateTimeAsString"/>
         </td>
-        <td> | <a href="#" class="delete" data-bind='click: $root.removeParticipation' >Verwijderen</a></td>
+        <td> | <a href="#" data-bind="click: $root.removeParticipation" >Verwijderen</a></td>
     </tr>
 </script>
 
@@ -126,12 +126,6 @@
         var allParticipations = new participations(initialData);
         ko.applyBindings(allParticipations, document.getElementById('participations_table'));
         ko.applyBindings(allParticipations, document.getElementById('new_activity_container'));
-
-        $('.org-edit').click(function() {
-            var link = $(this);
-            var id = link.attr('data-current');
-            window.location.href = '/participation/edit/' + id;
-        });
 
         $('.activity').live('change', function() {
             var select = $(this);
@@ -168,8 +162,10 @@
             var activityName = $('#new_activity_name').val();
             var activitySubject = $('#new_activity_subject').val();
 
-            var data = { 'Name': activityName,
-                         'SubjectId': activitySubject};
+            var data = {
+                'Name': activityName,
+                'SubjectId': activitySubject
+            };
             jQuery.ajax({
                 type: 'POST',
                 url: 'activity/add',
