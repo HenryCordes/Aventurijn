@@ -58,6 +58,10 @@ var participations = function (initialdata) {
     self.getParticipations = function(from, to, studentId) {
         _getData(from, to, studentId);
     };
+    
+    self.addActivity =  function(activity) {
+        self.activities.push(activity);
+    };
 
     function _getData (from, to, studentId){
          self.isLoading(true);

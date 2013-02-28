@@ -22,6 +22,7 @@ namespace Aventurijn.Activities.Web
                                          "~/Scripts/knockout-{version}.js",
                                          "~/Scripts/knockout.mapping-latest.js",
                                          "~/Scripts/jquery.dateFormat-1.0.js",
+                                         "~/Scripts/plugins/jquery.simplemodal-{version}.js",
                                          "~/Scripts/aventurijn/puntjes.js",
                                          "~/Scripts/aventurijn/puntjes.message.js",
                                          "~/Scripts/aventurijn/aventurijn.js",

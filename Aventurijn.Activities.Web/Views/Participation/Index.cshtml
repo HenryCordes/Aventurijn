@@ -17,7 +17,7 @@
                        }
                   </select></li>
     <li><button id="getParticipations" type="button" >Filter</button></li>
-    <li class="right"><button id="new_activity" type="button">Activiteit</button></li>
+    <li class="right"></li>
 </ul>
 
 <div id="participations_table">
@@ -48,9 +48,42 @@
             <button id="save_participations" data-bind="enable: participations().length > 0" type="submit" >Opslaan</button>
             
             <button id="show_participations" data-bind="enable: participations().length > 0" class="right" type="button">Print</button>
+            <button id="new_activity" type="button" class="right">Nieuwe activiteit</button>
         </div>
     </form>
 </div>
+
+
+<div class="" id="new_activity_dialog"  style="display:none;">
+    <h2>Nieuwe Activiteit</h2>
+
+    <form action="/Activity/Create" method="post">
+
+        <fieldset class="editor" id="new_activity_container">
+            <legend>Activity</legend>
+
+            <div class="editor-label">
+                <label for="Activity">Activiteit</label>
+            </div>
+            <div class="editor-field">
+                <input class="text-box single-line" data-val="true" data-val-length="Naam mag maximum 100 tekens lang zijn." data-val-length-max="100" id="new_activity_name" name="Activity.Name" type="text" value="" />
+                <span class="field-validation-valid" data-valmsg-for="Activity.Name" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                <label for="Activity_Subject">Onderwerp</label>
+            </div>
+            <div class="editor-field">
+                <select data-bind="options: $root.subjects, optionsText: 'Name', optionsValue: 'SubjectId' "  id="new_activity_subject" name="Activity.SubjectId" class="subject" data-val="true" data-val-required="Het onderwerp is verplicht." name="Activity.SubjectId"></select>
+                <span class="field-validation-valid" data-valmsg-for="Activity.Subject" data-valmsg-replace="true"></span>
+            </div>
+            <p>
+                <input id="save_new_activity_button" type="button" value="Opslaan"  />
+            </p>
+        </fieldset>
+    </form>
+</div>
+<input type="hidden" id="exText"/>
+
 <!--        TEMPLATES       -->
 <script type="text/html" id="participations-template">
     <tr>
@@ -80,27 +113,30 @@
 
 
 @section Scripts {
-@{
-string data = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Model);
-}
-    <script type="text/javascript"> 
+    @{
+        string data = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Model);
+    }
+
+    <script type="text/javascript">
         var initialData = @Html.Raw(data);
+        var modal;
 
         puntjes.message.init(document.getElementById('participations_table'));
-        
+
         var allParticipations = new participations(initialData);
         ko.applyBindings(allParticipations, document.getElementById('participations_table'));
+        ko.applyBindings(allParticipations, document.getElementById('new_activity_container'));
 
-         $('.org-edit').click(function() {
-             var link = $(this);
-             var id = link.attr('data-current');
-             window.location.href = '/participation/edit/'+id;
+        $('.org-edit').click(function() {
+            var link = $(this);
+            var id = link.attr('data-current');
+            window.location.href = '/participation/edit/' + id;
         });
-         
+
         $('.activity').live('change', function() {
-             var select = $(this);
+            var select = $(this);
             var newActivityId = select.val();
-            
+
             for (var i = 0; i < initialData.Activities.length; i++) {
                 if (initialData.Activities[i].ActivityId == newActivityId) {
                     $(select.parents('tr').find('.subject')[0]).val(initialData.Activities[i].SubjectId);
@@ -115,17 +151,47 @@ string data = new System.Web.Script.Serialization.JavaScriptSerializer().Seriali
             var studentId = $('#studentsSelect').val();
             allParticipations.getParticipations(from, to, studentId);
         });
-        
+
         $('#show_participations').click(function() {
             var from = $('#fromDate').val();
             var to = $('#toDate').val();
             var studentId = $('#studentsSelect').val();
 
-            window.location.href = 'participation/readonly?from=' + from + '&to=' + to + '&studentId=' + studentId; 
+            window.location.href = 'participation/readonly?from=' + from + '&to=' + to + '&studentId=' + studentId;
         });
 
-        //$('.extra-info').keyup(function() {
-        //    $(this).attr('title', $(this).val());
-        //});
+        $('#new_activity').click(function() {
+            modal = $('#new_activity_dialog').modal();
+        });
+
+        $('#save_new_activity_button').click(function() {
+            var activityName = $('#new_activity_name').val();
+            var activitySubject = $('#new_activity_subject').val();
+
+            var data = { 'Name': activityName,
+                         'SubjectId': activitySubject};
+            jQuery.ajax({
+                type: 'POST',
+                url: 'activity/add',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(data),
+                traditional: true,
+                success: function(result) {
+                    if (result.result === true) {
+                        puntjes.message.show("Succesvol opgeslagen");
+                        allParticipations.addActivity(result.activity);
+                        modal.close();
+                    }
+                    else {
+                        puntjes.message.show("Opslaan mislukt");
+                    }
+                },
+                error: function(xmlHttpRequest) {
+                    puntjes.message.show("Opslaan mislukt - fout");
+                    $('#exText').val(xmlHttpRequest.responseText);
+                }
+            });
+        });
     </script>
 }

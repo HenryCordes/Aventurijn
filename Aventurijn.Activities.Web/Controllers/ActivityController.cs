@@ -134,6 +134,33 @@ namespace Aventurijn.Activities.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public JsonResult Add(Activity activity)
+        {
+            try
+            {
+                activity.CreationDate = DateTime.UtcNow;
+                db.Activities.Add(activity);
+                db.SaveChanges();
+                var result = new
+                    {
+                        result = true,
+                        activity = activity
+                    };
+
+                return Json(result);
+            }
+            catch (Exception)
+            {
+                var result = new
+                {
+                    result = false
+                };
+                return Json(result);
+            }
+            
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
