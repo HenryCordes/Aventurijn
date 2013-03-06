@@ -1,7 +1,7 @@
 ﻿
-var participations = function (initialdata) {
+var participations = function(initialdata) {
     var self = this;
-    
+
     self.isLoading = ko.observable(false);
     self.participations = ko.mapping.fromJS(initialdata.Participations);
     self.students = ko.observableArray(initialdata.Students);
@@ -92,6 +92,17 @@ var participations = function (initialdata) {
         self.activities.push(activity);
         self.activities.sort(function(left, right) { return left.Name == right.Name ? 0 : (left.Name < right.Name ? -1 : 1) });
     };
+
+    //self.dirtyItems = ko.computed(function() {
+    //    return ko.utils.arrayFilter(self.participations(), function(item) {
+    //        return item.dirtyFlag.isDirty();
+    //    });
+    //}, this);
+    
+    //self.isDirty = ko.computed(function() {
+    //    return self.dirtyItems().length > 0;
+    //}, this);
+    
 
     function _getData (from, to, studentId){
          self.isLoading(true);
