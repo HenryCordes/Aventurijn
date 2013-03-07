@@ -66,16 +66,24 @@
                 <label for="Activity">Activiteit</label>
             </div>
             <div class="editor-field">
-                <input class="text-box single-line" data-val="true" data-val-length="Naam mag maximum 100 tekens lang zijn." data-val-length-max="100" id="new_activity_name" name="Activity.Name" type="text" value="" />
-                <span class="field-validation-valid" data-valmsg-for="Activity.Name" data-valmsg-replace="true"></span>
+                <input class="text-box single-line" maxlength="100"  id="new_activity_name" name="Activity.Name" type="text" value="" />
             </div>
             <div class="editor-label">
                 <label for="Activity_Subject">Onderwerp</label>
             </div>
             <div class="editor-field">
-                <select data-bind="options: $root.subjects, optionsText: 'Name', optionsValue: 'SubjectId' "  id="new_activity_subject" name="Activity.SubjectId" class="subject" data-val="true" data-val-required="Het onderwerp is verplicht." name="Activity.SubjectId"></select>
-                <span class="field-validation-valid" data-valmsg-for="Activity.Subject" data-valmsg-replace="true"></span>
+                <select data-bind="options: $root.subjects, optionsText: 'Name', optionsValue: 'SubjectId' "  id="new_activity_subject" name="Activity.SubjectId" class="subject"  name="Activity.SubjectId"></select>
             </div>
+            
+            <div class="editor-label">
+                <label for="Activity_Active">Aktief</label>
+            </div>
+            <div class="editor-field">
+            <input class="check-box" id="new_activity_active" name="Activity.Active" type="checkbox" checked="true">
+        </div>
+            
+            
+
             <p>
                 <input id="save_new_activity_button" type="button" value="Opslaan"  />
             </p>
@@ -161,10 +169,12 @@
         $('#save_new_activity_button').click(function() {
             var activityName = $('#new_activity_name').val();
             var activitySubject = $('#new_activity_subject').val();
+            var isActive = $('#new_activity_active').is(":checked");
 
             var data = {
                 'Name': activityName,
-                'SubjectId': activitySubject
+                'SubjectId': activitySubject,
+                'Active': isActive
             };
             jQuery.ajax({
                 type: 'POST',

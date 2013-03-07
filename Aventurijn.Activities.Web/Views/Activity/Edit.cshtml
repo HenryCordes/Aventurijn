@@ -32,6 +32,14 @@
         </div>
         
          <div class="editor-label">
+            @Html.LabelFor(model => model.Activity.Active)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Activity.Active)
+            @Html.ValidationMessageFor(model => model.Activity.Active)
+        </div>
+
+        <div class="editor-label">
             @Html.LabelFor(model => model.Activity.CreationDate)
         </div>
         <div class="editor-field">

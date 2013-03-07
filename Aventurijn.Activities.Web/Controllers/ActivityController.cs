@@ -21,7 +21,7 @@ namespace Aventurijn.Activities.Web.Controllers
 
         public ActionResult Index()
         {
-            var activities = db.Activities.OrderBy(a => a.Name).ToList();
+            var activities = db.Activities.OrderByDescending(a => a.Active).ThenBy(a => a.Name).ToList();
             foreach (var activity in activities)
             {
                 activity.Subject = db.Subjects.Find(activity.SubjectId);

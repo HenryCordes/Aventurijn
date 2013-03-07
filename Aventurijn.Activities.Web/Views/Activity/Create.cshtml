@@ -30,6 +30,14 @@
                                                                                     Model.Subjects.First().SubjectId))
             @Html.ValidationMessageFor(model => model.Activity.Subject)
         </div>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Activity.Active)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Activity.Active)
+            @Html.ValidationMessageFor(model => model.Activity.Active)
+        </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Activity.CreationDate)

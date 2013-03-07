@@ -192,7 +192,7 @@ BEGIN
 	  SELECT @SubjectId = [SubjectId] FROM [Subject] WHERE [Code] = @Code
 	  IF @SubjectId > 0
 	  BEGIN
-	  	INSERT INTO [Activity] ([SubjectId], [Name], [CreationDate]) VALUES (@SubjectId, @Subject, @currDate) 
+	  	INSERT INTO [Activity] ([SubjectId], [Name], [CreationDate], [Active]) VALUES (@SubjectId, @Subject, @currDate, 1) 
 	  END 
 	END
 
@@ -370,5 +370,7 @@ BEGIN
 	END
 END
 
+
+UPDATE [Activity] SET [Active] = 1
 
 GO

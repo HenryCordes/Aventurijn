@@ -18,6 +18,9 @@
             @Html.DisplayNameFor(model => model.Subject)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Active)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.CreationDate)
         </th>
         <th></th>
@@ -28,8 +31,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
-         <td>
+        <td>
             @Html.DisplayTextFor(modelItem => item.Subject.Name)
+        </td>
+         <td>
+            @Html.DisplayFor(modelItem => item.Active)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CreationDate)

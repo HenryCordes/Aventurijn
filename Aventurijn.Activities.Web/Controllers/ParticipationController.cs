@@ -22,9 +22,9 @@ namespace Aventurijn.Activities.Web.Controllers
 
         public ActionResult Index()
         {
-            var viewModel = new ParticipationsViewModel(db.Activities.OrderBy(a => a.Name),
-                                                        db.Students.OrderBy(s => s.Name),
-                                                        db.Subjects.OrderBy(su => su.Name));
+            var viewModel = new ParticipationsViewModel(GetActivityList(),
+                                                        GetStudentsList(),
+                                                        GetSubjectsList());
             viewModel.FromDate = DateTime.UtcNow.Date.AddMonths(-1);
             viewModel.ToDate = DateTime.UtcNow.Date;
 
@@ -33,16 +33,16 @@ namespace Aventurijn.Activities.Web.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
+         [HttpPost]
         public ActionResult Index([FromJson] IEnumerable<Participation> participations)
         {
             if (ModelState.IsValid)
             {
                 SaveParticipations(participations);
             }
-            var viewModel = new ParticipationsViewModel(db.Activities.OrderBy(a => a.Name),
-                                                        db.Students.OrderBy(s => s.Name),
-                                                        db.Subjects.OrderBy(su => su.Name));
+            var viewModel = new ParticipationsViewModel(GetActivityList(),
+                                                        GetStudentsList(),
+                                                        GetSubjectsList());
             viewModel.FromDate = DateTime.UtcNow.Date.AddMonths(-1);
             viewModel.ToDate = DateTime.UtcNow.Date;
             viewModel.Participations = participations;
@@ -71,7 +71,7 @@ namespace Aventurijn.Activities.Web.Controllers
 
         public ActionResult Create()
         {
-            var viewModel = new ParticipationViewModel(db.Activities.OrderBy(a => a.Name), db.Students.OrderBy(s => s.Name));
+            var viewModel = new ParticipationViewModel(GetActivityList(), GetStudentsList());
             return View(viewModel);
         }
 
@@ -87,7 +87,7 @@ namespace Aventurijn.Activities.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            var viewModel = new ParticipationViewModel(db.Activities.OrderBy(a => a.Name), db.Students.OrderBy(s => s.Name))
+            var viewModel = new ParticipationViewModel(GetActivityList(), GetStudentsList())
             {
                 Participation = participation
             };
@@ -104,7 +104,7 @@ namespace Aventurijn.Activities.Web.Controllers
             {
                 return HttpNotFound();
             }
-            var viewModel = new ParticipationViewModel(db.Activities.OrderBy(a => a.Name), db.Students.OrderBy(s => s.Name))
+            var viewModel = new ParticipationViewModel(GetActivityList(), GetStudentsList())
             {
                 Participation = participation
             };
@@ -126,14 +126,16 @@ namespace Aventurijn.Activities.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            var viewModel = new ParticipationViewModel(db.Activities.OrderBy(a => a.Name), db.Students.OrderBy(s => s.Name))
+            var viewModel = new ParticipationViewModel(GetActivityList(), GetStudentsList())
             {
                 Participation = participation
             };
             return View(viewModel);
         }
 
-        //
+        
+
+         //
         // GET: /Participation/Delete/5
 
         public ActionResult Delete(int id = 0)
@@ -245,6 +247,20 @@ namespace Aventurijn.Activities.Web.Controllers
              return participations;
         }
 
+        private IEnumerable<Activity> GetActivityList()
+        {
+            return db.Activities.Where(a => a.Active == true).OrderBy(a => a.Name);
+        }
+
+        private IEnumerable<Student> GetStudentsList()
+        {
+            return db.Students.OrderBy(s => s.Name);
+        }
+
+        private IEnumerable<Subject> GetSubjectsList()
+        {
+            return db.Subjects.OrderBy(su => su.Name);
+        }
 
         protected override void Dispose(bool disposing)
         {

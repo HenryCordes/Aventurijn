@@ -25,8 +25,11 @@ namespace Aventurijn.Activities.Web.Models.Domain
         public int SubjectId { get; set; } 
         
         [DisplayName("Gemaakt op")]
-
         [DataType(DataType.DateTime)]
         public DateTime CreationDate { get; set; }
+
+        [DisplayName("Aktief")]
+        public bool Active { get; set; }
     }
+    
 }
