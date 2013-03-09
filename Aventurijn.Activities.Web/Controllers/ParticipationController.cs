@@ -172,8 +172,8 @@ namespace Aventurijn.Activities.Web.Controllers
         {
             try
             {
-                SaveParticipations(participations);
-                return Json(true);
+                participations = SaveParticipations(participations);
+                return Json(participations);
             }
             catch
             {
@@ -209,7 +209,7 @@ namespace Aventurijn.Activities.Web.Controllers
             db.SaveChanges();
         }
 
-        private void SaveParticipations(IEnumerable<Participation> participations)
+        private IEnumerable<Participation> SaveParticipations(IEnumerable<Participation> participations)
         {
             foreach (var participation in participations)
             {
@@ -226,6 +226,8 @@ namespace Aventurijn.Activities.Web.Controllers
                 }
                 db.SaveChanges();
             }
+
+            return participations;
         }
 
         private List<Participation> GetParticipations(DateTime from, DateTime to, int studentId)

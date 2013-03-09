@@ -21,11 +21,12 @@ var participations = function(initialdata) {
                 traditional: true,
                 success: function(result){
                     self.isLoading(false);
-                    if (result === true) {
-                        puntjes.message.show("Succesvol opgeslagen");
+                    if (result === false) {
+                        puntjes.message.show("Opslaan mislukt");
                     }
                     else {
-                         puntjes.message.show("Opslaan mislukt");
+                        _updateModel(result);
+                        puntjes.message.show("Succesvol opgeslagen");
                     }
                 },
                 error: function(xmlHttpRequest)
@@ -93,17 +94,6 @@ var participations = function(initialdata) {
         self.activities.sort(function(left, right) { return left.Name == right.Name ? 0 : (left.Name < right.Name ? -1 : 1) });
     };
 
-    //self.dirtyItems = ko.computed(function() {
-    //    return ko.utils.arrayFilter(self.participations(), function(item) {
-    //        return item.dirtyFlag.isDirty();
-    //    });
-    //}, this);
-    
-    //self.isDirty = ko.computed(function() {
-    //    return self.dirtyItems().length > 0;
-    //}, this);
-    
-
     function _getData (from, to, studentId){
          self.isLoading(true);
         
@@ -128,7 +118,17 @@ var participations = function(initialdata) {
     function _updateModel (data) {
         self.isLoading(false);
         ko.mapping.fromJS(data, self.participations);
-     //   self.participations(data);
- 
     };
+
+    //self.dirtyItems = ko.computed(function() {
+    //    return ko.utils.arrayFilter(self.participations(), function(item) {
+    //        return item.dirtyFlag.isDirty();
+    //    });
+    //}, this);
+
+    //self.isDirty = ko.computed(function() {
+    //    return self.dirtyItems().length > 0;
+    //}, this);
+
+
 }
