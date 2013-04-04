@@ -21,18 +21,23 @@
                         @Html.Partial("_LoginPartial")
                     </section>
                     <nav>
-                        <ul id="nav">   
-                            <li>@Html.ActionLink("Puntjes", "Index", "Participation")
+                        <ul id="nav"> 
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>  
+                            <li><a href="#">Puntjes</a>
                                 <ul>
+                                    <li>@Html.ActionLink("Alle puntjes", "Index", "Participation")</li>
                                     <li>@Html.ActionLink("Puntjes per onderwerp", "PerSubject", "Participation")</li>
                                 </ul>
                             </li>
-                            <li>@Html.ActionLink("Activiteiten", "Index", "Activity")</li>   
-                            <li>@Html.ActionLink("Leerlingen", "Index", "Student")</li>
-                            <li>@Html.ActionLink("Onderwerpen", "Index", "Subject")</li>
-                            <li>@Html.ActionLink("Nivo", "Index", "Level")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                            
+                            <li><a href="#">Gegevens</a>
+                                <ul>
+                                    <li>@Html.ActionLink("Leerlingen", "Index", "Student")</li>
+                                    <li>@Html.ActionLink("Activiteiten", "Index", "Activity")</li> 
+                                    <li>@Html.ActionLink("Onderwerpen", "Index", "Subject")</li>
+                                    <li>@Html.ActionLink("Nivo", "Index", "Level")</li>
+                                </ul>
+                            </li>    
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>  
                         </ul>
                     </nav>
                 </div>

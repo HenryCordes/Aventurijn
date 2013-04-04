@@ -22,7 +22,7 @@
 
 <div id="participations_table"  data-bind="template: { name: 'participations-form' , templateUrl:'app/views'}"></div>
 <div id="new_activity_dialog"  style="display:none;" data-bind="template: { name: 'modal-activity' , templateUrl:'app/views'}"></div>
-<input type="hidden" id="exText"/>
+<input type="hidden" id="exText" />
 
 @section Scripts {
     @{
@@ -33,7 +33,7 @@
         
         var initialData = @Html.Raw(data);
         
-        puntjes.message.init(document.getElementById('main-content'));
+        puntjes.message.init(document.getElementById('participations_table'));
         
         var allParticipations = new participations(initialData);
         ko.applyBindings(allParticipations, document.getElementById('participations_table'));
