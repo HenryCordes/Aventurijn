@@ -1,0 +1,30 @@
+﻿<form id="participationsForm" method="post" action="/participation/save" data-bind="submit: save">
+        <table class="data full-width" data-bind="loadingWhen: isLoading">
+            <thead>
+                <tr>
+                    <th>Leerling</th>
+                    <th>Activiteit</th>
+                    <th>Onderwerp</th>
+                    <th>Deelname</th>
+                    <th>Extra</th>
+                    <th>Datum</th>  
+                    <th></th>  
+                </tr>
+            </thead>
+            <tbody data-bind="template: { name: 'participation' , templateUrl:'app/views', foreach: participations, as: 'participation'}"></tbody>
+            <tfoot data-bind="visible: participations().length == 0">
+                <tr>
+                    <td colspan="7">
+                        Geen puntjes gevonden...
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="buttonrow">
+            <button id="new_participation" type="button" data-bind='click: addParticipation' >Nieuw</button> 
+            <button id="save_participations" data-bind="enable: participations().length > 0" type="submit" >Opslaan</button>
+            
+            <button id="show_participations" class="right" type="button" data-bind="enable: participations().length > 0, click: showParticipationsReadOnly">Print</button>
+            <button id="new_activity" type="button" class="right" data-bind='click: showNewActivityModal'>Nieuwe activiteit</button>
+        </div>
+    </form>

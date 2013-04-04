@@ -294,7 +294,8 @@ namespace Aventurijn.Activities.Web.Controllers
         {
             var result = new List<ParticipationsPerSubject>();
             var queryableParticipations = db.Participations.Where(p => p.ParticipationDateTime > from &&
-                                                                       p.ParticipationDateTime <= to);
+                                                                       p.ParticipationDateTime <= to &&
+                                                                       p.Participating == true);
             if (subjectId > 0)
             {
                 queryableParticipations = queryableParticipations.Where(p => p.Activity.SubjectId == subjectId);
@@ -304,11 +305,10 @@ namespace Aventurijn.Activities.Web.Controllers
             foreach (var participation in participations)
             {
                 var activity = db.Activities.Find(participation.ActivityId);
-                var subject = db.Subjects.Find(activity.SubjectId);
                 var participationPerSubject = new ParticipationsPerSubject()
                     {
-                        SubjectName = subject.Name,
-                        SubjectId = subject.SubjectId,
+                        SubjectName = activity.Subject.Name,
+                        SubjectId = activity.Subject.SubjectId,
                         ActivityName = activity.Name,
                         ActivityId = participation.ActivityId,
                         NumberOfParticipations = participations.Count(p => p.ActivityId == participation.Activity.ActivityId && p.Participating == true)

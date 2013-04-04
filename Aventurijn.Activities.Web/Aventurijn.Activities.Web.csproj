@@ -202,7 +202,9 @@
     <Content Include="App\modules\puntjes.js" />
     <Content Include="App\modules\puntjes.message.js" />
     <Content Include="App\views\modal-activity.html" />
-    <Content Include="App\views\participationsForm.html" />
+    <Content Include="App\views\participation-per-subject.html" />
+    <Content Include="App\views\participations-per-subject-form.html" />
+    <Content Include="App\views\participations-form.html" />
     <Content Include="App\views\participation.html" />
     <Content Include="Content\img\ajax-loader.gif" />
     <Content Include="Content\img\avonturijnlogo.jpg" />

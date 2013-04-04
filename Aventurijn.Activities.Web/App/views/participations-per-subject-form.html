@@ -1,0 +1,23 @@
+﻿<form id="participationsPerSubjectForm" method="" >
+    <table class="data full-width" data-bind="loadingWhen: isLoading">
+        <thead>
+            <tr>
+                <th>Onderwerp</th>
+                <th>Activiteit</th>
+                <th>Deelname</th>
+                <th></th>  
+            </tr>
+        </thead>
+        <tbody data-bind="template: { name: 'participation-per-subject', foreach: participationsPerSubject, as: 'participation', templateUrl:'/app/views'}"></tbody>
+        <tfoot data-bind="visible: participationsPerSubject().length == 0">
+            <tr>
+                <td colspan="7">
+                    Geen puntjes gevonden...
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <div class="buttonrow">
+           
+    </div>
+</form>
