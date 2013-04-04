@@ -1011,3 +1011,5 @@ html[xmlns] #nav {
 * html #nav {
 	height: 1%;
 }
+
+#new_activity_dialog{ padding-top: 15px;}
