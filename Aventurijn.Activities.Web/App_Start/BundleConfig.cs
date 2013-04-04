@@ -22,11 +22,15 @@ namespace Aventurijn.Activities.Web
                                          "~/Scripts/knockout-{version}.js",
                                          "~/Scripts/knockout.mapping-latest.js",
                                          "~/Scripts/jquery.dateFormat-1.0.js",
+                                         "~/Scripts/TrafficCop.js",
+                                         "~/Scripts/infuser.js",
+                                         "~/Scripts/koExternalTemplateEngine_all.js",
                                          "~/Scripts/plugins/jquery.simplemodal-{version}.js",
-                                         "~/Scripts/aventurijn/puntjes.js",
-                                         "~/Scripts/aventurijn/puntjes.message.js",
-                                         "~/Scripts/aventurijn/aventurijn.js",
-                                         "~/Scripts/aventurijn/aventurijn.participations.js"));
+                                         "~/app/modules/puntjes.js",
+                                         "~/app/modules/puntjes.message.js",
+                                         "~/app/viewmodels/aventurijn.js",
+                                         "~/app/viewmodels/aventurijn.participations.js",
+                                         "~/app/viewmodels/aventurijn.participationspersubject.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.

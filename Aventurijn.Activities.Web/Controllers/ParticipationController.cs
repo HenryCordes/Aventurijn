@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Aventurijn.Activities.Web.Attributes;
 using Aventurijn.Activities.Web.Models.Domain;
 using Aventurijn.Activities.Web.Models.Context;
+using Aventurijn.Activities.Web.Models.Extensions;
 using Aventurijn.Activities.Web.Models.ViewModel;
 
 namespace Aventurijn.Activities.Web.Controllers
@@ -192,6 +193,29 @@ namespace Aventurijn.Activities.Web.Controllers
             return Json(participations);
         }
 
+
+        [HandleError]
+        public ActionResult PerSubject(int? id)
+        {
+            var from = DateTime.UtcNow.Date.AddMonths(-1);
+            var to = DateTime.UtcNow.Date;
+            const int subjectId = 0;
+
+            var viewModel = ParticipationsPerSubjectViewModel(id, from, to);
+
+            return View("PerSubject", viewModel);
+        }
+
+
+        [HandleError]
+        public JsonResult SubjectOrdered(DateTime from, DateTime to, int? id)
+        {
+            var viewModel = ParticipationsPerSubjectViewModel(id, from, to);
+
+            return Json(viewModel);
+        }
+
+     
         public ActionResult ReadOnly()
         {
             DateTime from = DateTime.Parse(Request.QueryString["from"]);
@@ -208,6 +232,23 @@ namespace Aventurijn.Activities.Web.Controllers
             db.Participations.Remove(participation);
             db.SaveChanges();
         }
+
+
+        private ParticipationsPerSubjectViewModel ParticipationsPerSubjectViewModel(int? id, DateTime from, DateTime to)
+        {
+            var subjectId = 0;
+            if (id.HasValue)
+            {
+                subjectId = (int)id;
+            }
+
+            var viewModel = new ParticipationsPerSubjectViewModel(GetSubjectsList());
+            viewModel.FromDate = from;
+            viewModel.ToDate = to;
+            viewModel.ParticipationsPerSubject = GetParticipationsPerSubject(from, to, subjectId);
+            return viewModel;
+        }
+
 
         private IEnumerable<Participation> SaveParticipations(IEnumerable<Participation> participations)
         {
@@ -249,6 +290,34 @@ namespace Aventurijn.Activities.Web.Controllers
              return participations;
         }
 
+        private IEnumerable<ParticipationsPerSubject> GetParticipationsPerSubject(DateTime from, DateTime to, int subjectId = 0)
+        {
+            var result = new List<ParticipationsPerSubject>();
+            var queryableParticipations = db.Participations.Where(p => p.ParticipationDateTime > from &&
+                                                                       p.ParticipationDateTime <= to);
+            if (subjectId > 0)
+            {
+                queryableParticipations = queryableParticipations.Where(p => p.Activity.SubjectId == subjectId);
+            }
+            var participations = queryableParticipations.OrderBy(p => p.ParticipationDateTime).ToList();
+
+            foreach (var participation in participations)
+            {
+                var activity = db.Activities.Find(participation.ActivityId);
+                var subject = db.Subjects.Find(activity.SubjectId);
+                var participationPerSubject = new ParticipationsPerSubject()
+                    {
+                        SubjectName = subject.Name,
+                        SubjectId = subject.SubjectId,
+                        ActivityName = activity.Name,
+                        ActivityId = participation.ActivityId,
+                        NumberOfParticipations = participations.Count(p => p.ActivityId == participation.Activity.ActivityId && p.Participating == true)
+                    };
+                result.Add(participationPerSubject);
+            }
+            return result.DistinctBy(p => p.ActivityId).OrderBy(p => p.SubjectName).ThenBy(p => p.ActivityName);
+        }
+
         private IEnumerable<Activity> GetActivityList()
         {
             return db.Activities.Where(a => a.Active == true).OrderBy(a => a.Name);
@@ -258,6 +327,7 @@ namespace Aventurijn.Activities.Web.Controllers
         {
             return db.Students.OrderBy(s => s.Name);
         }
+
 
         private IEnumerable<Subject> GetSubjectsList()
         {

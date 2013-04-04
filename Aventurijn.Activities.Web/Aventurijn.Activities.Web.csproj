@@ -186,15 +186,27 @@
     <Compile Include="Models\Domain\Participation.cs" />
     <Compile Include="Models\Domain\Student.cs" />
     <Compile Include="Models\Domain\Subject.cs" />
+    <Compile Include="Models\Extensions\LinqExtensions.cs" />
     <Compile Include="Models\ViewModel\ActivityViewModel.cs" />
+    <Compile Include="Models\ViewModel\ParticipationsPerSubject.cs" />
+    <Compile Include="Models\ViewModel\ParticipationsPerSubjectViewModel.cs" />
     <Compile Include="Models\ViewModel\ParticipationsViewModel.cs" />
     <Compile Include="Models\ViewModel\ParticipationViewModel.cs" />
     <Compile Include="Models\ViewModel\StudentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\viewmodels\aventurijn.js" />
+    <Content Include="App\viewmodels\aventurijn.participations.js" />
+    <Content Include="App\viewmodels\aventurijn.participationspersubject.js" />
+    <Content Include="App\modules\puntjes.js" />
+    <Content Include="App\modules\puntjes.message.js" />
+    <Content Include="App\views\modal-activity.html" />
+    <Content Include="App\views\participationsForm.html" />
+    <Content Include="App\views\participation.html" />
     <Content Include="Content\img\ajax-loader.gif" />
     <Content Include="Content\img\avonturijnlogo.jpg" />
+    <Content Include="Content\img\gradient.png" />
     <Content Include="Content\img\x.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -254,9 +266,12 @@
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="robots.txt" />
-    <Content Include="Scripts\aventurijn\aventurijn.participations.js" />
-    <Content Include="Scripts\aventurijn\aventurijn.js" />
-    <Content Include="Scripts\aventurijn\puntjes.message.js" />
+    <Content Include="Scripts\infuser-amd.js" />
+    <Content Include="Scripts\infuser-amd.min.gz.js" />
+    <Content Include="Scripts\infuser-amd.min.js" />
+    <Content Include="Scripts\infuser.js" />
+    <Content Include="Scripts\infuser.min.gz.js" />
+    <Content Include="Scripts\infuser.min.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -273,9 +288,20 @@
     <Content Include="Scripts\knockout-2.2.1.js" />
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
+    <Content Include="Scripts\koExternalTemplateEngine-amd.js" />
+    <Content Include="Scripts\koExternalTemplateEngine-amd.min.js" />
+    <Content Include="Scripts\koExternalTemplateEngine.js" />
+    <Content Include="Scripts\koExternalTemplateEngine.min.js" />
+    <Content Include="Scripts\koExternalTemplateEngine_all.js" />
+    <Content Include="Scripts\koExternalTemplateEngine_all.min.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
-    <Content Include="Scripts\aventurijn\puntjes.js" />
     <Content Include="Scripts\plugins\jquery.simplemodal-1.4.4.js" />
+    <Content Include="Scripts\TrafficCop-amd.js" />
+    <Content Include="Scripts\TrafficCop-amd.min.gz.js" />
+    <Content Include="Scripts\TrafficCop-amd.min.js" />
+    <Content Include="Scripts\TrafficCop.js" />
+    <Content Include="Scripts\TrafficCop.min.gz.js" />
+    <Content Include="Scripts\TrafficCop.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -345,6 +371,7 @@
     <Content Include="Views\Participation\ReadOnly.cshtml" />
     <Content Include="Views\Error\Error500.cshtml" />
     <Content Include="Views\Error\Error404.cshtml" />
+    <Content Include="Views\Participation\PerSubject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

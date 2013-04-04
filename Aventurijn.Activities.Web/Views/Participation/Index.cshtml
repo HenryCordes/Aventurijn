@@ -11,113 +11,24 @@
     <li>Tot: <input type="text" id="toDate" class="datefield small" value="@Model.ToDateAsString" /></li>
     <li>Leerling: <select id="studentsSelect" class="small">
                       <option value="0" selected>Alle...</option>
-                       @foreach (var student in Model.Students)
-                       {
-                           <option value="@student.StudentId">@student.Name</option>
-                       }
+                      @foreach (var student in Model.Students)
+                      {
+                          <option value="@student.StudentId">@student.Name</option>
+                      }
                   </select></li>
     <li><button id="getParticipations" type="button" >Filter</button></li>
     <li class="right"></li>
 </ul>
 
-<div id="participations_table">
-    <form id="participationsForm" method="post" action="/participation/save" data-bind="submit: save">
-        <table class="data full-width" data-bind="loadingWhen: isLoading">
-            <thead>
-                <tr>
-                    <th class="">Leerling</th>
-                    <th class="">Activiteit</th>
-                    <th class="">Onderwerp</th>
-                    <th class="">Deelname</th>
-                    <th class="">Extra</th>
-                    <th class="">Datum</th>  
-                    <th></th>  
-                </tr>
-            </thead>
-            <tbody data-bind="template: { name: 'participations-template', foreach: participations, as: 'participation'}"></tbody>
-            <tfoot data-bind="visible: participations().length == 0">
-                <tr>
-                    <td colspan="7">
-                        Geen puntjes gevonden...
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
-        <div class="buttonrow">
-            <button id="new_participation" type="button" data-bind='click: addParticipation' >Nieuw</button> 
-            <button id="save_participations" data-bind="enable: participations().length > 0" type="submit" >Opslaan</button>
-            
-            <button id="show_participations" data-bind="enable: participations().length > 0" class="right" type="button">Print</button>
-            <button id="new_activity" type="button" class="right">Nieuwe activiteit</button>
-        </div>
-    </form>
+<div id="participations_table"  data-bind="template: { name: 'participationsForm' , templateUrl:'app/views'}">
 </div>
 
-
-<div class="" id="new_activity_dialog"  style="display:none;">
-    <h2>Nieuwe Activiteit</h2>
-
-    <form action="/Activity/Create" method="post">
-
-        <fieldset class="editor" id="new_activity_container">
-            <legend>Activity</legend>
-
-            <div class="editor-label">
-                <label for="Activity">Activiteit</label>
-            </div>
-            <div class="editor-field">
-                <input class="text-box single-line" maxlength="100"  id="new_activity_name" name="Activity.Name" type="text" value="" />
-            </div>
-            <div class="editor-label">
-                <label for="Activity_Subject">Onderwerp</label>
-            </div>
-            <div class="editor-field">
-                <select data-bind="options: $root.subjects, optionsText: 'Name', optionsValue: 'SubjectId' "  id="new_activity_subject" name="Activity.SubjectId" class="subject"  name="Activity.SubjectId"></select>
-            </div>
-            
-            <div class="editor-label">
-                <label for="Activity_Active">Aktief</label>
-            </div>
-            <div class="editor-field">
-            <input class="check-box" id="new_activity_active" name="Activity.Active" type="checkbox" checked="true">
-        </div>
-    
-         <p>
-            <input id="save_new_activity_button" type="button" value="Opslaan"  />
-         </p>
-       </fieldset>
-
-    </form>
-
+<div id="new_activity_dialog"  style="display:none;" data-bind="template: { name: 'modal-activity' , templateUrl:'app/views'}">
 </div>
+
 <input type="hidden" id="exText"/>
 
 <!--        TEMPLATES       -->
-<script type="text/html" id="participations-template">
-    <tr>
-        <input type="hidden" data-bind="value: ParticipationId"/>
-        <input type="hidden" data-bind="value: StudentId"/>
-        <input type="hidden" data-bind="value: ActivityId"/>
-        <input type="hidden" data-bind="value: Activity.SubjectId"/>
-        <td>
-            <select data-bind="options: $root.students, optionsText: 'Name', optionsValue: 'StudentId', value: participation.StudentId, optionCaption: 'Selecteren...' "></select>
-        </td> 
-        <td>
-            <select data-bind="options: $root.activities, optionsText: 'Name', optionsValue: 'ActivityId', value: participation.ActivityId, optionCaption: 'Selecteren...' " class="activity"></select>
-        </td> 
-        <td data-bind="with: participation.ActivityId">
-            <select data-bind="options: $root.subjects, optionsText: 'Name', optionsValue: 'SubjectId', value: participation.Activity.SubjectId " class="subject" disabled="true"></select>
-        </td> 
-        <td class="centered"><input type="checkbox" data-bind="checked: Participating" /></td>
-        <td>
-            <input type="text"  data-bind="value: ExtraInfo, attr: { title: ExtraInfo }" />
-        </td>        
-        <td>
-            <input type="text" class="datefield" data-bind="value: ParticipationDateTimeAsString"/>
-        </td>
-        <td> | <a href="#" data-bind="click: $root.removeParticipation" >Verwijderen</a></td>
-    </tr>
-</script>
 
 
 @section Scripts {
@@ -126,26 +37,14 @@
     }
 
     <script type="text/javascript">
+        
         var initialData = @Html.Raw(data);
-        var modal;
-
-        puntjes.message.init(document.getElementById('participations_table'));
-
+        
+        puntjes.message.init(document.getElementById('main-content'));
+        
         var allParticipations = new participations(initialData);
         ko.applyBindings(allParticipations, document.getElementById('participations_table'));
         ko.applyBindings(allParticipations, document.getElementById('new_activity_container'));
-
-        $('.activity').live('change', function() {
-            var select = $(this);
-            var newActivityId = select.val();
-
-            for (var i = 0; i < initialData.Activities.length; i++) {
-                if (initialData.Activities[i].ActivityId == newActivityId) {
-                    $(select.parents('tr').find('.subject')[0]).val(initialData.Activities[i].SubjectId);
-                    return;
-                }
-            }
-        });
 
         $('#getParticipations').click(function() {
             var from = $('#fromDate').val();
@@ -154,50 +53,5 @@
             allParticipations.getParticipations(from, to, studentId);
         });
 
-        $('#show_participations').click(function() {
-            var from = $('#fromDate').val();
-            var to = $('#toDate').val();
-            var studentId = $('#studentsSelect').val();
-
-            window.location.href = 'participation/readonly?from=' + from + '&to=' + to + '&studentId=' + studentId;
-        });
-
-        $('#new_activity').click(function() {
-            modal = $('#new_activity_dialog').modal();
-        });
-
-        $('#save_new_activity_button').click(function() {
-            var activityName = $('#new_activity_name').val();
-            var activitySubject = $('#new_activity_subject').val();
-            var isActive = $('#new_activity_active').is(":checked");
-
-            var data = {
-                'Name': activityName,
-                'SubjectId': activitySubject,
-                'Active': isActive
-            };
-            jQuery.ajax({
-                type: 'POST',
-                url: 'activity/add',
-                contentType: 'application/json',
-                dataType: 'json',
-                data: JSON.stringify(data),
-                traditional: true,
-                success: function(result) {
-                    if (result.result === true) {
-                        puntjes.message.show("Succesvol opgeslagen");
-                        allParticipations.addActivity(result.activity);
-                        modal.close();
-                    }
-                    else {
-                        puntjes.message.show("Opslaan mislukt");
-                    }
-                },
-                error: function(xmlHttpRequest) {
-                    puntjes.message.show("Opslaan mislukt - fout");
-                    $('#exText').val(xmlHttpRequest.responseText);
-                }
-            });
-        });
     </script>
 }

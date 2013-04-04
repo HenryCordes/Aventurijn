@@ -21,13 +21,18 @@
                         @Html.Partial("_LoginPartial")
                     </section>
                     <nav>
-                        <ul id="menu">   
-                            <li>@Html.ActionLink("Puntjes", "Index", "Participation")</li>
+                        <ul id="nav">   
+                            <li>@Html.ActionLink("Puntjes", "Index", "Participation")
+                                <ul>
+                                    <li>@Html.ActionLink("Puntjes per onderwerp", "PerSubject", "Participation")</li>
+                                </ul>
+                            </li>
                             <li>@Html.ActionLink("Activiteiten", "Index", "Activity")</li>   
                             <li>@Html.ActionLink("Leerlingen", "Index", "Student")</li>
                             <li>@Html.ActionLink("Onderwerpen", "Index", "Subject")</li>
                             <li>@Html.ActionLink("Nivo", "Index", "Level")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            
                         </ul>
                     </nav>
                 </div>
@@ -35,7 +40,7 @@
         </header>
         <div id="body">
             @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
+            <section id="main-content" class="content-wrapper main-content clear-fix">
                 @RenderBody()
             </section>
         </div>
