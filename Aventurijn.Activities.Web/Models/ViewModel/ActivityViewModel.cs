@@ -16,7 +16,7 @@ namespace Aventurijn.Activities.Web.Models.ViewModel
         public Activity Activity { get; set; }
    
 
-        [Display(Name = "Onderwerpen")]
+        [Display(Name = "Vakken")]
         public List<Subject> Subjects { get; private set; }
     }
 }

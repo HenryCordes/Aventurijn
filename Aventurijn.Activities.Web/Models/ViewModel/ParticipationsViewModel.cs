@@ -28,7 +28,7 @@ namespace Aventurijn.Activities.Web.Models.ViewModel
         [Display(Name = "Leerlingen")]
         public List<Student> Students { get; private set; }
 
-        [Display(Name = "Onderwerpen")]
+        [Display(Name = "Vakken")]
         public List<Subject> Subjects { get; private set; }
 
         public DateTime FromDate { get; set; }

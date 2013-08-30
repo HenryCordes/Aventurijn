@@ -9,7 +9,7 @@
 <ul class="horizontal">
     <li>Van: <input type="text" id="fromDate" class="datefield small" value="@Model.FromDateAsString" /></li>
     <li>Tot: <input type="text" id="toDate" class="datefield small" value="@Model.ToDateAsString" /></li>
-    <li>Onderwerp: <select id="subjectsSelect" class="small">
+    <li>Vak: <select id="subjectsSelect" class="small">
                       <option value="0" selected>Alle...</option>
                       @foreach (var subject in Model.Subjects)
                       {

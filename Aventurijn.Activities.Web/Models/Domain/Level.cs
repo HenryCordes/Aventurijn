@@ -9,7 +9,7 @@ using System.Text;
 namespace Aventurijn.Activities.Web.Models.Domain
 {
     [Table("Level")]
-    [DisplayName("Nivo")]
+    [DisplayName("Bouw")]
     public class Level
     {
         [Key]

@@ -32,7 +32,7 @@ namespace Aventurijn.Activities.Web.Models.Domain
         //[DataType(DataType.DateTime)]
         //public DateTime BirthDate { get; set; }
 
-        [DisplayName("Nivo")]
+        [DisplayName("Bouw")]
         public Level Level { get; set; }
 
         public int LevelId { get; set; }

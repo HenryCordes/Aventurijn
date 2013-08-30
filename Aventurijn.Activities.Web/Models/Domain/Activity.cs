@@ -19,7 +19,7 @@ namespace Aventurijn.Activities.Web.Models.Domain
         [DisplayName("Naam")]
         public string Name { get; set; }
 
-        [DisplayName("Onderwerp")]
+        [DisplayName("Vak")]
         public Subject Subject { get; set; }
 
         public int SubjectId { get; set; } 

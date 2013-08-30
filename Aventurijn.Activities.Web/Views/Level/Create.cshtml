@@ -1,16 +1,16 @@
 ﻿@model Aventurijn.Activities.Web.Models.Domain.Level
 
 @{
-    ViewBag.Title = "Avonturijn - Nieuw Nivo";
+    ViewBag.Title = "Avonturijn - Nieuwe Bouw";
 }
 
-<h2>Nieuw Nivo</h2>
+<h2>Nieuw Bouw</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
     <fieldset class="editor">
-        <legend>Level</legend>
+        <legend>Bouw</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Name)

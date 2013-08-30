@@ -1,16 +1,16 @@
 ﻿@model Aventurijn.Activities.Web.Models.Domain.Level
 
 @{
-    ViewBag.Title = "Aventurijn - Nivo Aanpassen";
+    ViewBag.Title = "Aventurijn - Bouw Aanpassen";
 }
 
-<h2>Nivo aanpassen</h2>
+<h2>Bouw aanpassen</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
     <fieldset class="editor">
-        <legend>Nivo</legend>
+        <legend>Bouw</legend>
 
         @Html.HiddenFor(model => model.LevelId)
 

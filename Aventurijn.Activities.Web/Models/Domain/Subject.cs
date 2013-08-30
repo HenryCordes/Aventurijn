@@ -9,7 +9,7 @@ using System.Web;
 namespace Aventurijn.Activities.Web.Models.Domain
 {
     [Table("Subject")]
-    [DisplayName("Onderwerp")]
+    [DisplayName("Vak")]
     public class Subject
     {
         [Key]

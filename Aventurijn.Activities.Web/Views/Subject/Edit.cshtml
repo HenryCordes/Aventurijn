@@ -1,16 +1,16 @@
 ﻿@model Aventurijn.Activities.Web.Models.Domain.Subject
 
 @{
-    ViewBag.Title = "Aventurijn - Onderwerp Aanpassen";
+    ViewBag.Title = "Aventurijn - Vak Aanpassen";
 }
 
-<h2>Onderwerp aanpassen</h2>
+<h2>Vak aanpassen</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Onderwerp</legend>
+        <legend>Vak</legend>
 
         @Html.HiddenFor(model => model.SubjectId)
 

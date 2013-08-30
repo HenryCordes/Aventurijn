@@ -21,7 +21,7 @@ namespace Aventurijn.Activities.Web.Models.ViewModel
         public Student Student { get; set; }
    
 
-        [Display(Name = "Nivo's")]
+        [Display(Name = "Bouw")]
         public List<Level> Levels { get; private set; }
     
     }
