@@ -6,11 +6,11 @@
     <td>
         <select data-bind="options: $root.students, optionsText: 'Name', optionsValue: 'StudentId', value: participation.StudentId, optionCaption: 'Selecteren...' "></select>
     </td> 
-    <td>
-        <select data-bind="options: $root.activities, optionsText: 'Name', optionsValue: 'ActivityId', value: participation.ActivityId, optionCaption: 'Selecteren...', event: { change: $root.setActivityId } " class="activity"></select>
-    </td> 
     <td data-bind="with: participation.ActivityId">
         <select data-bind="options: $root.subjects, optionsText: 'Name', optionsValue: 'SubjectId', value: participation.Activity.SubjectId " class="subject" disabled="true"></select>
+    </td>
+    <td>
+        <select data-bind="options: $root.activities, optionsText: 'Name', optionsValue: 'ActivityId', value: participation.ActivityId, optionCaption: 'Selecteren...', event: { change: $root.setActivityId } " class="activity"></select>
     </td> 
     <td class="centered"><input type="checkbox" data-bind="checked: Participating" /></td>
     <td>
