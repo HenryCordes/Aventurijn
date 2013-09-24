@@ -6,47 +6,62 @@
 
 <h2>Puntjes</h2>
 
-<ul class="horizontal">
-    <li>Van: <input type="text" id="fromDate" class="datefield small" value="@Model.FromDateAsString" /></li>
-    <li>Tot: <input type="text" id="toDate" class="datefield small" value="@Model.ToDateAsString" /></li>
-    <li>Leerling: <select id="studentsSelect" class="small">
-                      <option value="0" selected>Alle...</option>
-                      @foreach (var student in Model.Students)
-                      {
-                          <option value="@student.StudentId">@student.Name</option>
-                      }
-                  </select></li>
-    <li><button id="getParticipations" type="button" >Filter</button></li>
-    <li class="right"></li>
-</ul>
+<form action="/participation" method="post" enctype="multipart/form-data">
+    <ul class="horizontal">
+        <li>Van: <input type="text" id="from" name="from" class="datefield small" value="@Model.FromDateAsString" /></li>
+        <li>Tot: <input type="text" id="to" name="to" class="datefield small" value="@Model.ToDateAsString" /></li>
+        <li>Leerling: <select id="studentId" name="studentId" class="small">
+                          <option value="0" selected>Alle...</option>
+                          @foreach (var student in Model.Students)
+                          {
+                              <option value="@student.StudentId">@student.Name</option>
+                          }
+                      </select></li>
+        <li><input id="getParticipations" type="submit" value="Filter" /></li>
+        <li class="right"></li>
+    </ul>
+</form>
 
-<div id="participations_table"  data-bind="template: { name: 'participations-form' , templateUrl:'app/views'}"></div>
-<div id="new_activity_dialog"  style="display:none;" data-bind="template: { name: 'modal-activity' , templateUrl:'app/views'}"></div>
-<input type="hidden" id="exText" />
+<table class="grid">
+    <tr>
+        <th>
+            Leerling
+        </th> 
+        <th>
+            Vak
+        </th>
+        <th>
+            Activiteit
+        </th>
+        <th>
+            Extra
+        </th>
+        <th>
+            Datum
+        </th>
+        <th></th>
+    </tr>
 
-@section Scripts {
-    @{
-        string data = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Model);
+    @foreach (var item in Model.Participations) {
+        <tr>
+            <td>
+                @Html.DisplayTextFor(modelItem => item.Student.Name)
+            </td>
+            <td class="break-word">
+                @Html.DisplayTextFor(modelItem => item.Subject.Name)
+            </td>
+            <td class="break-word">
+                @Html.DisplayTextFor(modelItem => item.Activity.Name)
+            </td>
+            <td class="break-word">
+                @Html.DisplayFor(modelItem => item.ExtraInfo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParticipationDateTime)
+            </td>
+            <td>@Html.ActionLink("Aanpassen", "Edit", new { id=item.ParticipationId }) | 
+                @Html.ActionLink("Verwijderen", "Delete", new { id=item.ParticipationId })</td>
+        </tr>
     }
 
-    <script type="text/javascript">
-        
-        var initialData = @Html.Raw(data);
-        
-        puntjes.message.init(document.getElementById('participations_table'));
-        
-        var allParticipations = new participations(initialData);
-        ko.applyBindings(allParticipations, document.getElementById('participations_table'));
-        ko.applyBindings(allParticipations, document.getElementById('new_activity_container'));
-
-        $('#getParticipations').click(function() {
-            var from = $('#fromDate').val();
-            var to = $('#toDate').val();
-            var studentId = $('#studentsSelect').val();
-            allParticipations.getParticipations(from, to, studentId);
-        });
-        
-       
-
-    </script>
-}
+</table>

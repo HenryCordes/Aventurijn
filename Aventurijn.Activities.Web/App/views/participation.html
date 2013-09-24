@@ -1,23 +1,13 @@
 ﻿<tr>
-    <input type="hidden" data-bind="value: ParticipationId"/>
-    <input type="hidden" data-bind="value: StudentId"/>
-    <input type="hidden" data-bind="value: ActivityId"/>
-    <input type="hidden" data-bind="value: Activity.SubjectId"/>
-    <td>
-        <select data-bind="options: $root.students, optionsText: 'Name', optionsValue: 'StudentId', value: participation.StudentId, optionCaption: 'Selecteren...' "></select>
+    <td  data-bind="text: participation.Student.Name">
     </td> 
-    <td data-bind="with: participation.ActivityId">
-        <select data-bind="options: $root.subjects, optionsText: 'Name', optionsValue: 'SubjectId', value: participation.Activity.SubjectId " class="subject" disabled="true"></select>
+    <td data-bind="text: participation.Subject.Name" class="break-word">
+     
     </td>
-    <td>
-        <select data-bind="options: $root.activities, optionsText: 'Name', optionsValue: 'ActivityId', value: participation.ActivityId, optionCaption: 'Selecteren...', event: { change: $root.setActivityId } " class="activity"></select>
+    <td  data-bind="text: participation.Activity.Name" class="break-word">
     </td> 
-    <td class="centered"><input type="checkbox" data-bind="checked: Participating" /></td>
-    <td>
-        <input type="text"  data-bind="value: ExtraInfo, attr: { title: ExtraInfo }" />
+    <td  data-bind="text: participation.ExtraInfo" class="break-word">
     </td>        
-    <td>
-        <input type="text" data-bind="datepicker: ParticipationDateTimeAsString, datepickerOptions: { minDate: new Date() , dateFormat: 'dd-mm-yy' }"  />
+    <td data-bind="text: participation.ParticipationDateTimeAsString">
     </td>
-    <td> | <a href="#" data-bind="click: $root.removeParticipation" >Verwijderen</a></td>
 </tr>

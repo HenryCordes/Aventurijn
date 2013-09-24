@@ -1,0 +1,29 @@
+﻿@model Aventurijn.Activities.Web.Models.ViewModel.NewParticipationsViewModel
+
+@{
+    ViewBag.Title = "Aventurijn - Nieuwe puntjes";
+}
+
+<h2>Nieuwe puntjes</h2>
+
+<div id="selection-container">
+    <div id="participationsSelection" class="horizontal"  data-bind="template: { name: 'new-participations-selection' , templateUrl:'/app/views'}"></div>
+</div>
+
+
+@section Scripts {
+    @{
+        string data = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Model);
+    }
+
+    <script type="text/javascript">
+
+        var initialData = @Html.Raw(data);
+ 
+        puntjes.message.init(document.getElementById('selection-container'));
+        var allParticipations = new newparticipations(initialData);
+        ko.applyBindings(allParticipations, document.getElementById('participationsSelection'));
+        
+        
+    </script>
+}

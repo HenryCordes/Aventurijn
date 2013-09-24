@@ -1,35 +1,59 @@
 ﻿@model Aventurijn.Activities.Web.Models.Domain.Participation
 
 @{
-    ViewBag.Title = "Avonturijn - Deelname Verwijderen";
+    ViewBag.Title = "Avonturijn - Puntje Verwijderen";
 }
 
-<h2>Deelname verwijderen</h2>
+<h2>Puntje verwijderen</h2>
 
-<h3>Weet je zerker dat je deze Deelname wilt verwijderen?</h3>
-<fieldset>
+<h3>Weet je zeker dat je dit puntje wilt verwijderen?</h3>
+<fieldset class="tabular">
     <legend>Deelname</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ExtraInfo)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ExtraInfo)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Participating)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Participating)
+    
+    <div class="row">
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Student.Name)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Student.Name)
+        </div>
     </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ParticipationDateTime)
+     <div class="row">
+         <div class="display-label">
+             @Html.DisplayNameFor(model => model.Subject.Name)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Subject.Name)
+        </div>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ParticipationDateTime)
+
+     <div class="row">
+         <div class="display-label">
+             @Html.DisplayNameFor(model => model.Activity.Name)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Activity.Name)
+        </div>
     </div>
+
+     <div class="row">
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.ExtraInfo)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.ExtraInfo)
+        </div>
+    </div>
+
+     <div class="row">
+         <div class="display-label">
+             @Html.DisplayNameFor(model => model.ParticipationDateTime)
+        </div>
+         <div class="display-field">
+             @Html.DisplayFor(model => model.ParticipationDateTime)
+         </div>
+      </div>
 </fieldset>
 @using (Html.BeginForm()) {
     <p>

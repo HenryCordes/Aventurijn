@@ -10,15 +10,12 @@
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Student)
-        </th>
+        </th> 
         <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+         <th>
             @Html.DisplayNameFor(model => model.Activity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Activity.Subject)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Participating)
         </th>
          <th>
             @Html.DisplayNameFor(model => model.ExtraInfo)
@@ -33,14 +30,11 @@
         <td>
             @Html.DisplayTextFor(modelItem => item.Student.Name)
         </td>
-        <td>
+        <td lass="break-word">
+            @Html.DisplayTextFor(modelItem => item.Subject.Name)
+        </td>
+        <td lass="break-word">
             @Html.DisplayTextFor(modelItem => item.Activity.Name)
-        </td>
-         <td>
-            @Html.DisplayTextFor(modelItem => item.Activity.Subject.Name)
-        </td>
-        <td class="centered">
-            @Html.DisplayFor(modelItem => item.Participating)
         </td>
         <td class="break-word">
             @Html.DisplayFor(modelItem => item.ExtraInfo)

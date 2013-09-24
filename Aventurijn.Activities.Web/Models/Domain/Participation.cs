@@ -22,6 +22,10 @@ namespace Aventurijn.Activities.Web.Models.Domain
         [DisplayName("Deelname")]
         public bool Participating { get; set; }
 
+        [DisplayName("Onderwerp")]
+        public Subject Subject { get; set; }
+        public long SubjectId { get; set; }
+
         [DisplayName("Activiteit")]
         public Activity Activity { get; set; }
         public long ActivityId { get; set; }

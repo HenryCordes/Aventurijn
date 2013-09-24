@@ -21,5 +21,9 @@ namespace Aventurijn.Activities.Web.Models.Domain
 
         [StringLength(10)]
         public string Code { get; set; }
+
+        public List<Activity> Activities { get; set; }
+   //     public int ActivityId { get; set; }
+
     }
 }

@@ -1,0 +1,49 @@
+﻿<div data-bind="loadingWhen: isLoading">
+    <ul class="horizontal">
+        <li id="newParticipationsSelection">Vak: <select data-bind="options: $root.subjects, optionsText: 'Name', optionsValue: 'SubjectId', value: subjectId, event: {change: $root.setSubject}" class="subject"></select></li>
+        <li>Activiteit: <select data-bind=" options: $root.subjectActivities, optionsText: 'Name', optionsValue: 'ActivityId', value: activityId, optionCaption: 'Selecteren...', event: { change: $root.setActivityId }" class="activity"></select></li>
+        <li><button id="new_activity" type="button" data-bind='click: showNewActivityModal' class="sign">+</button></li>
+        <li>Bouw: <select data-bind=" options: $root.levels, optionsText: 'Name', optionsValue: 'LevelId', value: levelId, event: { change: $root.setLevel }" class="level"></select></li>
+        <li>Datum: <input type="text" id="participationDate" class="datefield small"  data-bind="datepicker: participationDate, datepickerOptions: { minDate: new Date(), dateFormat: 'dd-mm-yy' }" /></li>
+        <li class="right"></li>
+    </ul>
+    <ul class="horizontal top-align">
+        <li class="padding-right">Leerlingen:</li>
+        <li class="padding-right-plus">
+            <div class="inline">
+                <input type="checkbox" data-bind="checked: allSelected" /> <span>Allen / geen</span>
+                <div>&nbsp;</div>
+                <ul class="students" data-bind="template: { name: 'student', templateUrl: '/app/views', foreach: $root.levelStudents, as: 'student' }"></ul>
+ 
+            </div>
+        </li>
+        <li>Extra info: </li>
+        <li>
+            <textarea data-bind="value: extraInfo" class="extra-info"></textarea>
+            
+        </li>
+    </ul>
+    <div class="buttonrow"><button type="button" data-bind="enable: $root.activityId() > 0, click: save">Opslaan</button></div>
+    
+    <div id="new_activity_dialog"  style="display:none;" data-bind="template: { name: 'modal-activity', templateUrl: '/app/views' }"></div>
+</div>
+<div>&nbsp;</div>
+<table class="data full-width"  data-bind="visible: $root.participations() != null">
+    <thead>
+        <tr>
+            <th>Leerling</th>
+            <th>Vak</th>
+            <th>Activiteit</th>
+            <th>Extra</th>
+            <th>Datum</th>   
+        </tr>
+    </thead>
+    <tbody data-bind="template: { name: 'participation', templateUrl: '/app/views', foreach: $root.participations, as: 'participation' }"></tbody>
+    <tfoot data-bind="visible: $root.participations() == null">
+        <tr>
+            <td colspan="7">
+                Geen puntjes gevonden...
+            </td>
+        </tr>
+    </tfoot>
+</table>

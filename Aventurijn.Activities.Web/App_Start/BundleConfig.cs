@@ -30,6 +30,7 @@ namespace Aventurijn.Activities.Web
                                          "~/app/modules/puntjes.message.js",
                                          "~/app/viewmodels/aventurijn.js",
                                          "~/app/viewmodels/aventurijn.participations.js",
+                                          "~/app/viewmodels/aventurijn.newparticipations.js",
                                          "~/app/viewmodels/aventurijn.participationspersubject.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

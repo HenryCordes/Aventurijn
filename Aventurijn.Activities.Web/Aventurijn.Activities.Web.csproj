@@ -188,6 +188,8 @@
     <Compile Include="Models\Domain\Subject.cs" />
     <Compile Include="Models\Extensions\LinqExtensions.cs" />
     <Compile Include="Models\ViewModel\ActivityViewModel.cs" />
+    <Compile Include="Models\ViewModel\NewParticipationsRequest.cs" />
+    <Compile Include="Models\ViewModel\NewParticipationsViewModel.cs" />
     <Compile Include="Models\ViewModel\ParticipationsPerSubject.cs" />
     <Compile Include="Models\ViewModel\ParticipationsPerSubjectViewModel.cs" />
     <Compile Include="Models\ViewModel\ParticipationsViewModel.cs" />
@@ -197,15 +199,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\viewmodels\aventurijn.js" />
+    <Content Include="App\viewmodels\aventurijn.newparticipations.js" />
     <Content Include="App\viewmodels\aventurijn.participations.js" />
     <Content Include="App\viewmodels\aventurijn.participationspersubject.js" />
     <Content Include="App\modules\puntjes.js" />
     <Content Include="App\modules\puntjes.message.js" />
     <Content Include="App\views\modal-activity.html" />
+    <Content Include="App\views\new-participations-selection.html" />
     <Content Include="App\views\participation-per-subject.html" />
     <Content Include="App\views\participations-per-subject-form.html" />
     <Content Include="App\views\participations-form.html" />
     <Content Include="App\views\participation.html" />
+    <Content Include="App\views\student.html" />
     <Content Include="Content\img\ajax-loader.gif" />
     <Content Include="Content\img\avonturijnlogo.jpg" />
     <Content Include="Content\img\gradient.png" />
@@ -363,7 +368,7 @@
     <Content Include="Views\Activity\Create.cshtml" />
     <Content Include="Views\Activity\Edit.cshtml" />
     <Content Include="Views\Activity\Delete.cshtml" />
-    <Content Include="Views\Participation\Index.cshtml" />
+    <Content Include="Views\Participation\Indexorg.cshtml" />
     <Content Include="Views\Participation\Details.cshtml" />
     <Content Include="Views\Participation\Create.cshtml" />
     <Content Include="Views\Participation\Edit.cshtml" />
@@ -374,6 +379,8 @@
     <Content Include="Views\Error\Error500.cshtml" />
     <Content Include="Views\Error\Error404.cshtml" />
     <Content Include="Views\Participation\PerSubject.cshtml" />
+    <Content Include="Views\Participation\New.cshtml" />
+    <Content Include="Views\Participation\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

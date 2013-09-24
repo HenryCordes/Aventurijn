@@ -1,0 +1,52 @@
+﻿@model Aventurijn.Activities.Web.Models.ViewModel.ParticipationsViewModel
+
+@{
+    ViewBag.Title = "Aventurijn - Puntjes";
+}
+
+<h2>Puntjes</h2>
+
+<ul class="horizontal">
+    <li>Van: <input type="text" id="fromDate" class="datefield small" value="@Model.FromDateAsString" /></li>
+    <li>Tot: <input type="text" id="toDate" class="datefield small" value="@Model.ToDateAsString" /></li>
+    <li>Leerling: <select id="studentsSelect" class="small">
+                      <option value="0" selected>Alle...</option>
+                      @foreach (var student in Model.Students)
+                      {
+                          <option value="@student.StudentId">@student.Name</option>
+                      }
+                  </select></li>
+    <li><button id="getParticipations" type="button" >Filter</button></li>
+    <li class="right"></li>
+</ul>
+
+<div id="participations_table"  data-bind="template: { name: 'participations-form' , templateUrl:'app/views'}"></div>
+<div id="new_activity_dialog"  style="display:none;" data-bind="template: { name: 'modal-activity' , templateUrl:'app/views'}"></div>
+<input type="hidden" id="exText" />
+
+@section Scripts {
+    @{
+        string data = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Model);
+    }
+
+    <script type="text/javascript">
+        
+        var initialData = @Html.Raw(data);
+        
+        puntjes.message.init(document.getElementById('participations_table'));
+        
+        var allParticipations = new participations(initialData);
+        ko.applyBindings(allParticipations, document.getElementById('participations_table'));
+        ko.applyBindings(allParticipations, document.getElementById('new_activity_container'));
+
+        $('#getParticipations').click(function() {
+            var from = $('#fromDate').val();
+            var to = $('#toDate').val();
+            var studentId = $('#studentsSelect').val();
+            allParticipations.getParticipations(from, to, studentId);
+        });
+        
+       
+
+    </script>
+}

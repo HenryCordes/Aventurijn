@@ -23,19 +23,68 @@ namespace Aventurijn.Activities.Web.Controllers
 
         public ActionResult Index()
         {
+           
             var viewModel = new ParticipationsViewModel(GetActivityList(),
                                                         GetStudentsList(),
                                                         GetSubjectsList());
-            viewModel.FromDate = DateTime.UtcNow.Date.AddMonths(-1);
-            viewModel.ToDate = DateTime.UtcNow.Date;
 
+            viewModel.FromDate = DateTime.UtcNow.Date.AddDays(-7);
+            viewModel.ToDate = DateTime.UtcNow.Date;
+            
             viewModel.Participations = GetParticipations(viewModel.FromDate, viewModel.ToDate, 0);
 
             return View(viewModel);
         }
 
          [HttpPost]
-        public ActionResult Index([FromJson] IEnumerable<Participation> participations)
+        public ActionResult Index(FormCollection form)
+         {
+
+             var collection = Request.Form;
+             DateTime from = DateTime.MinValue;
+             DateTime to = DateTime.MinValue;
+             int studentId = 0;
+
+
+             if (collection["from"] != null)
+             {
+                 DateTime.TryParse(collection["from"], out from);
+             }
+
+             if (collection["to"] != null)
+             {
+                 DateTime.TryParse(collection["to"], out to);
+             }
+
+             if (collection["studentId"] != null)
+             {
+                 int.TryParse(collection["studentId"], out studentId);
+
+             }
+     
+             var viewModel = new ParticipationsViewModel(GetActivityList(),
+                                                        GetStudentsList(),
+                                                        GetSubjectsList());
+             if (from > DateTime.MinValue && to > DateTime.MinValue)
+             {
+                 viewModel.FromDate = from;
+                 viewModel.ToDate = to;
+             }
+             else
+             {
+                 viewModel.FromDate = DateTime.UtcNow.Date.AddDays(-7);
+                 viewModel.ToDate = DateTime.UtcNow.Date;
+             }
+
+
+             viewModel.Participations = GetParticipations(viewModel.FromDate, viewModel.ToDate, studentId);
+
+             return View(viewModel);
+
+         }
+
+         [HttpPost]
+        public ActionResult Indexorg([FromJson] IEnumerable<Participation> participations)
         {
             if (ModelState.IsValid)
             {
@@ -44,12 +93,54 @@ namespace Aventurijn.Activities.Web.Controllers
             var viewModel = new ParticipationsViewModel(GetActivityList(),
                                                         GetStudentsList(),
                                                         GetSubjectsList());
-            viewModel.FromDate = DateTime.UtcNow.Date.AddMonths(-1);
+            viewModel.FromDate = DateTime.UtcNow.Date.AddDays(-7);
             viewModel.ToDate = DateTime.UtcNow.Date;
             viewModel.Participations = participations;
 
             return View(viewModel);
         }
+
+         public ActionResult New()
+         {
+             var viewModel = new NewParticipationsViewModel(GetSubjectsList(),
+                                                            GetActivityList(),
+                                                            GetStudentsList(),
+                                                            GetLevelsList());
+             viewModel.Participations = null;
+             viewModel.ParticipationDate = DateTime.UtcNow.Date;
+
+             return View(viewModel);
+         }
+
+         [HttpPost]
+         [HandleError]
+         public JsonResult New(NewParticipationsRequest request)
+         {
+            // var activity = db.Activities.Find(request.ActivityId);
+            var participations =  new List<Participation>();
+             foreach (var studentId in request.StudentIds)
+             {
+                // var student = db.Students.Find(studentId);
+
+                 var participation = new Participation()
+                     {
+                         ActivityId = request.ActivityId,
+                         Activity = db.Activities.Find(request.ActivityId),
+                         SubjectId = request.SubjectId,
+                         Subject = db.Subjects.Find(request.SubjectId),
+                         StudentId = studentId,
+                         Student = db.Students.Find(studentId),
+                         ParticipationDateTime = request.ParticipationDate,
+                         ExtraInfo = request.ExtraInfo
+                     };
+                 db.Participations.Add(participation);
+                 participations.Add(participation);
+             }
+             db.SaveChanges();
+
+             return Json(participations);
+         }
+
 
         //
         // GET: /Participation/Details/5
@@ -62,7 +153,7 @@ namespace Aventurijn.Activities.Web.Controllers
                 return HttpNotFound();
             }
             participation.Activity = db.Activities.Find(participation.ActivityId);
-            participation.Activity.Subject = db.Subjects.Find(participation.Activity.SubjectId);
+            participation.Subject = db.Subjects.Find(participation.SubjectId);
             participation.Student = db.Students.Find(participation.StudentId);
             return View(participation);
         }
@@ -121,7 +212,7 @@ namespace Aventurijn.Activities.Web.Controllers
             if (ModelState.IsValid)
             {
                 participation.Activity = db.Activities.Find(participation.ActivityId);
-                participation.Activity.Subject = db.Subjects.Find(participation.Activity.SubjectId);
+                participation.Subject = db.Subjects.Find(participation.Subject.SubjectId);
                 participation.Student = db.Students.Find(participation.StudentId);
                 db.Entry(participation).State = EntityState.Modified;
                 db.SaveChanges();
@@ -146,6 +237,9 @@ namespace Aventurijn.Activities.Web.Controllers
             {
                 return HttpNotFound();
             }
+            participation.Activity = db.Activities.Find(participation.ActivityId);
+            participation.Subject = db.Subjects.Find(participation.SubjectId);
+            participation.Student = db.Students.Find(participation.StudentId);
             return View(participation);
         }
 
@@ -255,7 +349,7 @@ namespace Aventurijn.Activities.Web.Controllers
             foreach (var participation in participations)
             {
                 participation.Activity = db.Activities.Find(participation.ActivityId);
-                participation.Activity.Subject = db.Subjects.Find(participation.Activity.SubjectId);
+                participation.Subject = db.Subjects.Find(participation.SubjectId);
                 participation.Student = db.Students.Find(participation.StudentId);
                 if (participation.ParticipationId == 0)
                 {
@@ -284,7 +378,8 @@ namespace Aventurijn.Activities.Web.Controllers
              foreach (var participation in participations)
              {
                  participation.Activity = db.Activities.Find(participation.ActivityId);
-                 participation.Activity.Subject = db.Subjects.Find(participation.Activity.SubjectId);
+                 participation.Subject = db.Subjects.Find(participation.SubjectId == 0 ? participation.Activity.SubjectId : participation.SubjectId);
+
                  participation.Student = db.Students.Find(participation.StudentId);
              }
              return participations;
@@ -298,20 +393,22 @@ namespace Aventurijn.Activities.Web.Controllers
                                                                        p.Participating == true);
             if (subjectId > 0)
             {
-                queryableParticipations = queryableParticipations.Where(p => p.Activity.SubjectId == subjectId);
+                queryableParticipations = queryableParticipations.Where(p => p.SubjectId == subjectId);
             }
             var participations = queryableParticipations.OrderBy(p => p.ParticipationDateTime).ToList();
 
             foreach (var participation in participations)
             {
                 var activity = db.Activities.Find(participation.ActivityId);
+                var subject = db.Subjects.Find(activity.SubjectId);
+           
                 var participationPerSubject = new ParticipationsPerSubject()
                     {
-                        SubjectName = activity.Subject.Name,
-                        SubjectId = activity.Subject.SubjectId,
+                        SubjectName = subject.Name,
+                        SubjectId = subject.SubjectId,
                         ActivityName = activity.Name,
                         ActivityId = participation.ActivityId,
-                        NumberOfParticipations = participations.Count(p => p.ActivityId == participation.Activity.ActivityId && p.Participating == true)
+                        NumberOfParticipations = participations.Count(p => p.ActivityId == participation.Activity.ActivityId)
                     };
                 result.Add(participationPerSubject);
             }
@@ -332,6 +429,11 @@ namespace Aventurijn.Activities.Web.Controllers
         private IEnumerable<Subject> GetSubjectsList()
         {
             return db.Subjects.OrderBy(su => su.Name);
+        }
+
+        private IEnumerable<Level> GetLevelsList()
+        {
+            return db.Levels.OrderBy(su => su.LevelId);
         }
 
         protected override void Dispose(bool disposing)

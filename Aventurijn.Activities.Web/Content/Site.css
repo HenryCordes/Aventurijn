@@ -109,7 +109,7 @@ h5, h6 {
 ----------------------------------------------------------*/
 .content-wrapper {
     margin: 0 auto;
-    max-width: 1100px;
+    max-width: 1300px;
 }
 
 #body {
@@ -121,6 +121,7 @@ h5, h6 {
     .main-content {
         background: url("../Images/accent.png") no-repeat;
         padding-left: 10px;
+        padding-right: 10px;
         padding-top: 25px;
     }
 
@@ -423,22 +424,37 @@ input, textarea, select {
     border: 1px solid #e2e2e2;
     background: #fff;
     color: #333;
-    font-size: 1.2em;
-    margin: 5px 0 6px 0;
+    /*font-size: 1.2em;
+    margin: 5px 0 6px 0;*/
+    font-size: 1em;
+    margin: 0;
     padding: 5px;
     width: 300px;
 }
 input[type="button"],input[type="submit"]{ width: inherit;}
 
-select{ width: 310px;}
+select{ width: 280px;}
+
+table td > select.subject,
+select.subject{ width: 244px;}
+
+table td > select.activity > option,
+select.activity > option {  overflow: hidden;  white-space: nowrap;  text-overflow: ellipsis; -webkit-appearance: none;}
+
+table td > select.level,
+select.level{ width: 130px;}
+
+table td > select.new-activity,
+select.new-activity { width: 310px;}
 
 table td > input, table td > select, select.small { padding: 4px; font-size: 1em;margin: 0;width: inherit;}
 table td > input.datefield { width: 80px;}
 input.datefield.small { font-size: 1em;  width: 80px;}
 
+div.centered{margin-left: auto;margin-right: auto;width: 300px;}
 textarea {
     font-family: inherit;
-    width: 500px;
+    width: 450px;
 }
 
     input:focus, textarea:focus {
@@ -475,6 +491,8 @@ textarea {
         margin-right: 4px;
     }
 
+    button.sign { padding: 5px 9px 3px 9px;}
+
     input[type="submit"]:hover,
     input[type="button"]:hover,
     button:hover {
@@ -487,7 +505,8 @@ textarea {
         background: -moz-linear-gradient(top, #B1B1B1, #B9B9B9);
         background: -webkit-gradient(linear, left top, left bottom, from(#B1B1B1), to(#B9B9B9));
     }
-    input[disabled] {
+    input[disabled],
+    button[disabled] {
         background: buttonface;
         color: GrayText;
         border-color: #B5B5B5;
@@ -495,10 +514,21 @@ textarea {
     }
 
 ul { list-style-type: none; }
+ul.students{-webkit-margin-before: 0em; -webkit-padding-start: 0em;margin-left: 0;padding-left: 0;}
 ul.horizontal {margin-left: -3em;}
-ul.horizontal li {display: inline; padding-right: 5px;}
+ul.horizontal > li {display: inline; padding-right: 5px;}
+ul.horizontal > li.padding-right { padding-right: 40px;}
+ul.horizontal > li.padding-right-plus { padding-right: 81px;}
+ul.top-align li { vertical-align: top;}
 ul li button { margin-top: 5px;}
-  
+
+div.inline { display: inline-block;}
+
+div.students-label {width: 380px;text-align: right;}
+div.col-2{ position: relative; left: 120px; display: inline-block;}
+div.col-3{ display: inline-block; vertical-align: top; padding-right: 88px;}
+textarea.extra-info{ height: 120px; width: 364px; vertical-align: top;}
+
 /* info and errors */
 .message-info {
     border: 1px solid;
@@ -562,6 +592,8 @@ table {
     margin-top: 0.75em;
     border: 0 none;
 }
+
+table.grid { width: 100%;}
 
 th {
     font-size: 1.2em;
@@ -832,20 +864,22 @@ fieldset.editor { margin-top: 10px;}
 }
 .message > div { margin-top:27px;}
 div.buttonrow { width: 100%;height: 20px; margin-top: 20px;}
+
+div.buttonrow button { margin-left: 30%; }
 .right { float: right;clear: left;}
 
 
 /*----     SIMPLE MODAL DIALOG    ----*/
 #simplemodal-container a.modalCloseImg {
-	background:url(/content/img/x.png) no-repeat; /* adjust url as required */
-	width:25px;
-	height:29px;
-	display:inline;
-	z-index:3200;
-	position:absolute;
-	top:-15px;
-	right:-18px;
-	cursor:pointer;
+    background:url(/content/img/x.png) no-repeat; /* adjust url as required */
+    width:25px;
+    height:29px;
+    display:inline;
+    z-index:3200;
+    position:absolute;
+    top:-15px;
+    right:-18px;
+    cursor:pointer;
 }
 .simplemodal-overlay{ background: #2D2D30;}
 .simplemodal-container{ background: #EFEEEF;padding: 14px;border: 2px solid #2D2D30;border-radius: 5px 5px 5px 5px;}
@@ -856,82 +890,82 @@ div.buttonrow { width: 100%;height: 20px; margin-top: 20px;}
 /*--    NAVIGATION Menu        -- */
 
 #nav {
-	margin: 0;
-	padding: 7px 6px 0;
-	background: #7d7d7d url(/Content/img/gradient.png) repeat-x 0 -110px;
-	line-height: 100%;
+    margin: 0;
+    padding: 7px 6px 0;
+    background: #7d7d7d url(/Content/img/gradient.png) repeat-x 0 -110px;
+    line-height: 100%;
 
-	border-radius: 2em;
-	-webkit-border-radius: 2em;
-	-moz-border-radius: 2em;
+    border-radius: 2em;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
 
-	-webkit-box-shadow: 0 1px 3px rgba(0,0,0, .4);
-	-moz-box-shadow: 0 1px 3px rgba(0,0,0, .4);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0, .4);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0, .4);
 }
 
 #nav li {
-	margin: 0 5px;
-	padding: 0 0 8px;
-	float: left;
-	position: relative;
-	list-style: none;
+    margin: 0 5px;
+    padding: 0 0 8px;
+    float: left;
+    position: relative;
+    list-style: none;
 }
 
 
 /* main level link */
 #nav a {
-	font-weight: bold;
-	color: #fff;
-	text-decoration: none;
-	display: block;
-	padding:  8px 20px;
-	margin: 0;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding:  8px 20px;
+    margin: 0;
 
-	-webkit-border-radius: 1.6em;
-	-moz-border-radius: 1.6em;
-	
-	text-shadow: 0 1px 1px rgba(0,0,0, .3);
+    -webkit-border-radius: 1.6em;
+    -moz-border-radius: 1.6em;
+    
+    text-shadow: 0 1px 1px rgba(0,0,0, .3);
 }
 #nav a:hover {
-	background: #000;
-	color: #fff;
+    background: #000;
+    color: #fff;
 }
 
 /* main level link hover */
 #nav .current a, #nav li:hover > a {
-	background: #666 url(/Content/img/gradient.png) repeat-x 0 -40px;
-	color: #444;
-	/*border-top: solid 1px #f8f8f8;*/
+    background: #666 url(/Content/img/gradient.png) repeat-x 0 -40px;
+    color: #444;
+    /*border-top: solid 1px #f8f8f8;*/
 
-	-webkit-box-shadow: 0 1px 1px rgba(0,0,0, .2);
-	-moz-box-shadow: 0 1px 1px rgba(0,0,0, .2);
-	box-shadow: 0 1px 1px rgba(0,0,0, .2);
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0, .2);
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0, .2);
+    box-shadow: 0 1px 1px rgba(0,0,0, .2);
 
-	text-shadow: 0 1px 0 rgba(255,255,255, 1);
+    text-shadow: 0 1px 0 rgba(255,255,255, 1);
 }
 
 /* sub levels link hover */
 #nav ul li:hover a, #nav li:hover li a {
-	background: none;
-	border: none;
-	color: #666;
+    background: none;
+    border: none;
+    color: #666;
 
-	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
 }
 #nav ul a:hover {
-	background: #0078ff url(/Content/img/gradient.png) repeat-x 0 -100px !important;
-	color: #fff !important;
+    background: #0078ff url(/Content/img/gradient.png) repeat-x 0 -100px !important;
+    color: #fff !important;
 
-	-webkit-border-radius: 0;
-	-moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
 
-	text-shadow: 0 1px 1px rgba(0,0,0, .1);
+    text-shadow: 0 1px 1px rgba(0,0,0, .1);
 }
 
 /* dropdown */
 #nav li:hover > ul, #nav li > ul:hover  {
-	display: block;
+    display: block;
     z-index: 1001;
 }
 #nav li:hover > ul li {
@@ -940,76 +974,76 @@ div.buttonrow { width: 100%;height: 20px; margin-top: 20px;}
 
 /* level 2 list */
 #nav ul {
-	display: none;
+    display: none;
 
-	margin: 0;
-	padding: 0;
-	width: 205px;
-	position: absolute;
-	top: 35px;
-	left: 0;
-	background: #ddd url(/Content/img/gradient.png) repeat-x 0 0;
-	border: solid 1px #b4b4b4;
+    margin: 0;
+    padding: 0;
+    width: 205px;
+    position: absolute;
+    top: 35px;
+    left: 0;
+    background: #ddd url(/Content/img/gradient.png) repeat-x 0 0;
+    border: solid 1px #b4b4b4;
 
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
 
-	-webkit-box-shadow: 0 1px 3px rgba(0,0,0, .3);
-	-moz-box-shadow: 0 1px 3px rgba(0,0,0, .3);
-	box-shadow: 0 1px 3px rgba(0,0,0, .3);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0, .3);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0, .3);
+    box-shadow: 0 1px 3px rgba(0,0,0, .3);
 }
 #nav ul li {
-	float: none;
-	margin: 0;
-	padding: 0;
+    float: none;
+    margin: 0;
+    padding: 0;
 }
 
 #nav ul a {
-	font-weight: normal;
-	text-shadow: 0 1px 0 #fff;
+    font-weight: normal;
+    text-shadow: 0 1px 0 #fff;
 }
 
 /* level 3+ list */
 #nav ul ul {
-	left: 181px;
-	top: -3px;
+    left: 181px;
+    top: -3px;
 }
 
 /* rounded corners of first and last link */
 #nav ul li:first-child > a {
-	-webkit-border-top-left-radius: 9px;
-	-moz-border-radius-topleft: 9px;
+    -webkit-border-top-left-radius: 9px;
+    -moz-border-radius-topleft: 9px;
 
-	-webkit-border-top-right-radius: 9px;
-	-moz-border-radius-topright: 9px;
+    -webkit-border-top-right-radius: 9px;
+    -moz-border-radius-topright: 9px;
 }
 #nav ul li:last-child > a {
-	-webkit-border-bottom-left-radius: 9px;
-	-moz-border-radius-bottomleft: 9px;
+    -webkit-border-bottom-left-radius: 9px;
+    -moz-border-radius-bottomleft: 9px;
 
-	-webkit-border-bottom-right-radius: 9px;
-	-moz-border-radius-bottomright: 9px;
+    -webkit-border-bottom-right-radius: 9px;
+    -moz-border-radius-bottomright: 9px;
 }
 
 /* clearfix */
 #nav:after {
-	content: ".";
-	display: block;
-	clear: both;
-	visibility: hidden;
-	line-height: 0;
-	height: 0;
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
 }
 #nav {
-	display: inline-block;
+    display: inline-block;
 } 
 html[xmlns] #nav {
-	display: block;
+    display: block;
 }
  
 * html #nav {
-	height: 1%;
+    height: 1%;
 }
 
 #new_activity_dialog{ padding-top: 15px;}

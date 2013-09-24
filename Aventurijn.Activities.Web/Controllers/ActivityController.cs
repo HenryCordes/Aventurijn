@@ -22,10 +22,10 @@ namespace Aventurijn.Activities.Web.Controllers
         public ActionResult Index()
         {
             var activities = db.Activities.OrderByDescending(a => a.Active).ThenBy(a => a.Name).ToList();
-            foreach (var activity in activities)
-            {
-                activity.Subject = db.Subjects.Find(activity.SubjectId);
-            }
+            //foreach (var activity in activities)
+            //{
+            //    activity.Subject = db.Subjects.Find(activity.SubjectId);
+            //}
             return View(activities);
         }
 
@@ -39,7 +39,7 @@ namespace Aventurijn.Activities.Web.Controllers
             {
                 return HttpNotFound();
             }
-            activity.Subject = db.Subjects.Find(activity.SubjectId);
+            //activity.Subject = db.Subjects.Find(activity.SubjectId);
             return View(activity);
         }
 
