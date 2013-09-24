@@ -53,6 +53,9 @@
                 self.isLoading(false);
                 puntjes.message.show("Succesvol toegevoegd");
                 _showUpdatedRecords(result);
+                ko.utils.arrayForEach(self.levelStudents(), function (student) {
+                    student.IsSelected(false);
+                });
             },
             error: function(xmlHttpRequest) {
                 self.isLoading(false);
