@@ -14,7 +14,11 @@
     CONSTRAINT [FK_dbo.Participation_dbo.Subject_Subject_SubjectId] FOREIGN KEY ([Subject_SubjectId]) REFERENCES [dbo].[Subject] ([SubjectId])
 );
 
+GO
+CREATE NONCLUSTERED INDEX [IX_ParticipationDateTime]
+    ON [dbo].[Participation]([ParticipationDateTime] ASC);
 
+GO
 
 
 
